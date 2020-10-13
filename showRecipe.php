@@ -7,9 +7,10 @@ session_start();
 $drinkName = $_POST['drinkName'];
 
 $recipe = $conn->query("SELECT * FROM recepies WHERE drinkName = $drinkName");
-$recipe->fetchassoc();
+$recipe = $recipe->fetch_assoc();
 
 $user = $conn->query("SELECT username , imgurl, rating FROM users WHERE username = $recipe['username']");
+$user = $user->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -26,12 +27,12 @@ $user = $conn->query("SELECT username , imgurl, rating FROM users WHERE username
 
 <!--    imgurl, Name of Drink, Drink rating, Description    -->
 <div>
-    <img src="" >       <!--  Image of drink  -->
+    <img src="<?php echo $recipe['imgurl'] ?>" >       <!--  Image of drink  -->
     <h2><?php echo $recipe['drinkName']?></h2>
     <!--    Drink Rating    -->
     <p><?php echo $recipe['numberOfRatings'] ?></p>
     <div></div>         <!--    Yellow color for stars  -->
-    <img src="<?php echo $recipe['imgurl'] ?>" >       <!--    Cut out stars image   -->
+    <img src="" >       <!--    Cut out stars image   -->
     <p><?php echo $recipe['description'] ?></p>
 </div>
 
