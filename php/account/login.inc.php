@@ -1,6 +1,5 @@
 <?php
 
-
     /* 
         Author: 
             Eric Qvarnström
@@ -31,10 +30,10 @@
     if($result->num_rows != 1){
         header('Location: ../../login.php?error=wrongcredentials');
     } else {
-        // check if the password is correct
+
+        // check if the password matches
         $row = $result->fetch_assoc();
         if(password_verify($_POST['password'], $row['pwd'])){
-            // Password is correct. Log the user in.
             session_start();
             $_SESSION['username'] = $_POST['username'];
             $_SESSION['id'] = $row['id'];

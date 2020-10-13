@@ -20,7 +20,6 @@
     */ 
     
     include_once '../includes/db.inc.php';
-    $conn->set_charset("utf8");
 
     // Checks if the entered email is taken or not. If the email is taken, return true. Else, return false;
     function EmailTaken($email){

@@ -1,3 +1,8 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+
 header {
     background-color: cornsilk;
 }
@@ -27,3 +32,29 @@ a {
 
 
 /* Register Styling */
+
+#registerBody {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(140deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(0, 212, 255, 0.14609593837535018) 100%);
+    background-repeat: no-repeat;
+}
+
+#register-container {
+    position: relative;
+    margin-top: 25vh;
+}
+
+#register-container h2 {
+    font-size: 2em;
+}
+
+#register-container h3 {
+    font-family: courier, arial, helvetica;
+    font-size: 1.2em;
+}
+
+#register-container .registration-form {
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 1em;
+}

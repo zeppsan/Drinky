@@ -6,74 +6,68 @@
     <title>Register</title>
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 </head>
-<body>
+<body id="registerBody">
     <?php include_once 'header.php'; ?>
 
-    <div class="container">
-        <div class="row mt-5">
-                <div class="col-12 col-md-8 mx-auto">
-                    <form action="php/account/register.inc.php" method="POST">
-
-                        <!-- Email & Username -->
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email" required>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="exampleInputUsername">Username</label>
-                                    <input type="text" class="form-control" id="exampleInputUsername" aria-describedby="usernameHelp" placeholder="Enter username" name="username" required>
-                                </div>
+    <div class="container-fluid" id="register-container">
+        <div class="row">
+            <div class="col-12 col-md-6 text-center">
+                <h2>Drinky Registration</h1>
+                <h3>Soon you'll be making drinks like Chuck Norris himself</h3>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 registration-form py-5">
+                <form action="php/account/register.inc.php" method="POST">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group input-group-sm">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email" required>
                             </div>
                         </div>
-
-                        <!-- First Name & Surname & Age -->
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="exampleInputFirstname">First Name</label>
-                                    <input type="text" class="form-control" id="exampleInputFirstname" aria-describedby="firstname" placeholder="Enter First Name" name="fname" required>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="exampleInputSurname">Surname</label>
-                                    <input type="text" class="form-control" id="exampleInputSurname" aria-describedby="lastname" placeholder="Enter Surname" name="lname" required>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="exampleInputAge">Age</label>
-                                    <input type="number" class="form-control" id="exampleInputAge" aria-describedby="age" value="18" min="18" max="105" name="age" required>
-                                </div>
+                        <div class="col-6">
+                            <div class="form-group input-group-sm">
+                                <label for="exampleInputUsername">Username</label>
+                                <input type="text" class="form-control" id="exampleInputUsername" aria-describedby="usernameHelp" placeholder="Enter username" name="username" required>
                             </div>
                         </div>
-
-                        <!-- Password & Repeat Password -->
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
-                                </div>
+                        <div class="col-6">
+                            <div class="form-group input-group-sm">
+                                <label for="exampleInputAge">Age</label>
+                                <input type="number" class="form-control" id="exampleInputAge" aria-describedby="age" value="18" min="18" max="105" name="age" required>
                             </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword2">Repeat Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" name="password-repeat" required>
-                                </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group input-group-sm">
+                                <label for="exampleInputFirstname">First Name</label>
+                                <input type="text" class="form-control" id="exampleInputFirstname" aria-describedby="firstname" placeholder="Enter First Name" name="fname" required>
                             </div>
-                        </div>    
-                        <button type="submit" class="btn btn-success" name="submit">Create Account</button>
-                    </form>
-                </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group input-group-sm">
+                                <label for="exampleInputSurname">Surname</label>
+                                <input type="text" class="form-control" id="exampleInputSurname" aria-describedby="lastname" placeholder="Enter Surname" name="lname" required>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group input-group-sm">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group input-group-sm">
+                                <label for="exampleInputPassword2">Repeat Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" name="password-repeat" required>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-success">Register Account</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>

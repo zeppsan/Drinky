@@ -4,13 +4,19 @@ include("./header.php");
 include("./php/includes/db.inc.php");
 
 session_start();
-$drinkName = $_POST['drinkName'];
 
-$recipe = $conn->query("SELECT * FROM recepies WHERE drinkName = $drinkName");
-$recipe = $recipe->fetch_assoc();
+// Fetch information about the specified recipe
+$stmt = $conn->prepare("SELECT * FROM recepies WHERE drinkName = ?");
+$stmt->bind_param("s", $_POST['drinkName']);
+$stmt->execute();
+$drink = $stmt->get_result()->fetch_assoc();
 
-$user = $conn->query("SELECT username , imgurl, rating FROM users WHERE username = $recipe['username']");
-$user = $user->fetch_assoc();
+// Fetch information about the user that created the recipe
+$stmt = $conn->prepare("SELECT username , imgurl FROM users WHERE username=?");
+$stmt->bind_param("s", $drink['username']);
+$stmt->execute();
+$user = $stmt->get_result()->fetch_assoc();
+
 ?>
 
 <!DOCTYPE html>
