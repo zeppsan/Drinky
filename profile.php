@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-</head>
 <body>
     <?php include_once 'header.php'; ?>
     <div class="container">
-        <div class="row">
-            <div class="col-4">Dope Profile 1</div>
-            <div class="col-4">Dope Profile Col 2</div>
-            <div class="col-4">Dope Profile Col 3</div>
-        </div>
+        <div class="UsernameProfile"><h3>Froffan</h3></div>
     </div>
+
 
     <script src="js/bootstrap.min.js"></script>
 </body>
