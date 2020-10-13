@@ -17,7 +17,6 @@
                 <input type='number' name='amount_" + numberOfFields++ + "'><br>
                 <input type='text' name='ingredient_" + numberOfFields++ + "'><br>
                 `;
-            console.log("hejsan");
         }
     </script>
 
