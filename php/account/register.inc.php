@@ -27,7 +27,7 @@
         $stmt->execute();
         $result = $stmt->get_result();
         $num = $result->fetch_assoc();
-        if($num[0] == 1){
+        if($num['count(email)'] == 1){
             return true;
         } else {
             return false;
@@ -41,7 +41,7 @@
         $stmt->execute();
         $result = $stmt->get_result();
         $num = $result->fetch_assoc();
-        if($num[0] == 1){
+        if($num['count(username)'] == 1){
             return true;
         } else {
             return false;
@@ -94,11 +94,11 @@
 
     $stmt = $conn->prepare("INSERT INTO users (email, username, fname, lname, age, pwd) VALUES (?,?,?,?,?,?)");
     $stmt->bind_param("ssssis", $_POST['email'],$_POST['username'], $_POST['fname'], $_POST['lname'], $_POST['age'], $hashedPassword);
-    $stmt->execute();
-    if($stmt->get_result() == false){
-        header("Location: ../../register.php?error=databaseError");
+    if($stmt->execute()){
+        header("Location: ../../index.php?account-created");
     } else {
-        header("Location: ../../index.php?error=account-created");
+        header("Location: ../../register.php?error=dbfail");
     }
+
     
 
