@@ -2,13 +2,25 @@
     session_start();
 
     require_once 'php/includes/db.inc.php';
-
-    // Fetch information about the user from the database
+    
     $conn->set_charset("utf8");
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
-    $stmt->bind_param("s", $_SESSION['username']);
-    $stmt->execute();
-    $row = $stmt->get_result()->fetch_assoc();
+    
+    // Check if there is a specific profile that we should visit
+    // Fetch information about the user from the database
+    if(isset($_GET['user'])){
+        // If a specific user is specified
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
+        $stmt->bind_param("s", $_GET['user']);
+        $stmt->execute();
+        $numRows = 
+        $row = $stmt->get_result()->fetch_assoc();
+    } else {
+        // If no user is specified, get the logged in user instead
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
+        $stmt->bind_param("s", $_SESSION['username']);
+        $stmt->execute();
+        $row = $stmt->get_result()->fetch_assoc();
+    }
 
     // Checks if user has set an profile-image, else, display the stock one.
     if($row['profile_picture'] != null){  
@@ -24,8 +36,20 @@
 <body>
     <?php include_once 'header.php'; ?>
     <div class="container">
-        
-        Endast slängt in lite data som vi kommer att använda. Var god och designa xD 
+
+    Endast slängt in lite data som vi kommer att använda. Var god och designa xD 
+
+        <?php if ($row['username'] == null): ?>
+       
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <h2>User could not be found...</h2>
+                    <p>Bad Luck... The user you were trying to access could not be found...</p>
+                </div>
+            </div>
+
+        <?php die(); endif;?>
+
 
         <div class="row">
 
@@ -36,7 +60,7 @@
 
             <!-- Profile Attributes -->
             <div class="col mt-3">
-            <b>User: </b><h3 class="d-inline"><?php echo $_SESSION['username'] ?></h3><br>
+            <b>User: </b><h3 class="d-inline"><?php echo $row['username'] ?></h3><br>
             <b>Name: </b><p class="d-inline"><?php echo $row['fname']." ".$row['lname']?></p><br>
             <b>Age: </b><p class="d-inline"><?php echo $row['age']?></p>
             </div>

@@ -18,6 +18,7 @@
     <div class="appName"><h1>DRINKY</h1></div> 
 
     <nav class="nav justify-content-center"> 
+        <a class="nav-link active" href="index.php">Start</a>
         <a class="nav-link active" href="#">Recept</a>
         <a class="nav-link" href="#">Skapa Eget</a>
         <a class="nav-link" href="#"> Slumpa Recept</a> 

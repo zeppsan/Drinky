@@ -24,7 +24,9 @@ a {
     color: black;
 }
 
-.input-group {}
+.input-group {
+    /* */
+}
 
 .infoArea {
     text-align: center;
