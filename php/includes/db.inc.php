@@ -1,6 +1,6 @@
 <?php
 
-  $conn = new mysqli('zepptech.se.mysql','zepptech_sedrinky','Drinky123','zepptech_sedrinky');
+  $conn = new mysqli('localhost','root','','Drinky');
 
   // Check connection
   if (mysqli_connect_errno()) {
