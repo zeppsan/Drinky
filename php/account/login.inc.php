@@ -2,7 +2,7 @@
 
     /* 
         Author: 
-            Eric Qvarnström
+            Eric Qvarnström - PHP
 
         Description:
             Script to login a user. Checks credentials agains database
@@ -13,6 +13,13 @@
 
     */ 
     
+    function StartSession($row){
+        session_start();
+        $_SESSION['username'] = $_POST['username'];
+        $_SESSION['id'] = $row['id'];
+        header("location: ../../index.php?loggedin");
+    }
+
     include_once '../includes/db.inc.php';
 
     // Checks so that username and password is set
@@ -31,15 +38,13 @@
         header('Location: ../../login.php?error=wrongcredentials');
     } else {
 
-        // check if the password matches
+        // Fetch the query result to an named array
         $row = $result->fetch_assoc();
+
+        // Check if the password matches
         if(password_verify($_POST['password'], $row['pwd'])){
-            session_start();
-            $_SESSION['username'] = $_POST['username'];
-            $_SESSION['id'] = $row['id'];
-            header("location: ../../index.php?loggedin");
+            StartSession($row);
         } else {
-            // Password is worng, hit him hard. 
             header("Location: ../../login.php?error=wrongcredentials");
         }
     }

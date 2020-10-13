@@ -1,7 +1,7 @@
 <?php
     /* 
         Author: 
-            Eric Qvarnström
+            Eric Qvarnström - PHP
 
         Description:
             Destorys the session for the user (logs out).

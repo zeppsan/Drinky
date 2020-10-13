@@ -1,9 +1,21 @@
 <?php
-    session_start();
 
+    /* 
+        Author: 
+            Eric Qvarnström - PHP
+            Frida Westerlund
+
+        Description:
+            Script to login a user. Checks credentials agains database
+        
+        Variables in:
+            username        - Username
+            password        - Password
+
+    */ 
+
+    session_start();
     require_once 'php/includes/db.inc.php';
-    
-    $conn->set_charset("utf8");
     
     // Check if there is a specific profile that we should visit
     // Fetch information about the user from the database
@@ -39,6 +51,8 @@
 
     Endast slängt in lite data som vi kommer att använda. Var god och designa xD 
 
+        <!-- If the row'username' is not set, then the searched user is not found.
+             So let's print that out and end the script afterward. -->
         <?php if ($row['username'] == null): ?>
        
             <div class="row mt-5">
