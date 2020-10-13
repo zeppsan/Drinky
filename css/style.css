@@ -24,9 +24,10 @@ a {
     color: black;
 }
 
-.input-group {
-    /* */
-}
+/* .input-group {
+    
+} 
+*/
 
 .infoArea {
     text-align: center;
@@ -36,7 +37,7 @@ a {
 /* Register & Login Styling */
 
 #registerBody,
-#loginBody {
+#loginBody, body {
     background: rgb(2, 0, 36);
     background: linear-gradient(140deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(0, 212, 255, 0.14609593837535018) 100%);
     background-repeat: no-repeat;
@@ -46,6 +47,11 @@ a {
 #login-container {
     position: relative;
     margin-top: 25vh;
+}
+
+.btn-primary{
+    background-color: gray; 
+    border-color: gray;
 }
 
 #register-container h2,
@@ -65,3 +71,9 @@ a {
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 1em;
 }
+
+.btn-success{
+    background-color: gray; 
+    border-color: gray;
+}
+

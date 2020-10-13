@@ -45,8 +45,11 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<body>
+<head> 
+    <title>Profile</title>
     <?php include_once 'header.php'; ?>
+</head>
+<body>
     <div class="container">
 
     Endast slängt in lite data som vi kommer att använda. Var god och designa xD 

@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 </head>
 <body id="registerBody">
     <?php include_once 'header.php'; ?>
@@ -39,13 +36,13 @@
                         <div class="col-6">
                             <div class="form-group input-group-sm">
                                 <label for="exampleInputFirstname">First Name</label>
-                                <input type="text" class="form-control" id="exampleInputFirstname" aria-describedby="firstname" placeholder="Enter First Name" name="fname" required>
+                                <input type="text" class="form-control" id="exampleInputFirstname" aria-describedby="firstname" placeholder="Enter first name" name="fname" required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group input-group-sm">
                                 <label for="exampleInputSurname">Surname</label>
-                                <input type="text" class="form-control" id="exampleInputSurname" aria-describedby="lastname" placeholder="Enter Surname" name="lname" required>
+                                <input type="text" class="form-control" id="exampleInputSurname" aria-describedby="lastname" placeholder="Enter surname" name="lname" required>
                             </div>
                         </div>
                         <div class="col-6">

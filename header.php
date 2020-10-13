@@ -35,11 +35,5 @@
         <button class="btn btn-outline-secondary" type="button">SÖK</button>
       </div>
     </div>
-    
-    <!-- <form class="signIn" action = "" method= "post">
-      Användarnamn:<input id="username" name="username" type="text">
-      Lösenord:<input id="password" name="password" type="text">
-      <input type="submit" value="Logga in">
-    </form>  -->
 </header>
 </html> 
