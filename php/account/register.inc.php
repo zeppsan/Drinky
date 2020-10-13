@@ -1,6 +1,9 @@
 <?php
 
     /* 
+        Author: 
+            Eric Qvarnström
+
         Description:
             Script to register a new user, check if the information is valid
             and then send it to the Database.
@@ -17,7 +20,7 @@
     */ 
     
     include_once '../includes/db.inc.php';
-
+    $conn->set_charset("utf8");
 
     // Checks if the entered email is taken or not. If the email is taken, return true. Else, return false;
     function EmailTaken($email){
@@ -54,14 +57,14 @@
     
     // Check if all fields are filled in
     // Safety measure if someone mixes with the JS that are supposed to catch these things.. 
-    if(empty($_POST['email']) || 
-        empty($_POST['username']) || 
-        empty($_POST['password']) || 
-        empty($_POST['password-repeat']) || 
-        empty($_POST['fname']) || 
-        empty($_POST['lname']) || 
-        empty($_POST['age'])){
-            header('Location: ../../register.php?error=notfilled');
+    if(!isset($_POST['email']) || 
+    !isset($_POST['username']) || 
+    !isset($_POST['password']) || 
+    !isset($_POST['password-repeat']) || 
+    !isset($_POST['fname']) || 
+    !isset($_POST['lname']) || 
+    !isset($_POST['age'])){
+        header('Location: ../../register.php?error=notfilled');
     }
 
     // Checks if the email-address is valid or not
@@ -99,6 +102,3 @@
     } else {
         header("Location: ../../register.php?error=dbfail");
     }
-
-    
-
