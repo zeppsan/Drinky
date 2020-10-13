@@ -1,27 +1,29 @@
-header{
+header {
     background-color: cornsilk;
 }
 
-.appName{
-font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-text-align: center;
-color: black; 
-}
-
-.nav{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: black; 
-}
-a{
-    color: black; 
-}
-
-.input-group{
+* {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.infoArea{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+.appName {
+    text-align: center;
+    color: black;
+}
+
+.nav {
+    color: black;
+}
+
+a {
+    color: black;
+}
+
+.input-group {}
+
+.infoArea {
     text-align: center;
 }
 
+
+/* Register Styling */

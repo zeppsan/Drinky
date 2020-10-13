@@ -1,4 +1,10 @@
-<!docktype> 
+<?php
+
+  if(session_status() != PHP_SESSION_ACTIVE)
+    session_start();
+
+
+?>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -15,6 +21,11 @@
         <a class="nav-link active" href="#">Recept</a>
         <a class="nav-link" href="#">Skapa Eget</a>
         <a class="nav-link" href="#"> Slumpa Recept</a> 
+        <?php 
+          if(isset($_SESSION['username'])){ 
+            echo '<a class="nav-link" href="profile.php">My Profile</a>';
+          }
+        ?>
     </nav> 
     <!-- sökrutan -->
     <div class="input-group mb-3"> 

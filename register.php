@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register</title>
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 </head>
 <body>
     <?php include_once 'header.php'; ?>
+
     <div class="container">
         <div class="row mt-5">
                 <div class="col-12 col-md-8 mx-auto">
                     <form action="php/account/register.inc.php" method="POST">
+
+                        <!-- Email & Username -->
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -26,6 +29,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- First Name & Surname & Age -->
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -46,6 +51,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Password & Repeat Password -->
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -60,7 +67,7 @@
                                 </div>
                             </div>
                         </div>    
-                        <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                        <button type="submit" class="btn btn-success" name="submit">Create Account</button>
                     </form>
                 </div>
             </div>
