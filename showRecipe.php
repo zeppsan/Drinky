@@ -3,6 +3,13 @@
 include("./header.php");
 include("./php/includes/db.inc.php");
 
+session_start();
+$drinkName = $_POST['drinkName'];
+
+$recipe = $conn->query("SELECT * FROM recepies WHERE drinkName = $drinkName");
+$recipe->fetchassoc();
+
+$user = $conn->query("SELECT username , imgurl, rating FROM users WHERE username = $recipe['username']");
 ?>
 
 <!DOCTYPE html>
@@ -15,17 +22,17 @@ include("./php/includes/db.inc.php");
 <body>
 
 <!--    Main container  -->
-<div> 
+<div class="Some Container"> 
 
 <!--    imgurl, Name of Drink, Drink rating, Description    -->
 <div>
     <img src="" >       <!--  Image of drink  -->
-    <h2>Drink Name</h2>
+    <h2><?php echo $recipe['drinkName']?></h2>
     <!--    Drink Rating    -->
-    <p> Number of ratings </p>
+    <p><?php echo $recipe['numberOfRatings'] ?></p>
     <div></div>         <!--    Yellow color for stars  -->
-    <img src="" >       <!--    Cut out stars image   -->
-    <p> Description </p>
+    <img src="<?php echo $recipe['imgurl'] ?>" >       <!--    Cut out stars image   -->
+    <p><?php echo $recipe['description'] ?></p>
 </div>
 
 <!--    Ingredients... Spirits, Liquer, juice, Soda, Garnish -->
@@ -37,8 +44,8 @@ include("./php/includes/db.inc.php");
 
 <!--    Drink Creator... Name, rating, link -->
 <div>
-    <img src="" >   <!--    User picture    -->
-    <a href="">Name of user / username </a>
+    <img src="<?php echo $user['imgurl'] ?>" >   <!--    User picture    -->
+    <a href="./profile.php"><?php echo $user['username'] ?></a>
     <!--    User Rating    -->
     <div></div>     <!--    Yellow color for stars  -->
     <img src="" >   <!--    Cut out for stars   -->
@@ -46,13 +53,13 @@ include("./php/includes/db.inc.php");
 
 </div>
 
-<!--    Ratings -->
+<!--    Ratings 
 <div>
-<!--    For each rating in ratings  
-            <           -->
+   For each rating in ratings  
+                      
 
 </div>
-
+-->
 
 </body>
 
