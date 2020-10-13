@@ -31,29 +31,34 @@ a {
 }
 
 
-/* Register Styling */
+/* Register & Login Styling */
 
-#registerBody {
+#registerBody,
+#loginBody {
     background: rgb(2, 0, 36);
     background: linear-gradient(140deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(0, 212, 255, 0.14609593837535018) 100%);
     background-repeat: no-repeat;
 }
 
-#register-container {
+#register-container,
+#login-container {
     position: relative;
     margin-top: 25vh;
 }
 
-#register-container h2 {
+#register-container h2,
+#login-container h2 {
     font-size: 2em;
 }
 
-#register-container h3 {
+#register-container h3,
+#login-container h3 {
     font-family: courier, arial, helvetica;
     font-size: 1.2em;
 }
 
-#register-container .registration-form {
+#register-container .registration-form,
+#login-container .loginform-form {
     background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 1em;
