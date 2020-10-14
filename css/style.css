@@ -24,6 +24,7 @@ a {
     color: black;
 }
 
+
 /* .input-group {
     
 } 
@@ -34,10 +35,13 @@ a {
 }
 
 
-/* Register & Login Styling */
+/* 
+## Register, Login, Profile ##
+*/
 
 #registerBody,
-#loginBody, body {
+#loginBody,
+.bg-bluegradient {
     background: rgb(2, 0, 36);
     background: linear-gradient(140deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(0, 212, 255, 0.14609593837535018) 100%);
     background-repeat: no-repeat;
@@ -49,8 +53,8 @@ a {
     margin-top: 25vh;
 }
 
-.btn-primary{
-    background-color: gray; 
+.btn-primary {
+    background-color: gray;
     border-color: gray;
 }
 
@@ -72,8 +76,28 @@ a {
     border-radius: 1em;
 }
 
-.btn-success{
-    background-color: gray; 
+.btn-success {
+    background-color: gray;
     border-color: gray;
 }
 
+.profile {}
+
+.profile .title {
+    font-size: 2em;
+    margin: 0;
+}
+
+.profile .sub-title {
+    font-size: 1em;
+    color: gray;
+    margin: 0;
+}
+
+.profile .text {
+    color: darkslategray;
+}
+
+.profile .display-1 {
+    font-size: 1em;
+}

@@ -49,55 +49,46 @@
     <title>Profile</title>
     <?php include_once 'header.php'; ?>
 </head>
-<body>
-    <div class="container">
-
-    <a href="php/account/logout.inc.php" class="btn btn-info">Logout</a><br>
-    Endast slängt in lite data som vi kommer att använda. Var god och designa xD 
-
-        <!-- If the row'username' is not set, then the searched user is not found.
-             So let's print that out and end the script afterward. -->
-        <?php if ($row['username'] == null): ?>
-       
-            <div class="row mt-5">
-                <div class="col text-center">
-                    <h2>User could not be found...</h2>
-                    <p>Bad Luck... The user you were trying to access could not be found...</p>
-                </div>
-            </div>
-
-        <?php die(); endif;?>
+<body class="bg-bluegradient">
 
 
-        <div class="row">
-
-            <!-- Profile Picture -->
-            <div class="col-6 col-md-3 mt-3">
-                <img src="media/profilepictures/<?php echo $profilepic?>" class="img" width="100%">
-            </div>
-
-            <!-- Profile Attributes -->
-            <div class="col mt-3">
-            <b>User: </b><h3 class="d-inline"><?php echo $row['username'] ?></h3><br>
-            <b>Name: </b><p class="d-inline"><?php echo $row['fname']." ".$row['lname']?></p><br>
-            <b>Age: </b><p class="d-inline"><?php echo $row['age']?></p>
-            </div>
-
-            <!-- Profile Presentation -->
-            <div class="col-6 mt-3">
-                <b>Presentation:</b>
-                <p><?php echo $row['presentation']?></p>
+    <?php if ($row['username'] == null): ?>
+    
+        <div class="row mt-5">
+            <div class="col text-center">
+                <h2>User could not be found...</h2>
+                <p>Bad Luck... The user you were trying to access could not be found...</p>
             </div>
         </div>
 
+    <?php die(); endif;?>
+
+    <div class="container profile">
+        <a href="php/account/logout.inc.php" class="btn btn-info text-right">Logout</a><br>
+        <div class="row">
+            <div class="col-6 col-md-3 px-5">
+                <img src="media/profilepictures/<?php echo $profilepic?>" class="img rounded-circle" width="100%;">
+            </div>
+            <div class="col-6">
+                <h3 class="title"><?php echo ucfirst($row['username'])?></h3>
+                <h4 class="sub-title"><?php echo ucfirst($row['fname'])." ".ucfirst($row['lname']).", ". $row['age']?></h4>
+                <p class="text mt-2"><?php echo $row['presentation']?></p>
+            </div>
+            <div class="col-12 col-md-3 text-center">
+                <h1 class="text-info">Score 4.3 / 5</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
         <!-- Top Recipes Box -->
         <div class="row">
-            <div class="col-12 col-md-4 bg-info text-light m-3 mt-5 mx-auto">Top Recipes</div>
+            <div class="col-12 col-md-4 bg-info text-light m-3 mt-5">Top Recipes</div>
         </div>
 
         <!-- Top Recipes -->
         <div class="row">
-            <div class="col text-center p-3">
+            <div class="col p-3">
                 <p>This is drink one</p>
                 <p>This is drink two</p>
                 <p>This is drink three</p>
@@ -105,8 +96,6 @@
             </div>
         </div>
     </div>
-
-
     <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
