@@ -52,6 +52,7 @@
 <body>
     <div class="container">
 
+    <a href="php/account/logout.inc.php" class="btn btn-info">Logout</a><br>
     Endast slängt in lite data som vi kommer att använda. Var god och designa xD 
 
         <!-- If the row'username' is not set, then the searched user is not found.
