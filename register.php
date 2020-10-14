@@ -62,6 +62,7 @@
                         </div>
                     </div>
                 </form>
+                <small>Already have an account? <a href="login.php" class="text-info">Login Here!</a></small>
             </div>
         </div>
     </div>

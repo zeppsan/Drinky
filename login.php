@@ -32,6 +32,7 @@
                         </div>
                     </div>
                 </form>
+                <small>Don't you have an account yet? <a href="register.php" class="text-info">Register here!</a></small>
             </div>
         </div>
     </div>

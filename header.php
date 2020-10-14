@@ -27,6 +27,11 @@
             echo '<a class="nav-link" href="profile.php">My Profile</a>';
           }
         ?>
+        <?php 
+          if(!isset($_SESSION['username'])){ 
+            echo '<a class="nav-link" href="login.php">Login</a>';
+          }
+        ?>
     </nav> 
     <!-- sökrutan -->
     <div class="input-group mb-3"> 
