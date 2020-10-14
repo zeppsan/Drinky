@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary" name="submit">Login</button>
+                            <button type="submit" class="btn btn-gray" name="submit">Login</button>
                         </div>
                     </div>
                 </form>

@@ -36,6 +36,22 @@ a {
 
 
 /* 
+## General Classes ##
+*/
+
+.btn-gray {
+    background-color: gray;
+    border-color: gray;
+}
+
+.btn-gray:hover {
+    background-color: lightslategray;
+    border-color: white;
+    color: white;
+}
+
+
+/* 
 ## Register, Login, Profile ##
 */
 
@@ -51,11 +67,6 @@ a {
 #login-container {
     position: relative;
     margin-top: 25vh;
-}
-
-.btn-primary {
-    background-color: gray;
-    border-color: gray;
 }
 
 #register-container h2,
@@ -76,11 +87,6 @@ a {
     border-radius: 1em;
 }
 
-.btn-success {
-    background-color: gray;
-    border-color: gray;
-}
-
 .profile {}
 
 .profile .title {
@@ -96,8 +102,4 @@ a {
 
 .profile .text {
     color: darkslategray;
-}
-
-.profile .display-1 {
-    font-size: 1em;
 }
