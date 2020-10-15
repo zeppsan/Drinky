@@ -15,7 +15,7 @@
 
 </head>
   <header>
-    <div class="appName"><h1>DRINKY</h1></div> 
+    <div class="appName"><a href="index.php"><h1>DRINKY</h1></a></div> 
 
     <nav class="nav justify-content-center"> 
         <a class="nav-link active" href="index.php">Start</a>
