@@ -96,6 +96,16 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form action="php/account/upload_image.inc.php" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="profilePicture">
+                    <input type="submit" name="submit-image">
+                </form>
+            </div>
+        </div>
+    </div>
     <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
