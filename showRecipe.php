@@ -6,7 +6,7 @@ include("./php/includes/db.inc.php");
 session_start();
 
 // Fetch information about the specified recipe
-$stmt = $conn->prepare("SELECT * FROM recepies WHERE drinkName = ?");
+$stmt = $conn->prepare("SELECT * FROM recipe WHERE 'name' = ?");
 $stmt->bind_param("s", $_POST['drinkName']);
 $stmt->execute();
 $drink = $stmt->get_result()->fetch_assoc();
@@ -33,15 +33,19 @@ $user = $stmt->get_result()->fetch_assoc();
 
 <!--    imgurl, Name of Drink, Drink rating, Description    -->
 <div>
-    <img src="<?php echo $recipe['imgurl'] ?>" >       <!--  Image of drink  -->
-    <h2><?php echo $recipe['drinkName']?></h2>
+    <!--    <img src="<?php //echo $drink['imgurl'] ?>" >        Image of drink  -->
+    <h2><?php echo $drink['name']?></h2>
     <!--    Drink Rating    -->
-    <p><?php echo $recipe['numberOfRatings'] ?></p>
+    <p><?php echo $drink['votes'] ?></p>
     <div></div>         <!--    Yellow color for stars  -->
     <img src="" >       <!--    Cut out stars image   -->
-    <p><?php echo $recipe['description'] ?></p>
+    <p><?php echo $drink['description'] ?></p>
 </div>
 
+<div>
+    <h2> Instructions </h2>
+    <?php echo $drink['instructions']?>
+</div>
 <!--    Ingredients... Spirits, Liquer, juice, Soda, Garnish -->
 <div>
     <ul>
@@ -51,8 +55,9 @@ $user = $stmt->get_result()->fetch_assoc();
 
 <!--    Drink Creator... Name, rating, link -->
 <div>
-    <img src="<?php echo $user['imgurl'] ?>" >   <!--    User picture    -->
+    <img src="<?php echo $user['profile_picture'] ?>" >   <!--    User picture    -->
     <a href="./profile.php"><?php echo $user['username'] ?></a>
+
     <!--    User Rating    -->
     <div></div>     <!--    Yellow color for stars  -->
     <img src="" >   <!--    Cut out for stars   -->
@@ -60,7 +65,7 @@ $user = $stmt->get_result()->fetch_assoc();
 
 </div>
 
-<!--    Ratings 
+<!--    Rating and comment?
 <div>
    For each rating in ratings  
                       
