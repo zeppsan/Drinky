@@ -12,6 +12,7 @@
             username        - Username
             password        - Password
 
+
     */ 
 
     session_start();
@@ -64,7 +65,9 @@
     <?php die(); endif;?>
 
     <div class="container profile">
-        <a href="php/account/logout.inc.php" class="btn btn-info text-right">Logout</a><br>
+        <a href="php/account/logout.inc.php" class="btn btn-gray text-right">Logout</a>
+        <a href="updateProfile.php" class="btn btn-gray">Edit Profile</a>
+        <br>
         <div class="row">
             <div class="col-6 col-md-3 px-5">
                 <img src="<?php echo $profilepic?>" class="img rounded-circle" width="100%;">
@@ -93,16 +96,6 @@
                 <p>This is drink two</p>
                 <p>This is drink three</p>
                 <p>Ja du fattar :)</p>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <form action="php/account/upload_image.inc.php" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="profilePicture">
-                    <input type="submit" name="submit-image">
-                </form>
             </div>
         </div>
     </div>

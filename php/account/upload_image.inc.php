@@ -12,6 +12,12 @@
         Variables in:
             image           - File to be uploaded
 
+        How to call this script: 
+            <form action="php/account/upload_image.inc.php" method="POST" enctype="multipart/form-data">
+                <input type="file" name="profilePicture">
+                <input type="submit" name="submit-image">
+            </form>
+
     */ 
 
     // Check so that the image-upload button was pressed.
@@ -43,7 +49,6 @@
     }
 
     // Put the uploaded image in the correct folder and set the name of the image
-
     if(move_uploaded_file($_FILES['profilePicture']['tmp_name'], $targetDir . $imagename)){
         // Image was successfully uploaded to the server. Let's update the profilepic of the user.
         $stmt = $conn->prepare("UPDATE users SET profile_picture = ? WHERE username = ?");
