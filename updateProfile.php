@@ -54,7 +54,7 @@
                 <div class="form-group">
                     <form action="php/account/upload_image.inc.php" method="POST" enctype="multipart/form-data">
                         <input type="file" class="" name="profilePicture">
-                        <button type="submit" class="btn btn-success">apply</button>
+                        <button type="submit" class="btn btn-success" name="submit-image">apply</button>
                     </form>
                 </div>
             </div>

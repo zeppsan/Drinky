@@ -49,7 +49,6 @@
     }
 
     // Put the uploaded image in the correct folder and set the name of the image
-
     if(move_uploaded_file($_FILES['profilePicture']['tmp_name'], $targetDir . $imagename)){
         // Image was successfully uploaded to the server. Let's update the profilepic of the user.
         $stmt = $conn->prepare("UPDATE users SET profile_picture = ? WHERE username = ?");
