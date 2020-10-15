@@ -38,7 +38,7 @@
     if($row['profile_picture'] != null){  
         $profilepic = $row['profile_picture'];
     }else{ 
-        $profilepic = "profilestock.jpg";
+        $profilepic = "media/profilepictures/profilestock.jpg";
     }  
 ?>
 
@@ -67,7 +67,7 @@
         <a href="php/account/logout.inc.php" class="btn btn-info text-right">Logout</a><br>
         <div class="row">
             <div class="col-6 col-md-3 px-5">
-                <img src="media/profilepictures/<?php echo $profilepic?>" class="img rounded-circle" width="100%;">
+                <img src="<?php echo $profilepic?>" class="img rounded-circle" width="100%;">
             </div>
             <div class="col-6">
                 <h3 class="title"><?php echo ucfirst($row['username'])?></h3>
