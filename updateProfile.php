@@ -15,25 +15,18 @@
 
     */ 
 
-    session_start();
     require_once 'php/includes/db.inc.php';
-    
-    // Check if there is a specific profile that we should visit
-    // Fetch information about the user from the database
-    if(isset($_GET['user'])){
-        // If a specific user is specified
-        $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
-        $stmt->bind_param("s", $_GET['user']);
-        $stmt->execute();
-        $numRows = 
-        $row = $stmt->get_result()->fetch_assoc();
-    } else {
-        // If no user is specified, get the logged in user instead
-        $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
-        $stmt->bind_param("s", $_SESSION['username']);
-        $stmt->execute();
-        $row = $stmt->get_result()->fetch_assoc();
-    }
+    session_start();
+
+    if(!isset($_SESSION['username']))
+        header("Location: login.php");
+
+    // If no user is specified, get the logged in user instead
+    $stmt = $conn->prepare("SELECT username, fname, lname, age, presentation, profile_picture FROM users WHERE username=?");
+    $stmt->bind_param("s", $_SESSION['username']);
+    $stmt->execute();
+    $row = $stmt->get_result()->fetch_assoc();
+
 
     // Checks if user has set an profile-image, else, display the stock one.
     if($row['profile_picture'] != null){  
@@ -53,29 +46,32 @@
 <body class="bg-bluegradient">
 
 
-    <?php if ($row['username'] == null): ?>
-    
-        <div class="row mt-5">
-            <div class="col text-center">
-                <h2>User could not be found...</h2>
-                <p>Bad Luck... The user you were trying to access could not be found...</p>
-            </div>
-        </div>
-
-    <?php die(); endif;?>
-
     <div class="container profile">
-        <a href="php/account/logout.inc.php" class="btn btn-gray text-right">Logout</a>
-        <a href="updateProfile.php" class="btn btn-gray">Edit Profile</a>
-        <br>
+        <a href="php/account/logout.inc.php" class="btn btn-info text-right">Logout</a><br>
         <div class="row">
             <div class="col-6 col-md-3 px-5">
                 <img src="<?php echo $profilepic?>" class="img rounded-circle" width="100%;">
+                <div class="form-group">
+                    <form action="php/account/upload_image.inc.php" method="POST" enctype="multipart/form-data">
+                        <input type="file" class="" name="profilePicture">
+                        <button type="submit" class="btn btn-success">apply</button>
+                    </form>
+                </div>
             </div>
             <div class="col-6">
-                <h3 class="title"><?php echo ucfirst($row['username'])?></h3>
-                <h4 class="sub-title"><?php echo ucfirst($row['fname'])." ".ucfirst($row['lname']).", ". $row['age']?></h4>
-                <p class="text mt-2"><?php echo $row['presentation']?></p>
+                <form action="php/account/update_profile.inc.php" method="POST">
+                    <h3 class="title"><?php echo ucfirst($row['username'])?></h3>
+                    <h4 class="sub-title">
+                        First name<input type="text" name="fname" placeholder="first name" value="<?php echo $row['fname']?>">
+                        <br>
+                        Last name<input type="text" name="lname" placeholder="last name" value="<?php echo $row['lname']?>">
+                    </h4>
+                    <p class="mt-3 mb-0">Presentation</p>
+                    <p class="text mt-2">
+                        <textarea name="presentation" cols="30" rows="5"><?php echo $row['presentation'] ?></textarea>
+                    </p>
+                    <button type="submit" class="btn btn-gray">Update Profile</button>
+                </form>
             </div>
             <div class="col-12 col-md-3 text-center">
                 <h1 class="text-info">Score 4.3 / 5</h1>

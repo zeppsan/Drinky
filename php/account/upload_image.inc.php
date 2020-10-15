@@ -12,6 +12,12 @@
         Variables in:
             image           - File to be uploaded
 
+        How to call this script: 
+            <form action="php/account/upload_image.inc.php" method="POST" enctype="multipart/form-data">
+                <input type="file" name="profilePicture">
+                <input type="submit" name="submit-image">
+            </form>
+
     */ 
 
     // Check so that the image-upload button was pressed.
