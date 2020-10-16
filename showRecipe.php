@@ -10,7 +10,7 @@ $drinkName = "Secret Mixture";
 
 // Fetch information about the specified recipe
 $stmt = $conn->prepare("SELECT * FROM recipe WHERE name = ?");
-$stmt->bind_param("s", $drinkName); //$_POST['drinkName']
+$stmt->bind_param("s", $drinkName); //$_GET['drinkName']
 $stmt->execute();
 $drink = $stmt->get_result()->fetch_assoc();
 
@@ -21,6 +21,12 @@ FROM user_recipe INNER JOIN recipe ON user_recipe.recipe_ID = ? INNER JOIN users
 $stmt->bind_param("s", $drink['recipe_ID']);
 $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc();
+
+$stmt = $conn->preare("SELECT name FROM recepie_ingredients INNER JOIN receipe ON receipe_ingredients.recipe_ID = ? 
+INNER JOIN ingredients ON recipe_ingredients.ingredient_ID = ingredients.ingredient_ID");
+$stmt->bind_param("s", $drink['recipe_ID']);
+$stmt->execute();
+$ingredients = $stmt->get_result()->fetch_assoc();
 
 ?>
 
@@ -57,7 +63,9 @@ $user = $stmt->get_result()->fetch_assoc();
 <div>
     <h2>Ingredients</h2>
     <ul>
-        <li></li>   <!--    Listed ingredient from ingredients  -->
+        <?php foreach($ingredients as $ingredient){
+            echo"<li>'$ingredient'</li>";?>   <!--    Listed ingredient from ingredients  -->
+        }
     </ul>
 </div>
 
