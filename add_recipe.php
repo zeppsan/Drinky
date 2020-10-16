@@ -28,7 +28,7 @@
                 "Sprit nr " + numberOfFields + "<input type='text' name='ingredient_" + numberOfFields + "'><br>";
             numberOfFields++;
         }
-    </script>-->
+    </script>
     <!-- Div for the AJAX serach results -->
     <div id="Ingredient_Lookup_Div"></div>
 
