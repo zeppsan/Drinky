@@ -6,11 +6,11 @@ session_start();
 if(!isset($_SESSION['username']))
     header("Location: login.php");
 
-$drinkName = "Secret Mixture";
+
 
 // Fetch information about the specified recipe
 $stmt = $conn->prepare("SELECT * FROM recipe WHERE name = ?");
-$stmt->bind_param("s", $drinkName); //$_GET['drinkName']
+$stmt->bind_param("s", $_GET['drinkName']);
 $stmt->execute();
 $drink = $stmt->get_result()->fetch_assoc();
 
@@ -22,8 +22,9 @@ $stmt->bind_param("s", $drink['recipe_ID']);
 $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc();
 
-$stmt = $conn->preare("SELECT name FROM recepie_ingredients INNER JOIN receipe ON receipe_ingredients.recipe_ID = ? 
-INNER JOIN ingredients ON recipe_ingredients.ingredient_ID = ingredients.ingredient_ID");
+$stmt = $conn->prepare("SELECT ingredients.name, recipe_ingredients.amout FROM recipe_ingredients 
+INNER JOIN recipe ON recipe_ingredients.recipe_ID = recipe.recipe_ID 
+INNER JOIN ingredients ON recipe_ingredients.ingredient_ID = ingredients.ingredient_ID WHERE recipe.recipe_ID = ?");
 $stmt->bind_param("s", $drink['recipe_ID']);
 $stmt->execute();
 $ingredients = $stmt->get_result()->fetch_assoc();
@@ -48,7 +49,7 @@ $ingredients = $stmt->get_result()->fetch_assoc();
     <!--    <img src="<?php //echo $drink['imgurl'] ?>" >        Image of drink  -->
     <h2><?php echo $drink['name']?></h2>
     <!--    Drink Rating    -->
-    <h2>Rating: <?php echo $drink['rating_total']/$drink['votes'] ?></h2>
+    <h2>Rating: <?php echo round($drink['rating_total']/$drink['votes'], 1) ?> / 5</h2>
     <p>Number of votes: <?php echo $drink['votes'] ?></p>      
     <!--    Yellow color for stars  -->
     <img src="" >       <!--    Cut out stars image   -->
@@ -64,8 +65,10 @@ $ingredients = $stmt->get_result()->fetch_assoc();
     <h2>Ingredients</h2>
     <ul>
         <?php foreach($ingredients as $ingredient){
-            echo"<li>'$ingredient'</li>";?>   <!--    Listed ingredient from ingredients  -->
+            echo"<li>'$ingredient'</li>";
         }
+        ?>   <!--    Listed ingredient from ingredients  -->
+    
     </ul>
 </div>
 

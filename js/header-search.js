@@ -55,6 +55,7 @@ function SetDatalist(data) {
     data['recipe'].forEach(element => {
         let listItem = document.createElement("a");
         listItem.value = element;
+        listItem.href = "showRecipe.php?drinkName=" + element;
         listItem.innerText = element;
         listItem.classList.add("searchLink");
         result_container.appendChild(listItem);
