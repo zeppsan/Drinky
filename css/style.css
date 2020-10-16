@@ -20,7 +20,8 @@ header {
     color: black;
 }
 
-a, a:hover {
+a,
+a:hover {
     color: black;
     text-decoration: none;
 }
@@ -88,9 +89,7 @@ a, a:hover {
     border-radius: 1em;
 }
 
-.profile {
-
-}
+.profile {}
 
 .profile .title {
     font-size: 2em;

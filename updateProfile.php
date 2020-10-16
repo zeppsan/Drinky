@@ -65,6 +65,8 @@
                         First name<input type="text" name="fname" placeholder="first name" value="<?php echo $row['fname']?>">
                         <br>
                         Last name<input type="text" name="lname" placeholder="last name" value="<?php echo $row['lname']?>">
+                        <br>
+                        Age<input type="number" name="age" placeholder="Age" value="<?php echo $row['age']?>">
                     </h4>
                     <p class="mt-3 mb-0">Presentation</p>
                     <p class="text mt-2">

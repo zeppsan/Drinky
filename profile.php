@@ -12,6 +12,14 @@
             username        - Username
             password        - Password
 
+        Variables that can be used in this document:
+            profilepicture:     <?php echo $profilepic?>
+            first name:         <?php echo ucfirst($row['fname']) ?>
+            last name:          <?php echo ucfirst($row['lname']) ?>
+            age:                <?php echo $row['age'] ?>
+            presentation:       <?php echo $row['presentation']?>
+            rating:             <?php echo round($drink_ratings['rating'], 1) ?>
+
 
     */ 
 
@@ -25,22 +33,34 @@
         $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
         $stmt->bind_param("s", $_GET['user']);
         $stmt->execute();
-        $numRows = 
-        $row = $stmt->get_result()->fetch_assoc();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
     } else {
         // If no user is specified, get the logged in user instead
         $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
         $stmt->bind_param("s", $_SESSION['username']);
         $stmt->execute();
-        $row = $stmt->get_result()->fetch_assoc();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
     }
 
-    // Checks if user has set an profile-image, else, display the stock one.
-    if($row['profile_picture'] != null){  
-        $profilepic = $row['profile_picture'];
-    }else{ 
-        $profilepic = "media/profilepictures/profilestock.jpg";
-    }  
+    if($result->num_rows > 0){
+        // Gets the user average drink rating
+        $stmt = $conn->prepare("SELECT user_recipe.user_ID, sum(recipe.rating_total) / sum(recipe.votes) AS 'rating' FROM user_recipe INNER JOIN recipe on recipe.recipe_ID = user_recipe.recipe_ID WHERE user_recipe.user_ID = ?");
+        $stmt->bind_param("i", $row['id']);
+        $stmt->execute();
+        $drink_ratings = $stmt->get_result()->fetch_assoc();
+
+        if($drink_ratings['rating'] == null)
+            $drink_ratings['rating'] = 0;
+
+        // Checks if user has set an profile-image, else, display the stock one.
+        if($row['profile_picture'] != null){  
+            $profilepic = $row['profile_picture'];
+        }else{ 
+            $profilepic = "media/profilepictures/profilestock.jpg";
+        }  
+    } 
 ?>
 
 
@@ -65,7 +85,6 @@
     <?php die(); endif;?>
 
     <div class="container profile">
-        <a href="php/account/logout.inc.php" class="btn btn-gray text-right">Logout</a>
         <a href="updateProfile.php" class="btn btn-gray">Edit Profile</a>
         <br>
         <div class="row">
@@ -78,7 +97,7 @@
                 <p class="text mt-2"><?php echo $row['presentation']?></p>
             </div>
             <div class="col-12 col-md-3 text-center">
-                <h1 class="text-info">Score 4.3 / 5</h1>
+                <h1 class="text-info"><?php echo round($drink_ratings['rating'], 1) ?> / 5</h1>
             </div>
         </div>
     </div>
