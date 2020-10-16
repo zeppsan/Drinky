@@ -19,8 +19,12 @@
 
 </head>
 
-<body>
+<<<<<<< HEAD <body>
     <!--<script>
+=======
+<body id="addRecipeBody">
+    <script>
+>>>>>>> 471eec207b848c2d1654eee12f388c5b3f948841
         var numberOfFields = 1;
         function addIngredient() {
             /*
@@ -56,6 +60,6 @@
     <input type="button" value="Add Ingredient" onclick="addIngredient()">
 
     <script src="./js/add_recipe.js"></script>
-</body>
+    </body>
 
 </html>
