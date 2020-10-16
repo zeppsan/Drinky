@@ -1,3 +1,12 @@
+/*
+    Author: 
+        Frida Westerlund
+        Eric Qvarnström 
+
+      Description:
+        Our own style/css of the website. Included in all our pages through header.php, togheter with bootstrap css. 
+*/
+
 html {
     height: 100%;
     width: 100%;
@@ -15,26 +24,27 @@ header {
     text-align: center;
     color: black;
 }
-
+h1{
+    display: inline; 
+}
+#cocktail{
+    margin-top: -1.7em; 
+    margin-left: -0.5em; 
+    display:inline; 
+}
 .nav {
     color: black;
 }
 
-a, a:hover {
+a,
+a:hover {
     color: black;
     text-decoration: none;
 }
 
-
-/* .input-group {
-    
-} 
-*/
-
 .infoArea {
     text-align: center;
 }
-
 
 /* 
 ## General Classes ##
@@ -88,9 +98,7 @@ a, a:hover {
     border-radius: 1em;
 }
 
-.profile {
-
-}
+.profile {}
 
 .profile .title {
     font-size: 2em;
