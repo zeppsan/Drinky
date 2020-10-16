@@ -3,20 +3,26 @@
 include("./header.php");
 include("./php/includes/db.inc.php");
 
-session_start();
+//session_start();
+$drinkName = "Crispy Pear";
 
 // Fetch information about the specified recipe
-$stmt = $conn->prepare("SELECT * FROM recipe WHERE 'name' = ?");
-$stmt->bind_param("s", $_POST['drinkName']);
+$stmt = $conn->prepare("SELECT * FROM recipe WHERE name = ?");
+$stmt->bind_param("s", $drinkName); //$_POST['drinkName']
 $stmt->execute();
 $drink = $stmt->get_result()->fetch_assoc();
 
+//print_r($drink); die();
+
 // Fetch information about the user that created the recipe
-$stmt = $conn->prepare("SELECT username , imgurl FROM users WHERE username = ?");
-$stmt->bind_param("s", $drink['username']);
+//$stmt = $conn->prepare("SELECT username, profile_picture FROM users WHERE ...");
+$stmt = $conn->prepare("SELECT username, fname, lname, age, profile_picture 
+FROM user_recipe INNER JOIN recipe ON user_recipe.recipe_ID = ? INNER JOIN users ON users.id = user_recipe.user_ID");
+$stmt->bind_param("s", $drink['recipe_ID']);
 $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc();
 
+//print_r($user); die();
 ?>
 
 <!DOCTYPE html>
@@ -48,6 +54,7 @@ $user = $stmt->get_result()->fetch_assoc();
 </div>
 <!--    Ingredients... Spirits, Liquer, juice, Soda, Garnish -->
 <div>
+    <h2>Ingredients</h2>
     <ul>
         <li></li>   <!--    Listed ingredient from ingredients  -->
     </ul>
@@ -56,8 +63,10 @@ $user = $stmt->get_result()->fetch_assoc();
 <!--    Drink Creator... Name, rating, link -->
 <div>
     <img src="<?php echo $user['profile_picture'] ?>" >   <!--    User picture    -->
-    <a href="./profile.php"><?php echo $user['username'] ?></a>
-
+    <a href="http://localhost/Drinky/profile.php?user=<?php echo $user['username'] ?>"><?php echo $user['username'] ?></a>
+    <p> <?php echo $user['fname'] ?></p>
+    <p> <?php echo $user['lname'] ?></p>
+    <p> <?php echo $user['age'] ?></p>
     <!--    User Rating    -->
     <div></div>     <!--    Yellow color for stars  -->
     <img src="" >   <!--    Cut out for stars   -->
