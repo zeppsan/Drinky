@@ -85,7 +85,7 @@
     <?php die(); endif;?>
 
     <div class="container profile">
-        <a href="updateProfile.php" class="btn btn-gray">Edit Profile</a>
+        <a href="updateProfile.php" id="EditProfile" class="btn btn-gray"><img src="media/pen.png" width="40px" height="40px"></a>
         <br>
         <div class="row">
             <div class="col-6 col-md-3 px-5">

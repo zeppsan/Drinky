@@ -16,7 +16,7 @@
 
 </head>
 
-<body>
+<body id="addRecipeBody">
     <script>
         var numberOfFields = 1;
         function addIngredient() {
@@ -39,11 +39,11 @@
     </script>
 
     <form id="add_recipe_form" name="recipe_form" action="./php/recipe/add_recipe_to_db.php" method="POST">
-        <input type="submit" value="Submit"><br>
-        Centiliter <input type="number" name="amount_0"><br>
-        Sprit <input type="text" name="ingredient_0"><br>
+        <input class = "btn btn-gray" type="submit" value="Submit"><br>
+        Centiliter <input class="form-control" type="number" name="amount_0"><br>
+        Sprit <input class="form-control" type="text" name="ingredient_0"><br>
     </form>
-    <input type="button" value="Add Ingredient" onclick="addIngredient()">
+    <input class="btn btn-gray" type="button" value="Add Ingredient" onclick="addIngredient()">
 
 
 
