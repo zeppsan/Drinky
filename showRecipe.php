@@ -22,7 +22,7 @@ $stmt->bind_param("s", $drink['recipe_ID']);
 $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc();
 
-$stmt = $conn->prepare("SELECT ingredients.name, recipe_ingredients.amout FROM recipe_ingredients 
+$stmt = $conn->prepare("SELECT ingredients.name, recipe_ingredients.amount FROM recipe_ingredients 
 INNER JOIN recipe ON recipe_ingredients.recipe_ID = recipe.recipe_ID 
 INNER JOIN ingredients ON recipe_ingredients.ingredient_ID = ingredients.ingredient_ID WHERE recipe.recipe_ID = ?");
 $stmt->bind_param("s", $drink['recipe_ID']);
