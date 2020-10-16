@@ -56,7 +56,7 @@ a:hover {
 }
 
 .btn-gray:hover {
-    background-color: lightslategray;
+    background-color: rgb(179, 178, 178);
     border-color: white;
     color: white;
 }
@@ -113,4 +113,13 @@ a:hover {
 
 .profile .text {
     color: darkslategray;
+}
+
+#EditProfile{
+    margin-left: 100%; 
+}
+
+/* ## AddRecipe ## */
+#addRecipeBody{
+    background: linear-gradient(cornsilk, white) ;
 }
