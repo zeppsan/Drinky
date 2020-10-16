@@ -114,3 +114,10 @@ a:hover {
 .profile .text {
     color: darkslategray;
 }
+
+#profile_picture{
+    margin-top: 5em;
+    width: 8em;
+    height: 8em;
+    overflow: hidden;
+}
