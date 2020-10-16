@@ -1,5 +1,11 @@
 <?php
+/*
+    Author: Max Jonsson
 
+    Description:
+    Helps AJAX for inserting recipe.
+    Gets all the ingredients that matches the user input and returns an JSON.accordion
+*/ 
 require_once("../includes/db.inc.php");
 
 $input = trim(file_get_contents("php://input"));

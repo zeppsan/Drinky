@@ -1,5 +1,11 @@
 <?php
+/*
+  Author: 
+  Max Jonsson
 
+  Description:
+  The backend of add_recipe that will add ingredients to the database and the recipe.
+*/ 
 require_once("../includes/db.inc.php");
 
 //Check if the ingredients from recipe is in the database
@@ -34,6 +40,7 @@ $recipe_id = $row['recipe_id'];
 
 echo "recipe_id = " .$recipe_id;
 
+//Not finished yet. Will add all the ingredients to the reicpe.
 foreach($_POST['ingredient'] as $key)
 {
   $stmt = $conn->prepare("SELECT ingredient_ID FROM ingredients WHERE name=?");

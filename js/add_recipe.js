@@ -1,3 +1,11 @@
+/*
+    Author: Max Jonsson
+
+    Description:
+    Javascript for adding more ingredients and handeling AJAX for easier search in ingredients. 
+*/
+
+//AJAX serach with Fetch to help the user with ingredients.
 function Ingredient_Lookup(search_str, input_name) {
     if (search_str.length == 0) {
         document.getElementsByName(input_name).innerHTML = "";
@@ -35,10 +43,7 @@ function Ingredient_Lookup(search_str, input_name) {
         });
 }
 
-function Ingredient_To_Input() {
-
-}
-
+//Set the position of the DIV with the AJAX results 
 function Ingredient_Lookup_Container(input_name) {
     var rect = document.getElementById(input_name).getBoundingClientRect();
     var searchHelp = document.getElementById('Ingredient_Lookup_Div');
@@ -51,22 +56,10 @@ function Ingredient_Lookup_Container(input_name) {
 
 }
 
+//Appending input fields if the user wants to add more ingredients
 var numberOfFields = 1;
+
 function addIngredient() {
-    /*
-    var node1 = document.createElement("input");
-    var textnode1 = document.createTextNode("Centiliter nr" + numberOfFields);
-    node1.appendChild(textnode1);
-
-    var node2 = document.createElement("input");
-    var textnode2 = document.createTextNode("Sprit nr" + numberOfFields);
-    node2.appendChild(textnode2);
-
-    document.getElementById("add_recipe_form").appendChild(node1);
-    document.getElementById("add_recipe_form").appendChild(node2);
-    */
-
-
     document.getElementById('add_recipe_form').innerHTML +=
         "Centiliter nr " + numberOfFields + " <input type='number' id='amount_" + numberOfFields + "' name='ingredient[" + numberOfFields + "][amount]'><br>" +
         "Sprit nr " + numberOfFields + "<input type='text' id='ingredient_" + numberOfFields + "' name='ingredient[" + numberOfFields + "][ingredientName]'><br>";

@@ -8,9 +8,9 @@
 <?php 
     include("./header.php");
     require_once("./php/includes/db.inc.php");
-    /*if(isset($_SESSION['username']))
+    if(!isset($_SESSION['username']))
         header("location: ./login.php");
-        */
+        
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,34 +19,21 @@
 
 </head>
 
-<<<<<<< HEAD <body>
-    <!--<script>
-=======
 <body id="addRecipeBody">
     <script>
->>>>>>> 471eec207b848c2d1654eee12f388c5b3f948841
         var numberOfFields = 1;
         function addIngredient() {
-            /*
-            var node1 = document.createElement("input");
-            var textnode1 = document.createTextNode("Centiliter nr" + numberOfFields);
-            node1.appendChild(textnode1);
-
-            var node2 = document.createElement("input");
-            var textnode2 = document.createTextNode("Sprit nr" + numberOfFields);
-            node2.appendChild(textnode2);
-
-            document.getElementById("add_recipe_form").appendChild(node1);
-            document.getElementById("add_recipe_form").appendChild(node2);
-            */
             document.getElementById('add_recipe_form').innerHTML +=
                 "Centiliter nr " + numberOfFields + " <input type='number' name='amount_" + numberOfFields + "'><br>" +
                 "Sprit nr " + numberOfFields + "<input type='text' name='ingredient_" + numberOfFields + "'><br>";
             numberOfFields++;
         }
     </script>-->
+    <!-- Div for the AJAX serach results -->
     <div id="Ingredient_Lookup_Div"></div>
 
+    <!-- Temp form for adding data to the database. 
+        In future changes the name property on every input/textbox needs to stay the same for the backend to work -->
     <form id="add_recipe_form" name="recipe_form" action="./php/recipe/add_recipe_to_db.php" method="POST">
         Name of drink <input type="text" name="drinkName" id="name"><br>
         Short description <textarea id="description" name="description" rows="2" cols="30"></textarea><br>
