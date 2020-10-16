@@ -27,7 +27,9 @@ INNER JOIN recipe ON recipe_ingredients.recipe_ID = recipe.recipe_ID
 INNER JOIN ingredients ON recipe_ingredients.ingredient_ID = ingredients.ingredient_ID WHERE recipe.recipe_ID = ?");
 $stmt->bind_param("s", $drink['recipe_ID']);
 $stmt->execute();
-$ingredients = $stmt->get_result()->fetch_assoc();
+$ingredients = $stmt->get_result()->fetch_all();
+
+//print_r($ingredients); die();
 
 ?>
 
@@ -56,19 +58,21 @@ $ingredients = $stmt->get_result()->fetch_assoc();
     <p><?php echo $drink['description'] ?></p>
 </div>
 
+<!--    Instructions    -->
 <div>
     <h2> Instructions </h2>
     <?php echo $drink['instructions']?>
 </div>
+
 <!--    Ingredients... Spirits, Liquer, juice, Soda, Garnish -->
 <div>
     <h2>Ingredients</h2>
      <!--    Listed ingredient from ingredients  -->
     <ul>
-        <?php foreach($ingredients as $ingredient){
-            echo"<li>$ingredient</li>";
-        } 
-        ?>
+        <?php 
+            foreach($ingredients as $ingredient){
+                echo"<li>".$ingredient."</li>";
+        } ?>
     
     </ul>
 </div>
