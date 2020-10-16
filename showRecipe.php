@@ -63,17 +63,19 @@ $ingredients = $stmt->get_result()->fetch_assoc();
 <!--    Ingredients... Spirits, Liquer, juice, Soda, Garnish -->
 <div>
     <h2>Ingredients</h2>
+     <!--    Listed ingredient from ingredients  -->
     <ul>
         <?php foreach($ingredients as $ingredient){
-            echo"<li>'$ingredient'</li>";
-        }
-        ?>   <!--    Listed ingredient from ingredients  -->
+            echo"<li>$ingredient</li>";
+        } 
+        ?>
     
     </ul>
 </div>
 
 <!--    Drink Creator... Name, rating, link -->
 <div>
+    <h2>Uploaded by: </h2>
     <div class="rounded-circle" id="profile_picture">
         <img src="<?php echo $user['profile_picture'] ?>" width="100%">   <!--    User picture    -->
     </div>
