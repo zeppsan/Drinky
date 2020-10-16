@@ -12,6 +12,7 @@
             username        - Username
             password        - Password
 
+
     */ 
 
     session_start();
@@ -38,7 +39,7 @@
     if($row['profile_picture'] != null){  
         $profilepic = $row['profile_picture'];
     }else{ 
-        $profilepic = "profilestock.jpg";
+        $profilepic = "media/profilepictures/profilestock.jpg";
     }  
 ?>
 
@@ -64,10 +65,12 @@
     <?php die(); endif;?>
 
     <div class="container profile">
-        <a href="php/account/logout.inc.php" class="btn btn-info text-right">Logout</a><br>
+        <a href="php/account/logout.inc.php" class="btn btn-gray text-right">Logout</a>
+        <a href="updateProfile.php" class="btn btn-gray">Edit Profile</a>
+        <br>
         <div class="row">
             <div class="col-6 col-md-3 px-5">
-                <img src="media/profilepictures/<?php echo $profilepic?>" class="img rounded-circle" width="100%;">
+                <img src="<?php echo $profilepic?>" class="img rounded-circle" width="100%;">
             </div>
             <div class="col-6">
                 <h3 class="title"><?php echo ucfirst($row['username'])?></h3>

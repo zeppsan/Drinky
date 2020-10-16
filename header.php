@@ -15,16 +15,17 @@
 
 </head>
   <header>
-    <div class="appName"><h1>DRINKY</h1></div> 
+    <div class="appName"><a href="index.php"><h1>DRINKY</h1></a></div> 
 
     <nav class="nav justify-content-center"> 
         <a class="nav-link active" href="index.php">Start</a>
-        <a class="nav-link active" href="#">Recept</a>
-        <a class="nav-link" href="#">Skapa Eget</a>
-        <a class="nav-link" href="#"> Slumpa Recept</a> 
+        <a class="nav-link active" href="#">Search Recipe</a>
+        <a class="nav-link" href="add_recipe.php">Make Recipe</a>
+        <a class="nav-link" href="#">Random Recipe</a> 
         <?php 
           if(isset($_SESSION['username'])){ 
             echo '<a class="nav-link" href="profile.php">My Profile</a>';
+            echo '<a class="nav-link" href="php/account/logout.inc.php">Log Out</a>';
           }
         ?>
         <?php 
@@ -35,9 +36,9 @@
     </nav> 
     <!-- sökrutan -->
     <div class="input-group mb-3"> 
-      <input type="text" class="form-control" placeholder="Recept.. , Profiler.."> 
+      <input type="text" class="form-control" placeholder="Recipes.. , Users.."> 
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button">SÖK</button>
+        <button class="btn btn-outline-secondary" type="button">Search</button>
       </div>
     </div>
 </header>
