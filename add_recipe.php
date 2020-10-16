@@ -35,15 +35,14 @@
     <!-- Temp form for adding data to the database. 
         In future changes the name property on every input/textbox needs to stay the same for the backend to work -->
     <form id="add_recipe_form" name="recipe_form" action="./php/recipe/add_recipe_to_db.php" method="POST">
-        Name of drink <input type="text" name="drinkName" id="name"><br>
-        Short description <textarea id="description" name="description" rows="2" cols="30"></textarea><br>
-        Instructions <textarea id="instructions" name="instructions" rows="4" cols="50"></textarea><br>
-        Centiliter <input type="number" name="ingredient[0][amount]" id="amount_0"><br>
+        Name of drink <input type="text" name="drinkName" id="name" required><br>
+        Short description <textarea id="description" name="description" rows="2" cols="30" required></textarea><br>
+        Instructions <textarea id="instructions" name="instructions" rows="4" cols="50" required></textarea><br>
+        Centiliter <input type="number" name="ingredient[0][amount]" id="amount_0" required><br>
         Sprit <input type="text" name="ingredient[0][ingredientName]" id="ingredient_0"
-            onkeyup="Ingredient_Lookup(this.value, this.id)" autocomplete="off"><br>
-        <input type="submit" value="Submit"><br>
+            onkeyup="Ingredient_Lookup(this.value, this.id)" autocomplete="off" required><br>
     </form>
-
+    <button type="submit" form="add_recipe_form" value="Submit">Submit</button>   
     <input type="button" value="Add Ingredient" onclick="addIngredient()">
 
     <script src="./js/add_recipe.js"></script>

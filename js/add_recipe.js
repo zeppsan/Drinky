@@ -61,7 +61,7 @@ var numberOfFields = 1;
 
 function addIngredient() {
     document.getElementById('add_recipe_form').innerHTML +=
-        "Centiliter nr " + numberOfFields + " <input type='number' id='amount_" + numberOfFields + "' name='ingredient[" + numberOfFields + "][amount]'><br>" +
-        "Sprit nr " + numberOfFields + "<input type='text' id='ingredient_" + numberOfFields + "' name='ingredient[" + numberOfFields + "][ingredientName]'><br>";
+        "Centiliter nr " + numberOfFields + " <input type='number' id='amount_" + numberOfFields + "' name='ingredient[" + numberOfFields + "][amount]' required><br>" +
+        "Sprit nr " + numberOfFields + "<input type='text' id='ingredient_" + numberOfFields + "' name='ingredient[" + numberOfFields + "][ingredientName]' required><br>";
     numberOfFields++;
 }
