@@ -21,7 +21,7 @@
       <link rel="stylesheet" href="css/style.css" type="text/css">
   </head>
   <header>
-    <div class="appName"><a href="index.php"><h1>DRINK<img src="media/coctail.png" width="50px" height="50px"></h1></a></div> 
+    <div class="appName"><a href="index.php"><h1>DRINK</h1><img id="cocktail" src="media/coctail.png" width="45px" height="40px"></a></div> 
     
     <nav class="nav justify-content-center"> 
         <!-- <a class="nav-link active" href="index.php">Start</a> -->

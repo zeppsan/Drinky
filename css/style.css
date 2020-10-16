@@ -24,7 +24,14 @@ header {
     text-align: center;
     color: black;
 }
-
+h1{
+    display: inline; 
+}
+#cocktail{
+    margin-top: -1.7em; 
+    margin-left: -0.5em; 
+    display:inline; 
+}
 .nav {
     color: black;
 }
@@ -91,10 +98,7 @@ a:hover {
     border-radius: 1em;
 }
 
-<<<<<<< HEAD
-=======
 .profile {}
->>>>>>> a313acef688ec28e02368cc674c0413ea323d42e
 
 .profile .title {
     font-size: 2em;
