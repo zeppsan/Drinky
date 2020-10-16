@@ -42,10 +42,14 @@
     </nav> 
     <!-- sökrutan -->
     <div class="input-group mb-3"> 
-      <input id="searchBar" type="text" class="form-control" placeholder="Recipes.. , Users.."> 
+      <input list="searchField" id="searchBar" type="text" class="form-control" placeholder="Recipes.. , Users.."> 
+      <div id="searchField">
+
+      </div>
       <div class="input-group-append">
         <button class="btn btn-outline-secondary" type="button">Search</button>
       </div>
     </div>
   </header>
+  <script src="js/header-search.js"></script>
 </html> 

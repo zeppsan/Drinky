@@ -39,6 +39,33 @@ a:hover {
     text-align: center;
 }
 
+
+/* search field in header */
+
+#searchField {
+    background-color: white;
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 100px;
+    border: 1px solid gray;
+    border-top: none;
+    z-index: 10;
+}
+
+#searchField a {
+    padding: 1em;
+    font-size: 1em;
+    display: block;
+    transition: .3s ease all;
+}
+
+#searchField a:hover {
+    background-color: #dedede;
+}
+
+
 /* 
 ## General Classes ##
 */
@@ -91,10 +118,7 @@ a:hover {
     border-radius: 1em;
 }
 
-<<<<<<< HEAD
-=======
 .profile {}
->>>>>>> a313acef688ec28e02368cc674c0413ea323d42e
 
 .profile .title {
     font-size: 2em;
