@@ -12,7 +12,6 @@
             username        - Username
             password        - Password
 
-
     */ 
 
     session_start();
