@@ -12,7 +12,7 @@ $stmt->execute();
 $drink = $stmt->get_result()->fetch_assoc();
 
 // Fetch information about the user that created the recipe
-$stmt = $conn->prepare("SELECT username , imgurl FROM users WHERE username=?");
+$stmt = $conn->prepare("SELECT username , imgurl FROM users WHERE username = ?");
 $stmt->bind_param("s", $drink['username']);
 $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc();
@@ -29,7 +29,7 @@ $user = $stmt->get_result()->fetch_assoc();
 <body>
 
 <!--    Main container  -->
-<div class="Some Container"> 
+<div class="container"> 
 
 <!--    imgurl, Name of Drink, Drink rating, Description    -->
 <div>
