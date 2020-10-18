@@ -49,6 +49,9 @@ a:hover {
     text-align: center;
 }
 
+#index{
+    margin-top: 20vh; 
+}
 
 /* search field in header */
 
@@ -107,7 +110,7 @@ a:hover {
 #register-container,
 #login-container {
     position: relative;
-    margin-top: 25vh;
+    margin-top: 20vh;
 }
 
 #register-container h2,
@@ -172,7 +175,6 @@ a:hover {
     border: 1px solid gray;
     border-radius: .5em;
 }
-
 
 /* ## AddRecipe ## */
 
