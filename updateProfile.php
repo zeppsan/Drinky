@@ -24,6 +24,10 @@
     */ 
 
     session_start();
+
+    if(!isset($_SESSION['username']))
+        header("Location: login.php?error=notloggedin");
+
     require_once 'php/includes/db.inc.php';
     
     // Check if there is a specific profile that we should visit
