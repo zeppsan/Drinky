@@ -31,9 +31,9 @@
     <nav class="navbar nav justify-content-center"> 
 
       <ul class="nav">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link active" href="index.php">Start</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link active" href="drink_search.php">Search Recipe</a>
         </li>
@@ -41,7 +41,7 @@
           <a class="nav-link" href="add_recipe.php">Make Recipe</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Random Recipe</a> 
+          <a class="nav-link" href="randomizeRecipe.php">Random Recipe</a> 
         </li>
         <?php if(isset($_SESSION['username'])):?>
 

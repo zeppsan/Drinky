@@ -8,6 +8,10 @@
 */ 
 require_once("../includes/db.inc.php");
 
+session_start();
+if(!isset($_SESSION['username']))
+        header("Location: login.php?error=notloggedin");
+
 //Check if the ingredients from recipe is in the database
 foreach($_POST['ingredient'] as $key)
 {
@@ -55,5 +59,19 @@ foreach($_POST['ingredient'] as $key)
   $stmt->execute();
 }
 
+//Get the ID of the user
+$stmt = $conn->prepare("SELECT id FROM users WHERE username=?");
+$stmt->bind_param("s", $_SESSION['username']);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = mysqli_fetch_array($result);
+$user_id = $row['id'];
 
+//Add the recipe to the user
+$stmt = $conn->prepare("INSERT INTO user_recipe (recipe_ID, user_ID) VALUES (?, ?)");
+$stmt->bind_param("ii", $recipe_id, $user_id);
+$stmt->execute();
+
+
+header("Location: ../../showRecipe.php?drinkName=" .$_POST['drinkName']);
 ?>

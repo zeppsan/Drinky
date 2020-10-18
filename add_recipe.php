@@ -8,6 +8,7 @@
 <?php 
     include("./header.php");
     require_once("./php/includes/db.inc.php");
+    echo $_SESSION['username'];
     if(!isset($_SESSION['username']))
         header("location: ./login.php");
         

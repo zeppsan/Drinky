@@ -3,6 +3,10 @@
 
     Description:
     Javascript for adding more ingredients and handeling AJAX for easier search in ingredients. 
+
+    Variables:
+    search_str - The input from the user
+    input_name - The ID of the input tag that the user is writing in.
 */
 
 //AJAX serach with Fetch to help the user with ingredients.
