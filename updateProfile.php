@@ -2,8 +2,8 @@
 
     /* 
         Author: 
-            Eric Qvarnström - PHP
-            Frida Westerlund
+            Eric Qvarnström - PHP, Layout, HTML
+            Frida Westerlund - Layout, HTML
 
         Description:
             Script to login a user. Checks credentials agains database
@@ -12,28 +12,67 @@
             username        - Username
             password        - Password
 
+        Variables that can be used in this document:
+            profilepicture:     <?php echo $profilepic?>
+            first name:         <?php echo ucfirst($row['fname']) ?>
+            last name:          <?php echo ucfirst($row['lname']) ?>
+            age:                <?php echo $row['age'] ?>
+            presentation:       <?php echo $row['presentation']?>
+            rating:             <?php echo round($drink_ratings['rating'], 1) ?>
+
 
     */ 
 
-    require_once 'php/includes/db.inc.php';
     session_start();
 
     if(!isset($_SESSION['username']))
-        header("Location: login.php");
+        header("Location: login.php?error=notloggedin");
 
-    // If no user is specified, get the logged in user instead
-    $stmt = $conn->prepare("SELECT username, fname, lname, age, presentation, profile_picture FROM users WHERE username=?");
-    $stmt->bind_param("s", $_SESSION['username']);
-    $stmt->execute();
-    $row = $stmt->get_result()->fetch_assoc();
+    require_once 'php/includes/db.inc.php';
+    
+    // Check if there is a specific profile that we should visit
+    // Fetch information about the user from the database
+    if(isset($_GET['user'])){
+        // If a specific user is specified
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
+        $stmt->bind_param("s", $_GET['user']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+    } else {
+        // If no user is specified, get the logged in user instead
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
+        $stmt->bind_param("s", $_SESSION['username']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+    }
+
+    if($result->num_rows > 0){
+        // Gets the user average drink rating
+        $stmt = $conn->prepare("SELECT user_recipe.user_ID, sum(recipe.rating_total) / sum(recipe.votes) AS 'rating' FROM user_recipe INNER JOIN recipe on recipe.recipe_ID = user_recipe.recipe_ID WHERE user_recipe.user_ID = ?");
+        $stmt->bind_param("i", $row['id']);
+        $stmt->execute();
+        $drink_ratings = $stmt->get_result()->fetch_assoc();
+
+        if($drink_ratings['rating'] == null)
+            $drink_ratings['rating'] = 0;
 
 
-    // Checks if user has set an profile-image, else, display the stock one.
-    if($row['profile_picture'] != null){  
-        $profilepic = $row['profile_picture'];
-    }else{ 
-        $profilepic = "media/profilepictures/profilestock.jpg";
-    }  
+        // fetch user drinks 
+        $stmt = $conn->prepare("SELECT name, description, instructions, rating_total / votes AS 'rating' FROM user_recipe JOIN recipe on user_recipe.recipe_ID = recipe.recipe_ID WHERE user_recipe.user_ID = ? ORDER BY rating DESC LIMIT 5");
+        $stmt->bind_param("i", $row['id']);
+        $stmt->execute();
+        $top_drinks_result = $stmt->get_result();
+        $top_drinks_amount = $top_drinks_result->num_rows;
+
+        // Checks if user has set an profile-image, else, display the stock one.
+        if($row['profile_picture'] != null){  
+            $profilepic = $row['profile_picture'];
+        }else{ 
+            $profilepic = "media/profilepictures/profilestock.jpg";
+        }  
+    } 
 ?>
 
 
@@ -45,55 +84,59 @@
 </head>
 <body class="bg-bluegradient">
 
-
     <div class="container profile">
-        <a href="php/account/logout.inc.php" class="btn btn-info text-right">Logout</a><br>
-        <div class="row">
-            <div class="col-6 col-md-3 px-5">
-                <img src="<?php echo $profilepic?>" class="img rounded-circle" width="100%;">
-                <div class="form-group">
-                    <form action="php/account/upload_image.inc.php" method="POST" enctype="multipart/form-data">
-                        <input type="file" class="" name="profilePicture">
-                        <button type="submit" class="btn btn-success" name="submit-image">apply</button>
-                    </form>
-                </div>
-            </div>
-            <div class="col-6">
-                <form action="php/account/update_profile.inc.php" method="POST">
-                    <h3 class="title"><?php echo ucfirst($row['username'])?></h3>
-                    <h4 class="sub-title">
-                        First name<input type="text" name="fname" placeholder="first name" value="<?php echo $row['fname']?>">
-                        <br>
-                        Last name<input type="text" name="lname" placeholder="last name" value="<?php echo $row['lname']?>">
-                        <br>
-                        Age<input type="number" name="age" placeholder="Age" value="<?php echo $row['age']?>">
-                    </h4>
-                    <p class="mt-3 mb-0">Presentation</p>
-                    <p class="text mt-2">
-                        <textarea name="presentation" cols="30" rows="5"><?php echo $row['presentation'] ?></textarea>
-                    </p>
-                    <button type="submit" class="btn btn-gray">Update Profile</button>
+        <div class="row p-3">
+
+            <!-- Profile picture & edit Profile picture-->
+            <div class="col-12 col-md-6 col-lg-3 pl-3">
+                <img src="<?php echo $profilepic?>" class="img" width="100%;">
+                <form action="php/account/upload_image.inc.php" method="POST" enctype="multipart/form-data">
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="profilePicture">
+                            <label class="custom-file-label">Choose file</label>
+                        </div>
+                    </div>
+                    <button class="btn btn-gray" type="submit" name="submit-image">Upload</button>
                 </form>
             </div>
-            <div class="col-12 col-md-3 text-center">
-                <h1 class="text-info">Score 4.3 / 5</h1>
-            </div>
-        </div>
-    </div>
 
-    <div class="container">
-        <!-- Top Recipes Box -->
-        <div class="row">
-            <div class="col-12 col-md-4 bg-info text-light m-3 mt-5">Top Recipes</div>
-        </div>
+            <!-- update profile information -->
+            <div class="col-12 col-md-6 my-auto">
+                <form action="php/account/update_profile.inc.php" method="POST">
+                    
+                    <h3 class="title"><?php echo ucfirst($row['username'])?></h3>
+                    <p class="mt-3 mb-0">Presentation</p>
+                    <p class="text mt-2">
+                        <textarea name="presentation" cols="100" rows="5" id="editProfilePres"><?php echo $row['presentation'] ?></textarea>
+                    </p>
 
-        <!-- Top Recipes -->
-        <div class="row">
-            <div class="col p-3">
-                <p>This is drink one</p>
-                <p>This is drink two</p>
-                <p>This is drink three</p>
-                <p>Ja du fattar :)</p>
+                    <!-- First Name -->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">First Name</span>
+                        </div>
+                        <input type="text" name="fname" class="form-control" placeholder="First Name" value="<?php echo $row['fname']?>" required>
+                    </div>
+
+                    <!-- Last Name -->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Last Name</span>
+                        </div>
+                        <input type="text" name="lname" class="form-control" placeholder="Last Name" value="<?php echo $row['lname']?>" required>
+                    </div>
+
+                    <!-- Age  -->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Age</span>
+                        </div>
+                        <input type="number" name="age" class="form-control" placeholder="Age" value="<?php echo $row['age']?>" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-gray">Update Profile</button>
+                </form>
             </div>
         </div>
     </div>
