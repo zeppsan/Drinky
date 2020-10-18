@@ -166,6 +166,14 @@ a:hover {
 }
 
 
+/* ## Edit Profile ## */
+
+#editProfilePres {
+    border: 1px solid gray;
+    border-radius: .5em;
+}
+
+
 /* ## AddRecipe ## */
 
 #addRecipeBody {
