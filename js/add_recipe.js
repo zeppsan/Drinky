@@ -88,3 +88,55 @@ function addIngredient() {
     Ingredient_Lookup("", "ingredient_" + numberOfFields);
     numberOfFields++;
 }
+
+
+//Test
+/*
+const fieldHolder = document.getElementById("fieldHolder");
+
+function addField() {
+    let col = document.createElement("div");
+    col.className = "col-12";
+    col.id = "input" + fieldCounter;
+
+    let inputGroup = document.createElement("div");
+    inputGroup.className = "input-group mb-3";
+
+    let prepend = document.createElement("div");
+    prepend.className = "input-group-prepend";
+
+    let span = document.createElement("span");
+    span.className = "input-group-text";
+    span.innerText = "Beverage " + (fieldCounter + 1);
+
+    let input = document.createElement("input");
+    input.type = "text";
+    input.name = "drink[" + fieldCounter + "][beverage]";
+    input.className = "form-control alcoInput";
+    input.placeholder = "ex: vodka";
+
+    let removeBtn = document.createElement('button');
+    removeBtn.className = "btn btn-warning remove";
+    removeBtn.innerText = "Del";
+    removeBtn.id = "remove" + fieldCounter;
+
+    prepend.appendChild(span);
+    inputGroup.appendChild(prepend);
+    inputGroup.appendChild(input);
+    inputGroup.appendChild(removeBtn);
+    col.appendChild(inputGroup);
+    fieldHolder.appendChild(col);
+
+    fieldCounter++;
+}
+
+document.addEventListener('click', (e) => {
+    if (e.target.classList == "btn btn-warning remove")
+        removeInputField(e.target.id);
+});
+
+function removeInputField(inputNumber) {
+    let numToRemove = inputNumber.slice(6, 10);
+    document.getElementById("input" + numToRemove).remove();
+}
+*/

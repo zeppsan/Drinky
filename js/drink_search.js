@@ -63,14 +63,14 @@ function searchDrinks() {
     console.log(JSON.stringify(data));
 
     fetch("php/recipe/search_recipe.inc.php", {
-            method: "POST",
-            mode: "same-origin",
-            credentials: "same-origin",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
+        method: "POST",
+        mode: "same-origin",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
         .then(response => response.json())
         .then(data => {
             clearResult();
