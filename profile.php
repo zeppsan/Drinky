@@ -2,8 +2,8 @@
 
     /* 
         Author: 
-            Eric Qvarnström - PHP
-            Frida Westerlund
+            Eric Qvarnström - PHP, Layout, HTML
+            Frida Westerlund - Layout, HTML
 
         Description:
             Script to login a user. Checks credentials agains database
@@ -54,6 +54,14 @@
         if($drink_ratings['rating'] == null)
             $drink_ratings['rating'] = 0;
 
+
+        // fetch user drinks 
+        $stmt = $conn->prepare("SELECT name, description, instructions, rating_total / votes AS 'rating' FROM user_recipe JOIN recipe on user_recipe.recipe_ID = recipe.recipe_ID WHERE user_recipe.user_ID = ? ORDER BY rating DESC LIMIT 5");
+        $stmt->bind_param("i", $row['id']);
+        $stmt->execute();
+        $top_drinks_result = $stmt->get_result();
+        $top_drinks_amount = $top_drinks_result->num_rows;
+
         // Checks if user has set an profile-image, else, display the stock one.
         if($row['profile_picture'] != null){  
             $profilepic = $row['profile_picture'];
@@ -72,49 +80,69 @@
 </head>
 <body class="bg-bluegradient">
 
-
-    <?php if ($row['username'] == null): ?>
-    
-        <div class="row mt-5">
-            <div class="col text-center">
-                <h2>User could not be found...</h2>
-                <p>Bad Luck... The user you were trying to access could not be found...</p>
-            </div>
-        </div>
-
-    <?php die(); endif;?>
-
     <div class="container profile">
-        <a href="updateProfile.php" id="EditProfile" class="btn btn-gray"><img src="media/pen.png" width="40px" height="40px"></a>
-        <br>
-        <div class="row">
-            <div class="col-6 col-md-3 px-5">
-                <img src="<?php echo $profilepic?>" class="img rounded-circle" width="100%;">
+        <div class="row p-3">
+            <div class="col-12 col-md-6 col-lg-3 pl-3">
+                <img src="<?php echo $profilepic?>" class="img" width="100%;">
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 my-auto">
                 <h3 class="title"><?php echo ucfirst($row['username'])?></h3>
-                <h4 class="sub-title"><?php echo ucfirst($row['fname'])." ".ucfirst($row['lname']).", ". $row['age']?></h4>
                 <p class="text mt-2"><?php echo $row['presentation']?></p>
+                <h4 class="sub-title"><?php echo ucfirst($row['fname'])." ".ucfirst($row['lname']).", ". $row['age']?></h4>
+                <?php if($_SESSION['username'] == $row['username']): ?>
+                    <a href="updateProfile.php" class="btn btn-gray mt-3">Edit
+                        <img src="media/pen.png" width="40px" height="40px">
+                    </a>
+                <?php endif;?>
             </div>
-            <div class="col-12 col-md-3 text-center">
+            <div class="col-12 col-md-3 text-center my-auto">
+                <p class="small my-0">Average Drink Score</p>
                 <h1 class="text-info"><?php echo round($drink_ratings['rating'], 1) ?> / 5</h1>
             </div>
         </div>
-    </div>
 
-    <div class="container">
-        <!-- Top Recipes Box -->
-        <div class="row">
-            <div class="col-12 col-md-4 bg-info text-light m-3 mt-5">Top Recipes</div>
-        </div>
+        <hr>
 
-        <!-- Top Recipes -->
-        <div class="row">
-            <div class="col p-3">
-                <p>This is drink one</p>
-                <p>This is drink two</p>
-                <p>This is drink three</p>
-                <p>Ja du fattar :)</p>
+        <div class="row mt-2 p-3">
+            <div class="col-12">
+                <h3><?php echo ucfirst($row['username']);?>'s Top Recipes</h3>
+            </div>
+            <div class="col-12">
+                <?php 
+                if($top_drinks_amount > 0): ?>
+                    <div class="row px-3 mt-3">
+                        <div class="col"><b>Drink Name</b></div>
+                        <div class="col"><b>Description</b></div>
+                        <div class="col"><b>Drink Rating</b></div>
+                    </div>
+                    <?php while($drinkrow = $top_drinks_result->fetch_assoc()): ?> 
+
+                        <a href="showRecipe.php?drinkName=<?php echo $drinkrow['name']?>">
+                            <div class="row my-2 drink-container p-3">
+                                <div class="col">
+                                    <p class="drink-name" href="#">
+                                        <?php echo $drinkrow['name']?>
+                                    </p>
+                                </div>
+                                <div class="col">
+                                    <p class="description">
+                                        <?php echo $drinkrow['description']?>
+                                    </p>
+                                </div>
+                                <div class="col">
+                                    <p class="rating">
+                                        <?php echo $drinkrow['rating']?>
+                                    </p>    
+                                </div>
+                            </div>
+                        </a>
+                    <?php endwhile; ?>
+                <?php else: ?>
+            
+                <p><?php echo $row['username']?> Has not drinks to show :(</p>
+                <?php endif;?>
+
+                    
             </div>
         </div>
     </div>

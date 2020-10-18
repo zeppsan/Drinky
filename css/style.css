@@ -24,14 +24,17 @@ header {
     text-align: center;
     color: black;
 }
-h1{
-    display: inline; 
+
+h1 {
+    display: inline;
 }
-#cocktail{
-    margin-top: -1.7em; 
-    margin-left: -0.5em; 
-    display:inline; 
+
+#cocktail {
+    margin-top: -1.7em;
+    margin-left: -0.5em;
+    display: inline;
 }
+
 .nav {
     color: black;
 }
@@ -125,11 +128,16 @@ a:hover {
     border-radius: 1em;
 }
 
-.profile {}
+.profile {
+    background-color: #FBFBFB;
+    -webkit-box-shadow: 4px 6px 37px 1px rgba(0, 0, 0, 0.33);
+    -moz-box-shadow: 4px 6px 37px 1px rgba(0, 0, 0, 0.33);
+    box-shadow: 4px 6px 37px 1px rgba(0, 0, 0, 0.33);
+}
 
 .profile .title {
     font-size: 2em;
-    margin: 0;
+    color: margin: 0;
 }
 
 .profile .sub-title {
@@ -142,15 +150,29 @@ a:hover {
     color: darkslategray;
 }
 
-#EditProfile{
-    margin-left: 100%; 
+#EditProfile {
+    margin-left: 100%;
 }
 
-/* ## AddRecipe ## */
-#addRecipeBody{
-    background: linear-gradient(cornsilk, white) ;
+.drink-container {
+    background-color: #dedede;
+    border: 1px solid white;
+    border-radius: 10px;
+    transition: .2s ease all;
 }
-#profile_picture{
+
+.drink-container:hover {
+    background-color: lightsteelblue;
+}
+
+
+/* ## AddRecipe ## */
+
+#addRecipeBody {
+    background: linear-gradient(cornsilk, white);
+}
+
+#profile_picture {
     width: 8em;
     height: 8em;
     overflow: hidden;
