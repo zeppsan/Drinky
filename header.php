@@ -35,7 +35,7 @@
           <a class="nav-link active" href="index.php">Start</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">Search Recipe</a>
+          <a class="nav-link active" href="drink_search.php">Search Recipe</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="add_recipe.php">Make Recipe</a>
