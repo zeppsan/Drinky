@@ -1,3 +1,12 @@
+/* 
+Author: 
+    Eric Qvarnström
+
+Description:
+    Javascript for handling drink_search
+
+*/
+
 const fieldHolder = document.getElementById("fieldHolder");
 const searchResultContainer = document.getElementById("searchResult");
 let fieldCounter = 1;
@@ -92,7 +101,7 @@ function applySearch(data) {
 
     data.forEach(element => {
         console.log(123123);
-        document.getElementById("searchResult").innerHTML += `<a href="#">
+        document.getElementById("searchResult").innerHTML += `<a href="showRecipe.php?drinkName=${element.name}">
         <div class="row">
             <div class="col-12">
                 <div class="row my-2 drink-container p-3">

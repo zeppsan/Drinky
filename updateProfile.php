@@ -3,7 +3,7 @@
     /* 
         Author: 
             Eric Qvarnström - PHP, Layout, HTML
-            Frida Westerlund - Layout, HTML
+            Frida Westerlund - HTML
 
         Description:
             Script to login a user. Checks credentials agains database

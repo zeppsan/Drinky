@@ -1,3 +1,11 @@
+<!--
+        Author: 
+            Eric Qvarnström
+
+        Description:
+            Page for user registration
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
