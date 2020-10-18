@@ -3,7 +3,7 @@
     /* 
         Author: 
             Eric Qvarnström - PHP, Layout, HTML
-            Frida Westerlund - Layout, HTML
+            Frida Westerlund - HTML
 
         Description:
             Script to login a user. Checks credentials agains database
@@ -124,7 +124,7 @@
                         <a href="showRecipe.php?drinkName=<?php echo $drinkrow['name']?>">
                             <div class="row my-2 drink-container p-3">
                                 <div class="col">
-                                    <p class="drink-name" href="#">
+                                    <p class="drink-name">
                                         <?php echo $drinkrow['name']?>
                                     </p>
                                 </div>
@@ -135,7 +135,7 @@
                                 </div>
                                 <div class="col">
                                     <p class="rating">
-                                        <?php echo $drinkrow['rating']?>
+                                        <?php echo round($drinkrow['rating'], 1)?>
                                     </p>    
                                 </div>
                             </div>
