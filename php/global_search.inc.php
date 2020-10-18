@@ -1,6 +1,18 @@
 <?php
 
+    /* 
+        Author: 
+            Eric Qvarnström - PHP
 
+        Description:
+            backend script to manage the post request from the global search bar
+        
+        Variables in:
+            searchString    - the string to search for
+
+
+
+    */ 
 
     $contentType = $_SERVER["CONTENT_TYPE"];
 

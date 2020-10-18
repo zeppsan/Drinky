@@ -1,19 +1,20 @@
 <?php
 
+    /* 
+        Author: 
+            Eric Qvarnström
+
+        Description:
+            This page is used to search the database for drinks that contains a specific beverage.
+
+    */ 
+
     session_start();
 
     if(!isset($_SESSION['username']))
         header("Location: login.php?error=notloggedin");
 
     require_once 'php/includes/db.inc.php';
-    
-
-
-
-
-
-
-
 
 ?>
 
@@ -59,23 +60,11 @@
                 <button class="btn btn-gray" onclick="searchDrinks()">search</button>
             </div>
         </div>
-
-
         <div class="row mt-3">
             <div class="col-12" id="searchResult">
-
-            
-
             </div>
-
-
         </div>
     </div>
-
-
-
-
-    
     <script src="js/drink_search.js"></script>
 </body>
 </html>

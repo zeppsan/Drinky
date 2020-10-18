@@ -3,7 +3,12 @@
         Frida Westerlund
 
       Description:
-        This is the header for our webpage. That will be included in every page. 
+        This is the header for our webpage. That will be included in every page.
+        If you are not logged in, there should be a login suggestion for users to be able 
+        to login, and to register a new account. But there should also be a regletion that users 
+        won't be able to search, make or see recepies. Thats because we don't know unregistered users 
+        age and we don't support underage drinking. If you try to see a recipe by any 
+        buttons you will be directed to the login page. 
 -->
 
 <?php
@@ -12,7 +17,7 @@
     session_start();
 ?>
 
-<html>
+<html lang="en">
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,11 +34,7 @@
     </div> 
     
     <nav class="navbar nav justify-content-center"> 
-
       <ul class="nav">
-        <!-- <li class="nav-item">
-          <a class="nav-link active" href="index.php">Start</a>
-        </li> -->
         <li class="nav-item">
           <a class="nav-link active" href="drink_search.php">Search Recipe</a>
         </li>
@@ -58,8 +59,12 @@
         <?php else: ?> 
 
           <li class="nav-item">
+              <a class="nav-link" href="register.php">Register Account</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="login.php">Login</a>
           </li>
+          
 
         <?php endif;?>
       </ul>
