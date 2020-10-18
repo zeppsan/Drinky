@@ -1,9 +1,61 @@
+<!--
+    Author: 
+        Frida Westerlund
+
+      Description:
+      This is the start page. It's main purpose is to inform the user about our webpage
+      and what it is for. If you are not logged in you should only get information on what 
+      Drinky is all about, but are you logged in as a user then it should also show top-recipes. 
+      It doesn't show top-recipes from the start because we don't want underage users to 
+      be informed or guided into underaged drinking. 
+-->
 <!DOCTYPE html>
+<?php
+
+  if(session_status() != PHP_SESSION_ACTIVE)
+    session_start();
+    include("php/includes/db.inc.php");
+
+
+    $stmt = $conn->prepare("SELECT * from recipe order by rating_total DESC limit 3"); 
+    $stmt->execute(); 
+    $topRecipes = $stmt->get_result()->fetch_assoc(); 
+?>
+
 <html lang="en">
-<body>
+<body class ="bg-bluegradient">
     <?php include_once 'header.php'; ?>
     <div class="container">
-        <div class="infoArea"><p>På Drinky kan du söka efter drink recept. Du kan ladda upp dina egna recept och betygsätta andras. Skriv ditt bästa recept och hoppas få in det på TOP-listan!</p></div>
+        <div id="index" class="row justify-content-center">
+            <div class="col-6 col-md-3">
+                <img src="media/coctail.png" width="200em">
+            </div>
+            <div class="col-6 col-md-3 ">
+                <div class="infoArea"><h4>Drinky is the platform for you that want to share your best drinks and to experiment by testing others! <hr> 
+                You can also rate others recipes and see what the best recipes of the site is in the TOP-Ratings!
+                </h4></div>
+            </div>
+        </div>
+        <?php if(isset($_SESSION['username'])):?>
+            <hr id="index">
+            <h3 style="text-align:center;">TOP-Recipes!</h3>
+
+        <div class="row justify-content-center">
+
+            <div class="col-6 col-md-3">
+
+            <?php echo $topRecipes[0]['name']; ?>
+            </div>
+            <div class="col-6 col-md-3">
+            <?php echo $topRecipes[0]['name']; ?>
+            </div>
+            <div class="col-6 col-md-3">
+            <?php echo $topRecipes[0]['name']; ?>
+            </div>
+        </div>
+
+
+         <?php endif;?>
     </div>
 </body>
 </html>

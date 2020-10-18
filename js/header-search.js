@@ -1,3 +1,12 @@
+/* 
+Author: 
+    Eric Qvarnström
+
+Description:
+    Javascript for handling the general search-bar
+
+*/
+
 const searchBar = document.getElementById("searchBar");
 const result_container = document.getElementById("searchField");
 
