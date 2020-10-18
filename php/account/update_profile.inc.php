@@ -29,7 +29,9 @@
 
     require_once '../includes/db.inc.php';
     session_start();
-    
+
+
+
     // Update the database with the new information
     $stmt = $conn->prepare("UPDATE users SET fname = ?, lname = ?, age = ?, presentation = ? WHERE username = ?");
     $stmt->bind_param("ssiss", $_POST['fname'], $_POST['lname'], $_POST['age'], $_POST['presentation'], $_SESSION['username']);
