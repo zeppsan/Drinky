@@ -28,9 +28,7 @@
     $stmt->bind_param("i", $drink['recipe_ID']);
     $stmt->execute();
     $ingredients = $stmt->get_result();
-
-
-//      Check Division with 0 
+ 
     $stmt = $conn->prepare("SELECT user_recipe.user_ID, sum(recipe.rating_total) / sum(recipe.votes) AS 'rating' FROM user_recipe INNER JOIN recipe on recipe.recipe_ID = user_recipe.recipe_ID WHERE user_recipe.user_ID = ?");
     $stmt->bind_param("i", $user['id']);
     $stmt->execute();
@@ -38,8 +36,6 @@
 
     if($drink_ratings['rating'] == null)
         $drink_ratings['rating'] = 0;
-
-    //print_r($ingredients); die();
 
 ?>
 
@@ -56,65 +52,69 @@
         <!--    Main container  -->
         <div class="container">
 
-        <!--    imgurl, Name of Drink, Drink rating, Description    -->
-        <div class="row justify-content-center">
-        <!--    <img src="<?php //echo $drink['imgurl'] ?>" >        Image of drink  -->
-            <div class="col-6 col-md-4 text-center">
-                <h2><?php echo $drink['name']?></h2>
-                <p><?php echo $drink['description'] ?></p>
-            </div>
-            <!--    Drink Rating    -->
-            <div class="col-6 col-md-4 text-center">
-                <h3 class="text-info">Rating: <?php echo round($drink['rating_total']/$drink['votes'], 1) ?> / 5</h3>
-                <p>Number of votes: <?php echo $drink['votes'] ?></p> 
-            </div>
-        </div>
+            <div class="row justify-content-center align-items-center">
+            <!--    imgurl, Name of Drink, Drink rating, Description    -->
+                <div class="col-2 text-center">
+                    <img src="./media/coctail.png" width="120em" >    <!--  Image of drink  -->
+                </div>
+                <div class="col-6 col-md-4 text-center">     
+                    <h2><?php echo $drink['name']?></h2>
+                    <p><?php echo $drink['description'] ?></p>
+                    </div>
+                    <!--    Drink Rating    -->
+                    <div class="col-2"> 
+                    <h4>Rating: <?php 
+                    if($drink['votes'] == null){
+                        echo "0";
+                    } else{
+                    echo round($drink['rating_total']/$drink['votes'], 1);
+                    }   ?> / 5</h4>
 
-        <!--    Instructions    -->
-        <div class="row justify-content-center">
-            <div class="col-6 text-center">
-                <h2> Instructions </h2>
-                <?php echo $drink['instructions']?>
-            </div>
-        </div>
-
-        <!--    Ingredients... Spirits, Liquer, juice, Soda, Garnish -->
-        <div class="row justify-content-center">
-            <div class="col-6 col-md-4 text-center">
-                <h2>Ingredients</h2>
-                <!--    Listed ingredient from ingredients  -->
-                <ul>
-                    <?php
-                        while($ingredient = $ingredients->fetch_assoc()){
-                            echo"<li>".$ingredient['name'],' ', $ingredient['amount']." cl </li>";
-                        };
-                    ?>
-                </ul>
-
+                    <p>Rated <?php echo $drink['votes'] ?> Times</p> 
             </div>
         </div>
 
-        <!--    Drink Creator... Name, rating, link -->
-        <div class="row justify-content-center">
+            <!--    Instructions    -->
+            <div class="row justify-content-center align-items-center">
+                <div class="col-6 col-md-4 text-center">
+                    <h2> Instructions </h2>
+                    <?php echo $drink['instructions']?>
+                </div>
+            <!--    Ingredients... Spirits, Liquer, juice, Soda, Garnish -->
+            
+                <div class="col-6 col-md-4 text-center">
+                    <h2>Ingredients</h2>
+                    <!--    Listed ingredient from ingredients  -->
+                    <ul class="list-unstyled">
+                        <?php
+                            while($ingredient = $ingredients->fetch_assoc()){
+                                echo"<li>".$ingredient['name'],' ', $ingredient['amount']." cl </li>";
+                            };
+                        ?>
+                    </ul>
 
-            <div class="rounded-circle" id="profile_picture">
-                <img src="<?php echo $user['profile_picture'] ?>" width="100%">   <!--    User picture    -->
+                </div>
             </div>
 
-            <div class="col-6">
-                <h2>Uploaded by: </h2>
-                <a href="http://localhost/Drinky/profile.php?user=<?php echo $user['username'] ?>"><?php echo $user['username'] ?></a>
-            </div>
+            <!--    Drink Creator... Name, rating, link -->
+            <div class="row justify-content-center align-items-center ">
+                <div class="col-2">
+                    <h2>Recipe by </h2>
+                    <div class="rounded-circle " id="profile_picture">
+                       <a href="http://localhost/Drinky/profile.php?user=<?php echo $user['username'] ?>"> <img src="<?php echo $user['profile_picture'] ?>"  width="100%">></a>   <!--    User picture    -->
+                    </div>
+                </div>
 
-            <div class="col-6">
-                <p> <?php echo $user['fname'], ' ', $user['lname'], ' ', $user['age'] ?></p>
-                <!--    User Rating    -->
-                <p class="small my-0">Average Drink Score</p>
-                <h3 class="small my-0"><?php echo round($drink_ratings['rating'], 1) ?> / 5</h3>
-            </div>
+                <div class="col-2 text-center">
+                    <p> <?php echo $user['username'] ?></p>
+                    <p> <?php echo $user['fname'], ' ', $user['lname'], ', ', $user['age'] ?></p>
+                    <!--    User Rating    -->
+                    <p class="small my-0">Average Drink Score</p>
+                    <h3 class="small my-0"><?php echo round($drink_ratings['rating'], 1) ?> / 5</h3>
+                </div>
 
-        </div>
-      
+            </div>
+        
         </div>
 
         <!--    Rating and comment?
