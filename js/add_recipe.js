@@ -12,10 +12,14 @@
 //AJAX serach with Fetch to help the user with ingredients.
 function Ingredient_Lookup(search_str, input_name) {
     if (search_str.length == 0) {
-        document.getElementsByName(input_name).innerHTML = "";
+        document.getElementById('Ingredient_Lookup_Div').innerHTML = "";
         return;
     }
 
+    //Resets the serach results everytime.
+    document.getElementById('Ingredient_Lookup_Div').innerHTML = "";
+
+    //Set the position of the container for search results
     Ingredient_Lookup_Container(input_name);
 
     fetch('./php/recipe/ingredient_lookup.php', {
@@ -31,21 +35,35 @@ function Ingredient_Lookup(search_str, input_name) {
     })
         .then(response => response.json())
         .then(data => {
-            var datalist = document.createElement("div");
+            var datalist = document.createElement("datalist");
+            datalist.setAttribute("id", "list_" + input_name);
             data.forEach(element => {
-                var temp_div = document.createTextNode(element);
-
-                datalist.appendChild(temp_div);
+                var option = document.createElement("option");
+                option.value = element;
+                //option.setAttribute("value", element);
+                datalist.appendChild(option);
+                console.log("input " + input_name + "serach = " + search_str)
+                /*
+                var temp_div = document.createElement("div");
+                temp_div.setAttribute("id", element);
+                /* temp_div.addEventListener('click', function () {
+                     document.getElementById(input_name).innerHTML = element;
+                 })
+                 
+                temp_div.setAttribute("onclick", "Add_To_Input(this.id, " + input_name + ")");
+                var name = document.createTextNode(element);
+                temp_div.appendChild(name);
+                document.getElementById("Ingredient_Lookup_Div").appendChild(temp_div);
                 console.log(element);
-            });
-            console.log(datalist);
-            document.getElementById("Ingredient_Lookup_Div").appendChild(datalist);
-            console.log("hejsan");
+                */
+            })
+            document.getElementById(input_name).appendChild(datalist);
         })
         .catch((error) => {
             console.error('Error:', error);
         });
 }
+
 
 //Set the position of the DIV with the AJAX results 
 function Ingredient_Lookup_Container(input_name) {
@@ -66,6 +84,7 @@ var numberOfFields = 1;
 function addIngredient() {
     document.getElementById('add_recipe_form').innerHTML +=
         "Centiliter nr " + numberOfFields + " <input type='number' id='amount_" + numberOfFields + "' name='ingredient[" + numberOfFields + "][amount]' required><br>" +
-        "Sprit nr " + numberOfFields + "<input type='text' id='ingredient_" + numberOfFields + "' name='ingredient[" + numberOfFields + "][ingredientName]' required><br>";
+        "Sprit nr " + numberOfFields + "<input list='list_ingredient_" + numberOfFields + "'type='text' id='ingredient_" + numberOfFields + "' name='ingredient[" + numberOfFields + "][ingredientName]' autocomplete=off required><br>";
+    Ingredient_Lookup("", "ingredient_" + numberOfFields);
     numberOfFields++;
 }

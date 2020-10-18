@@ -51,8 +51,13 @@
 
         <!--    Main container  -->
         <div class="container">
-
             <div class="row justify-content-center align-items-center">
+                <!-- Checking if the drink exists -->
+            <?php    if(!isset($drink['name'])){
+                echo 'Drink does not exist';
+                die();
+                } ?>
+
             <!--    imgurl, Name of Drink, Drink rating, Description    -->
                 <div class="col-2 text-center">
                     <img src="./media/coctail.png" width="120em" >    <!--  Image of drink  -->
@@ -117,13 +122,16 @@
         
         </div>
 
-        <!--    Rating and comment?
-        <div>
-        For each rating in ratings  
-                            
 
+        <div class="row justify-content-center align-items-center">
+            <div class="col-6 text-center">
+                <h2>Rate The Drink</h2>
+                <div class="rating">
+                    <span id="s1">☆</span><span id="s2">☆</span><span id="s3">☆</span><span id="s4">☆</span><span id="s5">☆</span>
+                </div>
+            </div>
         </div>
-        -->
+        
 
     </body>
 

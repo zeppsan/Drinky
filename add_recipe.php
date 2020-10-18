@@ -40,7 +40,7 @@
         Short description <textarea id="description" name="description" rows="2" cols="30" required></textarea><br>
         Instructions <textarea id="instructions" name="instructions" rows="4" cols="50" required></textarea><br>
         Centiliter <input type="number" name="ingredient[0][amount]" id="amount_0" required><br>
-        Sprit <input type="text" name="ingredient[0][ingredientName]" id="ingredient_0"
+        Sprit <input list="list_ingredient_0" type="text" name="ingredient[0][ingredientName]" id="ingredient_0"
             onkeyup="Ingredient_Lookup(this.value, this.id)" autocomplete="off" required><br>
     </form>
     <button type="submit" form="add_recipe_form" value="Submit">Submit</button>   
