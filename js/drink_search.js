@@ -106,7 +106,7 @@ function applySearch(data) {
 
         let rating = Math.round(element.rating * 100) / 100;
         document.getElementById("searchResult").innerHTML += `<a href="showRecipe.php?drinkName=${element.name}">
-        <div class="row">
+        <div class="row px-2">
             <div class="col-12">
                 <div class="row my-2 drink-container p-3">
                     <div class="col">

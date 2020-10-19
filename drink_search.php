@@ -27,8 +27,8 @@
 <body class="bg-bluegradient">
 
 
-    <div class="container">
-        <div class="row">
+    <div class="container profile">
+        <div class="row p-3">
             <div class="col">
             <h3>Search for Recipe</h3>
             <p>Get a drink suggestion depending on what beverages you have accessable:</p>
@@ -36,7 +36,7 @@
         </div>
 
         <!-- First row -->
-        <div class="row" id="fieldHolder">
+        <div class="row p-3" id="fieldHolder">
             <div class="col-12">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
