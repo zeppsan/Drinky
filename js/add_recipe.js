@@ -72,7 +72,7 @@ function addField() {
                         <option value="pcs">pcs</option>
                     </select>
                 </div>
-                <input type="number" name="beverage[${fieldCounter}][amount]" class="form-control" required>
+                <input type="number" step="0.1" name="beverage[${fieldCounter}][amount]" class="form-control" required>
                 <button class="btn btn-warning remove" id="remove${fieldCounter}">Del</button>
         </div>`;
     inputList.insertAdjacentHTML("beforeEnd", fields);
