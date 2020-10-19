@@ -31,7 +31,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Drink name</span>
                         </div>
-                        <input type="text" name="drinkName" class="form-control" id="name" placeholder="ex. Rum and coke" required><br>
+                        <input type="text" name="drinkname" class="form-control" id="name" placeholder="ex. Rum and coke" required><br>
                     </div>
                     <!-- Short decription -->
                     <p class="mt-3 mb-0">Short desciprion</p>
@@ -45,22 +45,28 @@
                     </p>
 
                     <div id="Make_Recipe_Ingredients">
+
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Spirit</span>
                             </div>
-                            <input list="list_ingredient_0" type="text" name="ingredient[0][ingredientName]" class="form-control" id="ingredient_0" onkeyup="Ingredient_Lookup(this.value, this.id)" placeholder="ex. Vodka" autocomplete="off" required>
-                        </div>
-                        <div class="input-group mb-3">
+                            <input list="list1" type="text" name="beverage[0][name]" class="form-control ingredientInput" placeholder="ex. Vodka" autocomplete="off" required>
+                            <datalist id="list1">
+                            
+                            </datalist>
+
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Centiliter</span>
                             </div>
-                            <input type="number" name="ingredient[0][amount]" id="amount_0" class="form-control" required>
+                            <input type="number" name="beverage[0][amount]" class="form-control" required>
                         </div>
+
+
                     </div>
+
                     <div class="row">
                         <div class="col text-center">
-                            <a href="#" onclick="addIngerdient()"><img src="media/plus_icon.png" width="32px"></a>
+                            <a href="#" onclick="addField()"><img src="media/plus_icon.png" width="32px"></a>
                         </div>
                     </div>
 
@@ -70,6 +76,7 @@
         </div>
     </div>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/add_recipe.js"></script>
 </body>
 </html>
 

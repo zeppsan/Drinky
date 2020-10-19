@@ -11,7 +11,7 @@ require_once("../includes/db.inc.php");
 $input = trim(file_get_contents("php://input"));
 $decoded = json_decode($input, true);
 
-$cstr = "%".$decoded['search'].'%';
+$cstr = "%".$decoded['searchString'].'%';
 
 $stmt = $conn->prepare("SELECT name FROM ingredients WHERE name LIKE ? LIMIT 5");
 $stmt->bind_param("s", $cstr);
