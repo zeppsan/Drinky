@@ -80,7 +80,7 @@
                                     ?>
                                 </select>
                             </div>
-                            <input type="number" step="0.01" name="beverage[0][amount]" id="amount_0" class="form-control" required>
+                            <input type="number" step="0.1" name="beverage[0][amount]" id="amount_0" class="form-control" required>
                         </div>
                     </div>
 
