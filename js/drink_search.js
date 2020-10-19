@@ -88,14 +88,19 @@ function searchDrinks() {
 
 function applySearch(data) {
 
-    if (data.length) {
+    if (data.length > 0) {
         searchResultContainer.innerHTML += `<div class="row px-3 mt-3">
         <div class="col"><b>Drink Image</b></div>
         <div class="col"><b>Drink Name</b></div>
         <div class="col"><b>Description</b></div>
         <div class="col"><b>Drink Rating</b></div>
     </div>`;
+    } else {
+        searchResultContainer.innerHTML += `
+            <h2>No drinks were found...</h2>
+        `;
     }
+
 
 
     data.forEach(element => {
