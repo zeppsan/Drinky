@@ -80,63 +80,79 @@ function Ingredient_Lookup_Container(input_name) {
 
 //Appending input fields if the user wants to add more ingredients
 var numberOfFields = 1;
+const ingredientsContainer = document.getElementById('Make_Recipe_Ingredients');
 
 function addIngredient() {
-    document.getElementById('add_recipe_form').innerHTML +=
-        "Centiliter nr " + numberOfFields + " <input type='number' id='amount_" + numberOfFields + "' name='ingredient[" + numberOfFields + "][amount]' required><br>" +
-        "Sprit nr " + numberOfFields + "<input list='list_ingredient_" + numberOfFields + "'type='text' id='ingredient_" + numberOfFields + "' name='ingredient[" + numberOfFields + "][ingredientName]' autocomplete=off required><br>";
-    Ingredient_Lookup("", "ingredient_" + numberOfFields);
+
+    //Add spirit
+    let spirit = document.createElement("div");
+    spirit.className = "input-group mb-3";
+
+    let spirit_prepend = document.createElement("div");
+    spirit_prepend.className = "input-group-prepend";
+
+    let spirit_span = document.createElement("span");
+    spirit_span.className = "input-group-text";
+    span.innerText = "Spirit " + (numberOfFields);
+
+    let spirit_input = document.createElement("input");
+    spirit_input.type = "text";
+    spirit_input.name = "ingredient[" + numberOfFields + "][ingredientName]";
+    spirit_input.className = "form-control alcoInput";
+    spirit_input.id = "ingredient_" + numberOfFields + "";
+    spirit_input.placeholder = "ex: vodka";
+    spirit_input.autocomplete = "off";
+    /*
+            let removeBtn = document.createElement('button');
+            removeBtn.className = "btn btn-warning remove";
+            removeBtn.innerText = "Del";
+            removeBtn.id = "remove" + fieldCounter;
+    */
+    spirit_prepend.appendChild(spirit_span);
+    spirit.appendChild(spirit_prepend);
+    spirit.appendChild(spirit_input);
+    ingredientsContainer.appendChild(spirit);
+
+    //Add amount
+    let amount = document.createElement("div");
+    amount.className = "input-group mb-3";
+
+    let amount_prepend = document.createElement("div");
+    amount_prepend.className = "input-group-prepend";
+
+    let amount_span = document.createElement("span");
+    amount_span.className = "input-group-text";
+    amount.innerText = "Cl " + (numberOfFields);
+
+    let amount_input = document.createElement("input");
+    amount_input.type = "number";
+    amount_input.name = "ingredient[" + numberOfFields + "][amount]";
+    amount_input.className = "form-control alcoInput";
+    amount_input.id = "ingredient_" + numberOfFields + "";
+    /*
+            let removeBtn = document.createElement('button');
+            removeBtn.className = "btn btn-warning remove";
+            removeBtn.innerText = "Del";
+            removeBtn.id = "remove" + fieldCounter;
+    */
+    amount_prepend.appendChild(amount_span);
+    amount.appendChild(amount_prepend);
+    amount.appendChild(amount_input);
+    ingredientsContainer.appendChild(amount);
+
+
     numberOfFields++;
-}
-
-
-//Test
-/*
-const fieldHolder = document.getElementById("fieldHolder");
-
-function addField() {
-    let col = document.createElement("div");
-    col.className = "col-12";
-    col.id = "input" + fieldCounter;
-
-    let inputGroup = document.createElement("div");
-    inputGroup.className = "input-group mb-3";
-
-    let prepend = document.createElement("div");
-    prepend.className = "input-group-prepend";
-
-    let span = document.createElement("span");
-    span.className = "input-group-text";
-    span.innerText = "Beverage " + (fieldCounter + 1);
-
-    let input = document.createElement("input");
-    input.type = "text";
-    input.name = "drink[" + fieldCounter + "][beverage]";
-    input.className = "form-control alcoInput";
-    input.placeholder = "ex: vodka";
-
-    let removeBtn = document.createElement('button');
-    removeBtn.className = "btn btn-warning remove";
-    removeBtn.innerText = "Del";
-    removeBtn.id = "remove" + fieldCounter;
-
-    prepend.appendChild(span);
-    inputGroup.appendChild(prepend);
-    inputGroup.appendChild(input);
+    /*
     inputGroup.appendChild(removeBtn);
     col.appendChild(inputGroup);
     fieldHolder.appendChild(col);
-
-    fieldCounter++;
+    */
+    /*
+        document.getElementById('Make_Recipe_Ingredients').innerHTML +=
+            "Centiliter nr " + numberOfFields + " <input type='number' id='amount_" + numberOfFields + "' class='form-control' name='ingredient[" + numberOfFields + "][amount]' required><br>" +
+            "Sprit nr " + numberOfFields + "<input list='list_ingredient_" + numberOfFields + "' type='text' id='ingredient_" + numberOfFields + "' class='form-control' name='ingredient[" + numberOfFields + "][ingredientName]' autocomplete=off required><br>";
+                    Ingredient_Lookup("", "ingredient_" + numberOfFields);
+                    numberOfFields++;
+            }
+    */
 }
-
-document.addEventListener('click', (e) => {
-    if (e.target.classList == "btn btn-warning remove")
-        removeInputField(e.target.id);
-});
-
-function removeInputField(inputNumber) {
-    let numToRemove = inputNumber.slice(6, 10);
-    document.getElementById("input" + numToRemove).remove();
-}
-*/
