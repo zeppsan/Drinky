@@ -1,9 +1,9 @@
 /* 
-Author: 
-    Casper Kärrström
+    Author: 
+        Casper Kärrström
 
-Description:
-    Javascript for the rating system on recipes
+    Description:
+        Javascript for the rating system on recipes
 
 */
 
@@ -30,6 +30,6 @@ document.addEventListener("click", (e) => {
 
 function rate(rating){
 
-    
+
 
 }

@@ -91,8 +91,8 @@
             </div>
             <div class="col-12 col-md-6 my-auto">
                 <h3 class="title"><?php echo ucfirst($row['username'])?></h3>
-                <p class="text mt-2"><?php echo $row['presentation']?></p>
                 <h4 class="sub-title"><?php echo ucfirst($row['fname'])." ".ucfirst($row['lname']).", ". $row['age']?></h4>
+                <p class="text mt-2"><?php echo $row['presentation']?></p>
                 <?php if($_SESSION['username'] == $row['username']): ?>
                     <a href="updateProfile.php" class="btn btn-gray mt-3">Edit
                         <img src="media/pen.png" width="40px" height="40px">

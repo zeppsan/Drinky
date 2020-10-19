@@ -1,13 +1,13 @@
 <?php
 
 /* 
-        Author: 
-            Casper Kärrström
+    Author: 
+        Casper Kärrström
 
-        Description:
-            Shows the recipe
+    Description:
+        Shows the recipe
 
-    */ 
+*/ 
 
 
     include("./php/includes/db.inc.php");
@@ -30,7 +30,7 @@
     $stmt->execute();
     $user = $stmt->get_result()->fetch_assoc();
     //  Array of all ingredients and thier amount
-    $stmt = $conn->prepare("SELECT ingredients.name, recipe_ingredients.amount FROM recipe_ingredients 
+    $stmt = $conn->prepare("SELECT ingredients.name, recipe_ingredients.amount, recipe_ingredients.unit FROM recipe_ingredients 
     INNER JOIN recipe ON recipe_ingredients.recipe_ID = recipe.recipe_ID 
     INNER JOIN ingredients ON recipe_ingredients.ingredient_ID = ingredients.ingredient_ID WHERE recipe.recipe_ID = ?");
     $stmt->bind_param("i", $drink['recipe_ID']);
@@ -68,7 +68,7 @@
                 } ?>
 
             <!--    imgurl, Name of Drink, Drink rating, Description    -->
-                <div class="col-3 col-md-2 text-center">
+                <div class="col-6 col-md-2">
                     <img src="<?php 
                     if(isset($drink['image'])){     // Image of drink  
                     echo $drink['image'];} else{ echo "./media/coctail.png";}
@@ -79,7 +79,7 @@
                     <p><?php echo $drink['description'] ?></p>
                     </div>
                     <!--    Drink Rating    -->
-                    <div class="col-3 col-md-2"> 
+                    <div class="col-6 col-md-2"> 
                     <h4>Rating: <?php 
                     if($drink['votes'] == null){
                         echo "0";
@@ -101,11 +101,11 @@
             <!--    Ingredients... Spirits, Liquer, juice, Soda, Garnish -->
                 <div class="col-6 col-md-4 text-center">
                     <h2>Ingredients</h2>
-                    <!--    Listed ingredient from ingredients  -->
+                    <!--    Lists ingredient from ingredients  -->
                     <ul class="list-unstyled">
                         <?php
                             while($ingredient = $ingredients->fetch_assoc()){
-                                echo"<li>".$ingredient['name'],' ', $ingredient['amount']." cl </li>";
+                                echo"<li>".$ingredient['name'],' ', $ingredient['amount'], $ingredient['unit']." </li>";
                             };
                         ?>
                     </ul>
@@ -115,15 +115,19 @@
 
             <!--    Drink Creator... Name, rating, link -->
             <div class="row justify-content-center align-items-center mt-5 p-4">
-                <div class="col-4 col-md-2">
+                <div class="col-6 col-md-2">
                     <h2>Recipe by </h2>
-                    <div class="rounded-circle " id="profile_picture">
+                     <!--    User picture    -->
+                    <div class="rounded-circle" id="profile_picture">
                         <a href="http://localhost/Drinky/profile.php?user=<?php echo $user['username'] ?>"> 
-                        <img src="<?php echo $user['profile_picture'] ?>"  width="100%"></a>   <!--    User picture    -->
+                        <img src="<?php if(isset($user['profile_picture'])){
+                            echo $user['profile_picture']; 
+                        } else { echo "./media/profilepictures/profilestock.jpg";}
+                         ?>"  width="100%"></a>
                     </div>
                 </div>
-
-                <div class="col-4 col-md-2 text-center">
+                    <!--    Username, firstname, lastname and age    -->
+                <div class="col-6 col-md-2">
                     <p> <?php echo $user['username'] ?></p>
                     <p> <?php echo $user['fname'], ' ', $user['lname'], ', ', $user['age'] ?></p>
                     <!--    User Rating    -->
@@ -137,8 +141,7 @@
                 <div class="col-6 text-center">
                     <h2>Rate The Drink</h2>
                     <div class="rating">
-                        <span class="ratingStars" id="s1">☆</span><span class="ratingStars" id="s2">☆</span><span class="ratingStars" id="s3">☆</span>
-                        <span class="ratingStars" id="s4">☆</span><span class="ratingStars" id="s5">☆</span>
+                        <span class="ratingStars" id="s1">☆</span><span class="ratingStars" id="s2">☆</span><span class="ratingStars" id="s3">☆</span><span class="ratingStars" id="s4">☆</span><span class="ratingStars" id="s5">☆</span>
                     </div>
                 </div>
             </div>

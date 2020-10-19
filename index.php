@@ -26,6 +26,7 @@
     while($row = mysqli_fetch_row($topRecipes)){
         $topArray[$i++] = array("name"=>$row[1], "rating_total"=>$row[4], "votes"=>$row[5], "image"=>$row[6]); 
     }
+    $defaultImage = "media/drinkImages/default.png"; 
 ?>
 
 <html lang="en">
@@ -36,7 +37,7 @@
             <div class="col-6 col-md-3">
                 <img src="media/coctail.png" width="200em">
             </div>
-            <div class="col-6 col-md-3 ">
+            <div class="col-12 col-md-3 ">
                 <div class="infoArea"><h4>Drinky is the platform for you that want to share your best drinks and to experiment by testing others! <hr> 
                 You can also rate others recipes and see what the best recipes of the site is in the TOP-Ratings!
                 </h4></div>
@@ -48,26 +49,27 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-3">
             <a href="showRecipe.php?drinkName=<?php echo $topArray[0]['name']; ?>">
-                <h4><?php echo round($topArray[0]['rating_total']/$topArray[0]['votes'],1); ?>
+                <h4><?php if($topArray[0]['votes'] == NULL) echo 0; else echo round($topArray[0]['rating_total']/$topArray[0]['votes'],1); ?>
                 <i><?php echo $topArray[0]['name']; ?></i></h4>
-                <img src="<?php echo $topArray[0]['image'];?>" width="200em"height="200em"></a>
+                <img src="<?php if($topArray[0]['image'] == NULL)
+                echo $defaultImage; else echo $topArray[0]['image'];?>" width="200em"height="200em"></a>
             </div>
             <div class="col-12 col-md-3">
             <a href="showRecipe.php?drinkName=<?php echo $topArray[1]['name']; ?>">
-                <h4><?php echo round($topArray[1]['rating_total']/$topArray[1]['votes'],1); ?>
+                <h4><?php if($topArray[1]['votes'] == NULL) echo 0; else echo round($topArray[1]['rating_total']/$topArray[1]['votes'],1); ?>
                 <i><?php echo $topArray[1]['name']; ?></i></h4>
-                <img src="<?php echo $topArray[1]['image'];?>"width="200em"height="200em"></a>
+                <img src="<?php if($topArray[1]['image'] == NULL)
+                echo $defaultImage; else echo $topArray[1]['image'];?>"width="200em"height="200em"></a>
             </div>
             <div class="col-12 col-md-3 mb-2">
                 <a href="showRecipe.php?drinkName=<?php echo $topArray[2]['name']; ?>">
-                <h4><?php echo round($topArray[2]['rating_total']/$topArray[2]['votes'],1); ?>
+                <h4><?php if($topArray[2]['votes'] == NULL) echo 0; else echo round($topArray[2]['rating_total']/$topArray[2]['votes'],1); ?>
                 <i><?php echo $topArray[2]['name']; ?></i></h4>
-                <img src="<?php echo $topArray[2]['image'];?>"width="200em"height="200em"></a>
+                <img src="<?php if($topArray[2]['image'] == NULL)
+                echo $defaultImage; else echo $topArray[2]['image'];?>"width="200em"height="200em"></a>
             </div>
         </div>
         <div class="row justify-content-center" id="index"></div>
-
-
 
          <?php endif;?>
     </div>

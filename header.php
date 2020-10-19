@@ -33,7 +33,7 @@
       </a>
     </div> 
     
-    <nav class="navbar nav justify-content-center"> 
+    <nav class="navbar nav justify-content-center col-12"> 
       <ul class="nav">
         <li class="nav-item">
           <a class="nav-link active" href="drink_search.php">Search Recipe</a>
