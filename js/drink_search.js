@@ -90,18 +90,28 @@ function applySearch(data) {
 
     if (data.length) {
         searchResultContainer.innerHTML += `<div class="row px-3 mt-3">
+        <div class="col"><b>Drink Image</b></div>
         <div class="col"><b>Drink Name</b></div>
         <div class="col"><b>Description</b></div>
         <div class="col"><b>Drink Rating</b></div>
     </div>`;
     }
 
+
     data.forEach(element => {
+        let image = element.image;
+
+        if (element.image === null)
+            image = "media/drinkImages/default.png";
+
         let rating = Math.round(element.rating * 100) / 100;
         document.getElementById("searchResult").innerHTML += `<a href="showRecipe.php?drinkName=${element.name}">
         <div class="row">
             <div class="col-12">
                 <div class="row my-2 drink-container p-3">
+                    <div class="col">
+                        <img src="${image}" height="64px">
+                    </div>
                     <div class="col">
                         <p class="drink-name">
                             ${element.name}

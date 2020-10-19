@@ -19,7 +19,7 @@
 
     $decoded = json_decode($content, true);
 
-    $prepareString = 'SELECT DISTINCT recipe.name, recipe.description, recipe.rating_total / recipe.votes AS "rating" FROM (recipe_ingredients INNER JOIN ingredients ON recipe_ingredients.ingredient_ID = ingredients.ingredient_ID) INNER JOIN recipe on recipe.recipe_ID = recipe_ingredients.recipe_ID WHERE ingredients.name = "" ';
+    $prepareString = 'SELECT DISTINCT recipe.image, recipe.name, recipe.description, recipe.rating_total / recipe.votes AS "rating" FROM (recipe_ingredients INNER JOIN ingredients ON recipe_ingredients.ingredient_ID = ingredients.ingredient_ID) INNER JOIN recipe on recipe.recipe_ID = recipe_ingredients.recipe_ID WHERE ingredients.name = "" ';
 
     $arr = [];
 
