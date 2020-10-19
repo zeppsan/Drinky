@@ -55,7 +55,7 @@ foreach($_POST['beverage'] as $key)
   $ingredient_id = $row['ingredient_ID'];
 
   $stmt = $conn->prepare("INSERT INTO recipe_ingredients (recipe_ID, ingredient_ID, amount) VALUES (?, ?, ?)");
-  $stmt->bind_param("sss", $recipe_id, $ingredient_id, $key['amount']);
+  $stmt->bind_param("sss", $recipe_id, $ingredient_id, $key['amount'], $key['unit']);
   $stmt->execute();
 }
 

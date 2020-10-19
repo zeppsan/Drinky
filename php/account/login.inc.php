@@ -70,7 +70,7 @@
         session_start();
         $_SESSION['username'] = $_POST['username'];
         $_SESSION['id'] = $row['id'];
-        header("location: ../../profile.php?");
+        header("location: ../../index.php?");
     }
 
     /** Login was failed. redirects user the login page with error.
