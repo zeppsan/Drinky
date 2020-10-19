@@ -48,7 +48,7 @@
         <?php include_once 'header.php'; ?>
     </head>
 
-    <body  class="bg-bluegradient">
+    <body class="bg-bluegradient">
 
         <!--    Main container  -->
         <div class="container">

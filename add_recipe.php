@@ -58,15 +58,15 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Centiliter</span>
                             </div>
-                            <input type="number" name="beverage[0][amount]" class="form-control" required>
+                            <input type="number" name="beverage[0][amount]" id="amount_0" class="form-control" required>
                         </div>
 
-
+                        
                     </div>
 
                     <div class="row">
                         <div class="col text-center">
-                            <a href="#" onclick="addField()"><img src="media/plus_icon.png" width="32px"></a>
+                            <a href="#" onclick="addIngerdient()"><img src="media/plus_icon.png" width="32px"></a>
                         </div>
                     </div>
 
