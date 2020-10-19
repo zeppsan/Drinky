@@ -25,13 +25,22 @@
             <!-- Create recipe -->
             <div class="col-12 col-md-6 my-auto">
                 <form id="add_recipe_form" name="recipe_form" action="./php/recipe/add_recipe_to_db.php" method="POST" enctype="multipart/form-data">
-                <h3 class="title">Make Recipe</h3>
+                    <h3 class="title">Make Recipe</h3>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Add image</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="drinkImage">
+                            <label class="custom-file-label">Choose file</label>
+                        </div>
+                    </div>
                     <!-- Drink name -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Drink name</span>
                         </div>
-                        <input type="text" name="drinkname" class="form-control" id="name" placeholder="ex. Rum and coke" required><br>
+                        <input type="text" name="drinkname" class="form-control" id="name" placeholder="ex. Rum and coke" required>
                     </div>
                     <!-- Short decription -->
                     <p class="mt-3 mb-0">Short description</p>
@@ -64,11 +73,6 @@
                             </div>
                             <input type="number" name="beverage[0][amount]" id="amount_0" class="form-control" required>
                         </div>
-
-                        <input type="file" class="custom-file-input" name="drinkImage">
-                        <label class="custom-file-label">Choose file</label>
-
-                        
                     </div>
 
                     <div class="row">

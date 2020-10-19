@@ -84,7 +84,7 @@ $stmt->execute();
   Description:
     The script below will add an eventual image to the recipe. 
 */ 
-if($_FILES['drinkImage'] != NULL){
+if($_FILES['drinkImage']['name'] != ""){
   $targetDir = "../../media/drinkImages/";
   $dbPathToImage = "media/drinkImages/";
   
