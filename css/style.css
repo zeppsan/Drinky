@@ -12,6 +12,10 @@ html {
     width: 100%;
 }
 
+body {
+    height: 100%;
+}
+
 header {
     background-color: cornsilk;
 }
@@ -49,9 +53,8 @@ a:hover {
     text-align: center;
 }
 
-#index{
-    margin-top: 20vh; 
-}
+#index {}
+
 
 /* search field in header */
 
@@ -105,6 +108,7 @@ a:hover {
     background: rgb(2, 0, 36);
     background: linear-gradient(140deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(0, 212, 255, 0.14609593837535018) 100%);
     background-repeat: no-repeat;
+    background-size: contain;
 }
 
 #register-container,
@@ -200,15 +204,17 @@ a:hover {
 .rating {
     unicode-bidi: bidi-override;
     direction: rtl;
-  }
-.rating > span {
+}
+
+.rating>span {
     display: inline-block;
     position: relative;
     width: 1.1em;
 }
-.rating > span:hover:before,
-.rating > span:hover ~ span:before {
-     content: "\2605";
-     position: absolute;
-     color: gold;
+
+.rating>span:hover:before,
+.rating>span:hover~span:before {
+    content: "\2605";
+    position: absolute;
+    color: gold;
 }
