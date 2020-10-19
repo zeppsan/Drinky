@@ -66,7 +66,7 @@
 
                     <div class="row">
                         <div class="col text-center">
-                            <a href="#" onclick="addIngerdient()"><img src="media/plus_icon.png" width="32px"></a>
+                            <a href="#" onclick="addField()"><img src="media/plus_icon.png" width="32px"></a>
                         </div>
                     </div>
 

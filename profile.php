@@ -121,6 +121,7 @@
                     </div>
                     <?php while($drinkrow = $top_drinks_result->fetch_assoc()): ?> 
 
+
                         <a href="showRecipe.php?drinkName=<?php echo $drinkrow['name']?>">
                             <div class="row my-2 drink-container p-3">
                                 <div class="col">
@@ -134,7 +135,7 @@
                                     </p>
                                 </div>
                                 <div class="col">
-                                    <p class="rating">
+                                    <p class="profileDrinkRating">
                                         <?php echo round($drinkrow['rating'], 1)?>
                                     </p>    
                                 </div>

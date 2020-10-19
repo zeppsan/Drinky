@@ -60,11 +60,8 @@ function removeInputField(inputNumber) {
 }
 
 function searchDrinks() {
-
     let inputs = document.querySelectorAll('.alcoInput');
-
     let data = [];
-    let count = 0;
     inputs.forEach(element => {
         data.push(element.value);
     });
@@ -72,14 +69,14 @@ function searchDrinks() {
     console.log(JSON.stringify(data));
 
     fetch("php/recipe/search_recipe.inc.php", {
-        method: "POST",
-        mode: "same-origin",
-        credentials: "same-origin",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    })
+            method: "POST",
+            mode: "same-origin",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
         .then(response => response.json())
         .then(data => {
             clearResult();
@@ -100,7 +97,7 @@ function applySearch(data) {
     }
 
     data.forEach(element => {
-        console.log(123123);
+        let rating = Math.round(element.rating * 100) / 100;
         document.getElementById("searchResult").innerHTML += `<a href="showRecipe.php?drinkName=${element.name}">
         <div class="row">
             <div class="col-12">
@@ -116,8 +113,8 @@ function applySearch(data) {
                         </p>
                     </div>
                     <div class="col">
-                        <p class="rating">
-                            ${element.rating}
+                        <p class="profileDrinkRating">
+                            ${rating}
                         </p>    
                     </div>
                 </div>
