@@ -7,6 +7,7 @@
 
 */
 
+
 document.addEventListener("click", (e) => {
 
     switch (e.target.id) {
@@ -14,12 +15,16 @@ document.addEventListener("click", (e) => {
             rate(1);
             break;
         case "s2":
+            rate(2);
             break;
         case "s3":
+            rate(3);
             break;
         case "s4":
+            rate(4);
             break;
         case "s5":
+            rate(5);
             break;
         default:
             break;
@@ -27,9 +32,10 @@ document.addEventListener("click", (e) => {
 
 });
 
+function rate(ratedIndex){
 
-function rate(rating){
-
-
+    for(var i=0; i <=ratedIndex; i++){
+        //pissråtta assåååå
+    }
 
 }

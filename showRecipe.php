@@ -12,6 +12,7 @@
 
     include("./php/includes/db.inc.php");
 
+
     session_start();
     if(!isset($_SESSION['username']))
         header("Location: login.php");
@@ -115,7 +116,7 @@
 
             <!--    Drink Creator... Name, rating, link -->
             <div class="row justify-content-center align-items-center mt-5 p-4">
-                <div class="col-6 col-md-2">
+                <div class="col-6 col-sm-4 col-md-2">
                     <h2>Recipe by </h2>
                      <!--    User picture    -->
                     <div class="rounded-circle" id="profile_picture">
@@ -127,7 +128,7 @@
                     </div>
                 </div>
                     <!--    Username, firstname, lastname and age    -->
-                <div class="col-6 col-md-2">
+                <div class="col-6 col-sm-4 col-md-2">
                     <p> <?php echo $user['username'] ?></p>
                     <p> <?php echo $user['fname'], ' ', $user['lname'], ', ', $user['age'] ?></p>
                     <!--    User Rating    -->
@@ -141,7 +142,7 @@
                 <div class="col-6 text-center">
                     <h2>Rate The Drink</h2>
                     <div class="rating">
-                        <span class="ratingStars" id="s1">☆</span><span class="ratingStars" id="s2">☆</span><span class="ratingStars" id="s3">☆</span><span class="ratingStars" id="s4">☆</span><span class="ratingStars" id="s5">☆</span>
+                        <span class="ratingStars" id="1">☆</span><span class="ratingStars" id="2">☆</span><span class="ratingStars" id="3">☆</span><span class="ratingStars" id="4">☆</span><span class="ratingStars" id="5">☆</span>
                     </div>
                 </div>
             </div>
@@ -151,6 +152,6 @@
     </body>
 
 
-
-
+    <script src="http://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script src="js/rating.js"></script>
 </html>
