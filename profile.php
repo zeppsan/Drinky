@@ -60,7 +60,7 @@
 
 
         // fetch user drinks 
-        $stmt = $conn->prepare("SELECT name, description, instructions, rating_total / votes AS 'rating' FROM user_recipe JOIN recipe on user_recipe.recipe_ID = recipe.recipe_ID WHERE user_recipe.user_ID = ? ORDER BY rating DESC LIMIT 5");
+        $stmt = $conn->prepare("SELECT name, image, description, instructions, rating_total / votes AS 'rating' FROM user_recipe JOIN recipe on user_recipe.recipe_ID = recipe.recipe_ID WHERE user_recipe.user_ID = ? ORDER BY rating DESC LIMIT 5");
         $stmt->bind_param("i", $row['id']);
         $stmt->execute();
         $top_drinks_result = $stmt->get_result();
@@ -115,6 +115,7 @@
                 <?php 
                 if($top_drinks_amount > 0): ?>
                     <div class="row px-3 mt-3">
+                        <div class="col"><b>Image</b></div>
                         <div class="col"><b>Drink Name</b></div>
                         <div class="col"><b>Description</b></div>
                         <div class="col"><b>Drink Rating</b></div>
@@ -124,6 +125,9 @@
 
                         <a href="showRecipe.php?drinkName=<?php echo $drinkrow['name']?>">
                             <div class="row my-2 drink-container p-3">
+                                <div class="col">
+                                    <img src="<?php echo $drinkrow['image']?>" height="64px">
+                                </div>
                                 <div class="col">
                                     <p class="drink-name">
                                         <?php echo $drinkrow['name']?>
