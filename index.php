@@ -46,19 +46,19 @@
             <hr id="index">
             <h3 style="text-align:center;">TOP-Recipes!</h3>
         <div class="row justify-content-center">
-            <div class="col-6 col-md-3">
+            <div class="col-12 col-md-3">
             <a href="showRecipe.php?drinkName=<?php echo $topArray[0]['name']; ?>">
                 <h4><?php echo round($topArray[0]['rating_total']/$topArray[0]['votes'],1); ?>
                 <i><?php echo $topArray[0]['name']; ?></i></h4>
                 <img src="<?php echo $topArray[0]['image'];?>" width="200em"height="200em"></a>
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-12 col-md-3">
             <a href="showRecipe.php?drinkName=<?php echo $topArray[1]['name']; ?>">
                 <h4><?php echo round($topArray[1]['rating_total']/$topArray[1]['votes'],1); ?>
                 <i><?php echo $topArray[1]['name']; ?></i></h4>
                 <img src="<?php echo $topArray[1]['image'];?>"width="200em"height="200em"></a>
             </div>
-            <div class="col-6 col-md-3 mb-2">
+            <div class="col-12 col-md-3 mb-2">
                 <a href="showRecipe.php?drinkName=<?php echo $topArray[2]['name']; ?>">
                 <h4><?php echo round($topArray[2]['rating_total']/$topArray[2]['votes'],1); ?>
                 <i><?php echo $topArray[2]['name']; ?></i></h4>
