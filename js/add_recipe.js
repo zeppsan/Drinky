@@ -49,10 +49,10 @@ function clearResult(targetId) {
 }
 
 var inputList = document.getElementById('Recipe_Ingredients');
-function addField() {
 
+function addField() {
     var fields = `
-        <div class="input-group mb-3" id="ingredient-group-${fieldCounter}">
+        <div class="input-group mb-3" id="input${fieldCounter}">
             <div class="input-group-prepend">
                 <span class="input-group-text">Spirit</span>
             </div>
@@ -65,8 +65,19 @@ function addField() {
                     <span class="input-group-text">Centiliter</span>
                 </div>
                 <input type="number" name="beverage[${fieldCounter}][amount]" class="form-control" required>
-    </div>`;
+                <button class="btn btn-warning remove" id="remove${fieldCounter}">Del</button>
+        </div>`;
     console.log("addField recipe");
     inputList.insertAdjacentHTML("beforeEnd", fields);
     fieldCounter++;
+}
+
+document.addEventListener('click', (e) => {
+    if (e.target.classList == "btn btn-warning remove")
+        removeInputField(e.target.id);
+});
+
+function removeInputField(inputNumber) {
+    let numToRemove = inputNumber.slice(6, 10);
+    document.getElementById("input" + numToRemove).remove();
 }
