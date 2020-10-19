@@ -17,9 +17,15 @@
     include("php/includes/db.inc.php");
 
 
-    $stmt = $conn->prepare("SELECT * from recipe order by rating_total DESC limit 3"); 
+    $stmt =$conn->prepare("SELECT * from recipe order by rating_total DESC limit 3"); 
     $stmt->execute(); 
-    $topRecipes = $stmt->get_result()->fetch_assoc(); 
+    $topRecipes = $stmt->get_result(); 
+    $topArray = []; 
+    $i = 0; 
+
+    while($row = mysqli_fetch_row($topRecipes)){
+        $topArray[$i++] = array("name"=>$row[1], "rating_total"=>$row[4], "votes"=>$row[5], "image"=>$row[6]); 
+    }
 ?>
 
 <html lang="en">
@@ -39,20 +45,28 @@
         <?php if(isset($_SESSION['username'])):?>
             <hr id="index">
             <h3 style="text-align:center;">TOP-Recipes!</h3>
-
         <div class="row justify-content-center">
-
             <div class="col-6 col-md-3">
-
-            <?php echo $topRecipes[0]['name']; ?>
+            <a href="showRecipe.php?drinkName=<?php echo $topArray[0]['name']; ?>">
+                <h4><?php echo round($topArray[0]['rating_total']/$topArray[0]['votes'],1); ?>
+                <i><?php echo $topArray[0]['name']; ?></i></h4>
+                <img src="<?php echo $topArray[0]['image'];?>"></a>
             </div>
             <div class="col-6 col-md-3">
-            <?php echo $topRecipes[0]['name']; ?>
+            <a href="showRecipe.php?drinkName=<?php echo $topArray[1]['name']; ?>">
+                <h4><?php echo round($topArray[1]['rating_total']/$topArray[1]['votes'],1); ?>
+                <i><?php echo $topArray[1]['name']; ?></i></h4>
+                <img src="<?php echo $topArray[1]['image'];?>"></a>
             </div>
-            <div class="col-6 col-md-3">
-            <?php echo $topRecipes[0]['name']; ?>
+            <div class="col-6 col-md-3 mb-2">
+                <a href="showRecipe.php?drinkName=<?php echo $topArray[2]['name']; ?>">
+                <h4><?php echo round($topArray[2]['rating_total']/$topArray[2]['votes'],1); ?>
+                <i><?php echo $topArray[2]['name']; ?></i></h4>
+                <img src="<?php echo $topArray[2]['image'];?>"></a>
             </div>
         </div>
+        <div class="row justify-content-center" id="index"></div>
+
 
 
          <?php endif;?>
