@@ -1,11 +1,18 @@
 <?php
 
+/* 
+        Author: 
+            Casper Kärrström - PHP, Layout, HTML
+
+        Description:
+            Shows the recipe
+
+    */ 
     include("./php/includes/db.inc.php");
 
     session_start();
     if(!isset($_SESSION['username']))
         header("Location: login.php");
-
 
 
     // Fetch information about the specified recipe
@@ -47,11 +54,11 @@
         <title>Recepie</title>
         <?php include_once 'header.php'; ?>
     </head>
-
+    
     <body class="bg-bluegradient">
 
         <!--    Main container  -->
-        <div class="container">
+        <div class="container" >
             <div class="row justify-content-center align-items-center">
                 <!-- Checking if the drink exists -->
             <?php    if(!isset($drink['name'])){
@@ -60,7 +67,7 @@
                 } ?>
 
             <!--    imgurl, Name of Drink, Drink rating, Description    -->
-                <div class="col-2 text-center">
+                <div class="col-3 col-md-2 text-center">
                     <img src="./media/coctail.png" width="120em" >    <!--  Image of drink  -->
                 </div>
                 <div class="col-6 col-md-4 text-center">     
@@ -68,7 +75,7 @@
                     <p><?php echo $drink['description'] ?></p>
                     </div>
                     <!--    Drink Rating    -->
-                    <div class="col-2"> 
+                    <div class="col-3 col-md-2"> 
                     <h4>Rating: <?php 
                     if($drink['votes'] == null){
                         echo "0";
@@ -104,14 +111,15 @@
 
             <!--    Drink Creator... Name, rating, link -->
             <div class="row justify-content-center align-items-center mt-5">
-                <div class="col-2">
+                <div class="col-4 col-md-2">
                     <h2>Recipe by </h2>
                     <div class="rounded-circle " id="profile_picture">
-                       <a href="http://localhost/Drinky/profile.php?user=<?php echo $user['username'] ?>"> <img src="<?php echo $user['profile_picture'] ?>"  width="100%">></a>   <!--    User picture    -->
+                        <a href="http://localhost/Drinky/profile.php?user=<?php echo $user['username'] ?>"> 
+                        <img src="<?php echo $user['profile_picture'] ?>"  width="100%"></a>   <!--    User picture    -->
                     </div>
                 </div>
 
-                <div class="col-2 text-center">
+                <div class="col-4 col-md-2 text-center">
                     <p> <?php echo $user['username'] ?></p>
                     <p> <?php echo $user['fname'], ' ', $user['lname'], ', ', $user['age'] ?></p>
                     <!--    User Rating    -->
