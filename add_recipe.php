@@ -45,17 +45,17 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Drink name</span>
                         </div>
-                        <input type="text" name="drinkname" class="form-control" id="name" placeholder="ex. Rum and coke" required>
+                        <input type="text" name="drinkname" class="form-control" id="name" placeholder="ex. Rum and coke" maxlength="50" required>
                     </div>
                     <!-- Short decription -->
                     <p class="mt-3 mb-0">Short description</p>
                     <p class="text mt-2">
-                        <textarea id="description" name="description" rows="3" cols="30"></textarea>
+                        <textarea id="description" name="description" rows="3" cols="30" maxlength="255"></textarea>
                     </p>
                     <!-- Instructions -->
                     <p class="mt-3 mb-0">Instructions</p>
                     <p class="text mt-2">
-                        <textarea id="instructions" name="instructions" rows="10" cols="30"></textarea>
+                        <textarea id="instructions" name="instructions" rows="10" cols="30" maxlength="1000"></textarea>
                     </p>
 
                     <div id="Recipe_Ingredients">
@@ -64,7 +64,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Spirit</span>
                             </div>
-                            <input list="list1" type="text" name="beverage[0][name]" class="form-control ingredientInput" placeholder="ex. Vodka" autocomplete="off" required>
+                            <input list="list1" type="text" name="beverage[0][name]" class="form-control ingredientInput" placeholder="ex. Vodka" maxlength="50" autocomplete="off" required>
                             <datalist id="list1">
                             
                             </datalist>
@@ -80,7 +80,7 @@
                                     ?>
                                 </select>
                             </div>
-                            <input type="number" step="0.1" name="beverage[0][amount]" id="amount_0" class="form-control" required>
+                            <input type="number" step="0.1" name="beverage[0][amount]" id="amount_0" class="form-control" maxlength="11" required>
                         </div>
                     </div>
 
