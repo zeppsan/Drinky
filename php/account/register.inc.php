@@ -21,7 +21,11 @@
     
     include_once '../includes/db.inc.php';
 
-    // Checks if the entered email is taken or not. If the email is taken, return true. Else, return false;
+    /** Checks if email is already taken
+     * 
+     * @param $email - user email
+     * @return bool - returns true if email is taken
+    */
     function EmailTaken($email){
         global $conn;
         $stmt = $conn->prepare('SELECT count(email) FROM users WHERE email=?');
@@ -36,6 +40,11 @@
         }
     }
 
+    /** Checks if username is already taken
+     * 
+     * @param $username - user username
+     * @return bool - returns true if username is taken
+    */
     function UsernameTaken($username){
         global $conn;
         $stmt = $conn->prepare('SELECT count(username) FROM users WHERE username=?');
@@ -50,21 +59,47 @@
         }
     }
 
+    /** Checks if all the field is set, else, return to register.php
+     * 
+     * @param _POST - the post varaibles from register.php
+     * @return redirect user to register.php if all fields are not fileld
+    */
+    function fieldsFilled($postArray){
+        if(!isset($postArray['email']) || 
+        !isset($postArray['username']) || 
+        !isset($postArray['password']) || 
+        !isset($postArray['password-repeat']) || 
+        !isset($postArray['fname']) || 
+        !isset($postArray['lname']) || 
+        !isset($postArray['age'])){
+            header('Location: ../../register.php?error=notfilled');
+        }
+    }
+
+    /** Completes the registration
+     * 
+     * @param _POST - the post varaibles from register.php
+     * @return redirect user to login.php if the registration can be completed else, redirect to register.phpp for error handlig
+    */
+    function compelteRegistration($postData){
+        global $conn;
+        $hashedPassword = password_hash($postData['password'], PASSWORD_DEFAULT);
+        $stmt = $conn->prepare("INSERT INTO users (email, username, fname, lname, age, pwd) VALUES (?,?,?,?,?,?)");
+        $stmt->bind_param("ssssis", $postData['email'],$postData['username'], $postData['fname'], $postData['lname'], $postData['age'], $hashedPassword);
+        if($stmt->execute()){
+            header("Location: ../../index.php?account-created");
+        } else {
+            header("Location: ../../register.php?error=dbfail");
+        }
+    }
+
     // Checks if the submit button was not pressed. If not, do not continue with script
     if(!isset($_POST['submit']))
         header('Location: ../../register.php?error=linkerror');
     
-    // Check if all fields are filled in
-    // Safety measure if someone mixes with the JS that are supposed to catch these things.. 
-    if(!isset($_POST['email']) || 
-    !isset($_POST['username']) || 
-    !isset($_POST['password']) || 
-    !isset($_POST['password-repeat']) || 
-    !isset($_POST['fname']) || 
-    !isset($_POST['lname']) || 
-    !isset($_POST['age'])){
-        header('Location: ../../register.php?error=notfilled');
-    }
+    
+    fieldsFilled($_POST);
+    
 
     // Checks if the email-address is valid or not
     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
@@ -92,12 +127,4 @@
         header('Location: ../../register.php?error=agelimit');
     }
 
-    $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-    $stmt = $conn->prepare("INSERT INTO users (email, username, fname, lname, age, pwd) VALUES (?,?,?,?,?,?)");
-    $stmt->bind_param("ssssis", $_POST['email'],$_POST['username'], $_POST['fname'], $_POST['lname'], $_POST['age'], $hashedPassword);
-    if($stmt->execute()){
-        header("Location: ../../index.php?account-created");
-    } else {
-        header("Location: ../../register.php?error=dbfail");
-    }
+    compelteRegistration($_POST);
