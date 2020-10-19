@@ -24,7 +24,7 @@
         <div class="row p-3">
             <!-- Create recipe -->
             <div class="col-12 col-md-6 my-auto">
-                <form id="add_recipe_form" name="recipe_form" action="./php/recipe/add_recipe_to_db.php" method="POST">
+                <form id="add_recipe_form" name="recipe_form" action="./php/recipe/add_recipe_to_db.php" method="POST" enctype="multipart/form-data">
                 <h3 class="title">Make Recipe</h3>
                     <!-- Drink name -->
                     <div class="input-group mb-3">
@@ -56,10 +56,17 @@
                             </datalist>
 
                             <div class="input-group-prepend">
-                                <span class="input-group-text">Centiliter</span>
+                                <select name="unit0" class="input-group-text">
+                                    <option value="cl">cl</option>
+                                    <option value="dl">dl</option>
+                                    <option value="pcs">pcs</option>
+                                </select>
                             </div>
                             <input type="number" name="beverage[0][amount]" id="amount_0" class="form-control" required>
                         </div>
+
+                        <input type="file" class="custom-file-input" name="drinkImage">
+                        <label class="custom-file-label">Choose file</label>
 
                         
                     </div>

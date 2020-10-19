@@ -4,18 +4,18 @@
     Description:
     Javascript for adding more ingredients and handeling AJAX for easier search in ingredients. 
 
-    Variables:
-    search_str - The input from the user
 */
 
 let fieldCounter = 1;
 
+//Event listner to check if the user is typing in the inputbox
 document.addEventListener('keyup', (e) => {
     console.log(e);
     if (e.target.classList.contains("ingredientInput"))
         IngredientSearch(e.target);
 });
 
+//AJAX search for the ingredients
 function IngredientSearch(target) {
     fetch("php/recipe/ingredient_lookup.php", {
         method: "POST",
@@ -36,6 +36,7 @@ function IngredientSearch(target) {
         })
 }
 
+//If the user is typing add the ajax result to the datalist
 function applySearch(data, targetId) {
     let target = document.getElementById(targetId);
 
@@ -44,12 +45,15 @@ function applySearch(data, targetId) {
     });
 }
 
+//Clears the search results so the user dont get duplicate suggestions
+//When the box is empty there should not be any sugesstions 
 function clearResult(targetId) {
     document.getElementById(targetId).innerHTML = "";
 }
 
 var inputList = document.getElementById('Recipe_Ingredients');
 
+//When the user clicks the green plus add more fields to the document
 function addField() {
     var fields = `
         <div class="input-group mb-3" id="input${fieldCounter}">
@@ -62,7 +66,11 @@ function addField() {
                 </datalist>
 
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Centiliter</span>
+                    <select name="unit${fieldCounter}" class="input-group-text">
+                        <option value="cl">cl</option>
+                        <option value="dl">dl</option>
+                        <option value="pcs">pcs</option>
+                    </select>
                 </div>
                 <input type="number" name="beverage[${fieldCounter}][amount]" class="form-control" required>
                 <button class="btn btn-warning remove" id="remove${fieldCounter}">Del</button>
@@ -72,11 +80,13 @@ function addField() {
     fieldCounter++;
 }
 
+//Event listner for the delete input button
 document.addEventListener('click', (e) => {
     if (e.target.classList == "btn btn-warning remove")
         removeInputField(e.target.id);
 });
 
+//Function to remove the inputfield
 function removeInputField(inputNumber) {
     let numToRemove = inputNumber.slice(6, 10);
     document.getElementById("input" + numToRemove).remove();
