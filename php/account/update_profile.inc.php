@@ -8,18 +8,30 @@
             Script will manage the update requests regarding the profile
         
         Variables in:
-            fname           - 
-            lname           - 
-            age             - 
-            presentation    - 
-
-        How to call this script: 
-            <form action="php/account/upload_image.inc.php" method="POST" enctype="multipart/form-data">
-                <input type="file" name="profilePicture">
-                <input type="submit" name="submit-image">
-            </form>
+            fname           - First Name
+            lname           - Last Name
+            age             - Age
+            presentation    - User Presentation
 
     */ 
+
+    require_once '../includes/db.inc.php';
+
+    /** Updates the database with the new user information.
+     * 
+     * @param dataArray Array with data from the $_POST
+     * @return redirect Redirects user back to profile with success or fail message
+     */
+    function updateUserData($dataArray){
+        global $conn;
+        $stmt = $conn->prepare("UPDATE users SET fname = ?, lname = ?, age = ?, presentation = ? WHERE username = ?");
+        $stmt->bind_param("ssiss", $dataArray['fname'], $dataArray['lname'], $dataArray['age'], $dataArray['presentation'], $_SESSION['username']);
+        
+        if($stmt->execute())
+            header('Location: ../../profile.php?updateSuccess');
+        else
+            header('Location: ../../profile.php?updateFailed');
+    }
 
 
     // Check if the button was pressed
@@ -27,15 +39,7 @@
         header("Location: ../../updateProfile.php?error=link");
     }
 
-    require_once '../includes/db.inc.php';
+    // Starts session to get access to the username
     session_start();
 
-
-
-    // Update the database with the new information
-    $stmt = $conn->prepare("UPDATE users SET fname = ?, lname = ?, age = ?, presentation = ? WHERE username = ?");
-    $stmt->bind_param("ssiss", $_POST['fname'], $_POST['lname'], $_POST['age'], $_POST['presentation'], $_SESSION['username']);
-    $stmt->execute();
-    
-    header('Location: ../../profile.php?success');
-    die();
+    updateUserData($_POST);

@@ -55,7 +55,7 @@ foreach($_POST['beverage'] as $key)
   $ingredient_id = $row['ingredient_ID'];
 
   $stmt = $conn->prepare("INSERT INTO recipe_ingredients (recipe_ID, ingredient_ID, amount) VALUES (?, ?, ?)");
-  $stmt->bind_param("sss", $recipe_id, $ingredient_id, $key['amount']);
+  $stmt->bind_param("sss", $recipe_id, $ingredient_id, $key['amount'], $key['unit']);
   $stmt->execute();
 }
 
@@ -72,6 +72,54 @@ $stmt = $conn->prepare("INSERT INTO user_recipe (recipe_ID, user_ID) VALUES (?, 
 $stmt->bind_param("ii", $recipe_id, $user_id);
 $stmt->execute();
 
+
+
+
+
+
+/*
+  Author: 
+    Eric Qvarnström 
+
+  Description:
+    The script below will add an eventual image to the recipe. 
+*/ 
+if($_FILES['drinkImage']['name'] != ""){
+  $targetDir = "../../media/drinkImages/";
+  $dbPathToImage = "media/drinkImages/";
+  
+  /** Checks if the entered file is an image or not 
+   * @param file The file that should be checked
+   * @return bool returns true if file is an image.
+  */
+  function isImage($file){
+      $imageType =  pathinfo($file['name'], PATHINFO_EXTENSION);
+      if($imageType != 'jpg' && $imageType != 'png' && $imageType != 'jpeg' && $imageType != 'gif' && $imageType != 'svg')
+          return false;
+      else
+          return true;
+  }
+  
+  /** Uploads an image to the specified drink.
+   * 
+   * @param file image file
+   * 
+   */
+  function uploadImage($image){
+      global $conn, $dbPathToImage, $targetDir, $recipe_id;
+      $imageType = pathinfo($image['name'], PATHINFO_EXTENSION);
+      $imagename = time() .".". $imageType;
+      $imageFullName = $dbPathToImage . $imagename;
+
+  
+      move_uploaded_file($_FILES['drinkImage']['tmp_name'], $targetDir . $imagename);
+      $stmt = $conn->prepare("UPDATE recipe SET image = ? WHERE recipe_ID = ?");
+      $stmt->bind_param('ss', $imageFullName, $recipe_id);
+      $stmt->execute();
+  }
+  
+  uploadImage($_FILES['drinkImage']);
+}
 
 header("Location: ../../showRecipe.php?drinkName=" .$_POST['drinkname']);
 ?>
