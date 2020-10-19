@@ -57,7 +57,9 @@ a:hover {
     text-align: center;
 }
 
-#index {}
+#index {
+    margin-top: 20vh;
+}
 
 
 /* search field in header */
