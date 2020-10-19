@@ -55,7 +55,7 @@
         </div>
 
 
-        <!-- <?php endif;?> -->
+         <?php endif;?>
     </div>
 </body>
 </html>

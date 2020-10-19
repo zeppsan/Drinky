@@ -16,8 +16,8 @@
 
     // Fetch information about the user that created the recipe
     //$stmt = $conn->prepare("SELECT username, profile_picture FROM users WHERE ...");
-    $stmt = $conn->prepare("SELECT id, username, fname, lname, age, profile_picture 
-    FROM user_recipe INNER JOIN recipe ON user_recipe.recipe_ID = ? INNER JOIN users ON users.id = user_recipe.user_ID");
+    $stmt = $conn->prepare("SELECT id, username, fname, lname, age, profile_picture FROM user_recipe 
+    INNER JOIN recipe ON user_recipe.recipe_ID = ? INNER JOIN users ON users.id = user_recipe.user_ID");
     $stmt->bind_param("i", $drink['recipe_ID']);
     $stmt->execute();
     $user = $stmt->get_result()->fetch_assoc();
@@ -29,7 +29,8 @@
     $stmt->execute();
     $ingredients = $stmt->get_result();
  
-    $stmt = $conn->prepare("SELECT user_recipe.user_ID, sum(recipe.rating_total) / sum(recipe.votes) AS 'rating' FROM user_recipe INNER JOIN recipe on recipe.recipe_ID = user_recipe.recipe_ID WHERE user_recipe.user_ID = ?");
+    $stmt = $conn->prepare("SELECT user_recipe.user_ID, sum(recipe.rating_total) / sum(recipe.votes) AS 'rating' FROM user_recipe 
+    INNER JOIN recipe on recipe.recipe_ID = user_recipe.recipe_ID WHERE user_recipe.user_ID = ?");
     $stmt->bind_param("i", $user['id']);
     $stmt->execute();
     $drink_ratings = $stmt->get_result()->fetch_assoc();
@@ -80,7 +81,7 @@
         </div>
 
             <!--    Instructions    -->
-            <div class="row justify-content-center align-items-center">
+            <div class="row justify-content-center align-items-center mt-5">
                 <div class="col-6 col-md-4 text-center">
                     <h2> Instructions </h2>
                     <?php echo $drink['instructions']?>
@@ -102,7 +103,7 @@
             </div>
 
             <!--    Drink Creator... Name, rating, link -->
-            <div class="row justify-content-center align-items-center ">
+            <div class="row justify-content-center align-items-center mt-5">
                 <div class="col-2">
                     <h2>Recipe by </h2>
                     <div class="rounded-circle " id="profile_picture">
@@ -123,7 +124,7 @@
         </div>
 
 
-        <div class="row justify-content-center align-items-center">
+        <div class="row justify-content-center align-items-center mt-5">
             <div class="col-6 text-center">
                 <h2>Rate The Drink</h2>
                 <div class="rating">
