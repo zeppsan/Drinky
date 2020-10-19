@@ -25,7 +25,7 @@
             <!-- Create recipe -->
             <div class="col-12 col-md-6 my-auto">
                 <form id="add_recipe_form" name="recipe_form" action="./php/recipe/add_recipe_to_db.php" method="POST">
-                <h3 class="title">Create recipe</h3>
+                <h3 class="title">Make Recipe</h3>
                     <!-- Drink name -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -34,7 +34,7 @@
                         <input type="text" name="drinkname" class="form-control" id="name" placeholder="ex. Rum and coke" required><br>
                     </div>
                     <!-- Short decription -->
-                    <p class="mt-3 mb-0">Short desciprion</p>
+                    <p class="mt-3 mb-0">Short description</p>
                     <p class="text mt-2">
                         <textarea id="description" name="description" rows="3" cols="30"></textarea>
                     </p>
