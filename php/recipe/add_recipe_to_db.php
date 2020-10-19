@@ -47,6 +47,7 @@ echo "recipe_id = " .$recipe_id;
 //Not finished yet. Will add all the ingredients to the reicpe.
 foreach($_POST['beverage'] as $key)
 {
+  //Get the ingredient_id from database
   $stmt = $conn->prepare("SELECT ingredient_ID FROM ingredients WHERE name=?");
   $stmt->bind_param("s", $key['name']);
   $stmt->execute();
@@ -54,8 +55,8 @@ foreach($_POST['beverage'] as $key)
   $row = mysqli_fetch_array($result);
   $ingredient_id = $row['ingredient_ID'];
 
-  $stmt = $conn->prepare("INSERT INTO recipe_ingredients (recipe_ID, ingredient_ID, amount) VALUES (?, ?, ?)");
-  $stmt->bind_param("sss", $recipe_id, $ingredient_id, $key['amount'], $key['unit']);
+  $stmt = $conn->prepare("INSERT INTO recipe_ingredients (recipe_ID, ingredient_ID, amount, unit) VALUES (?, ?, ?, ?)");
+  $stmt->bind_param("ssss", $recipe_id, $ingredient_id, $key['amount'], $key['unit']);
   $stmt->execute();
 }
 

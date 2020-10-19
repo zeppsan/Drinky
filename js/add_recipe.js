@@ -7,7 +7,7 @@
 */
 
 let fieldCounter = 1;
-
+addUnits();
 //Event listner to check if the user is typing in the inputbox
 document.addEventListener('keyup', (e) => {
     console.log(e);
@@ -30,8 +30,8 @@ function IngredientSearch(target) {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(target.list);
             clearResult(target.list.id);
+            console.log();
             applySearch(data, target.list.id);
         })
 }
@@ -66,7 +66,7 @@ function addField() {
                 </datalist>
 
                 <div class="input-group-prepend">
-                    <select name="unit${fieldCounter}" class="input-group-text">
+                    <select name="beverage[${fieldCounter}][unit]" class="input-group-text">
                         <option value="cl">cl</option>
                         <option value="dl">dl</option>
                         <option value="pcs">pcs</option>
@@ -75,8 +75,8 @@ function addField() {
                 <input type="number" name="beverage[${fieldCounter}][amount]" class="form-control" required>
                 <button class="btn btn-warning remove" id="remove${fieldCounter}">Del</button>
         </div>`;
-    console.log("addField recipe");
     inputList.insertAdjacentHTML("beforeEnd", fields);
+
     fieldCounter++;
 }
 
@@ -90,4 +90,13 @@ document.addEventListener('click', (e) => {
 function removeInputField(inputNumber) {
     let numToRemove = inputNumber.slice(6, 10);
     document.getElementById("input" + numToRemove).remove();
+}
+
+function addUnits(units) {
+    document.getElementsByName('unit0').innerHTML +=
+        `
+    <option value="cl">cl</option>
+    <option value="dl">dl</option>
+    <option value="pcs">pcs</option>
+    `
 }

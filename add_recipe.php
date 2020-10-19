@@ -10,7 +10,12 @@
     require_once("./php/includes/db.inc.php");
     if(!isset($_SESSION['username']))
         header("location: ./login.php");
-        
+    
+    //Get the units from the database
+    $stmt = $conn->prepare("SELECT unit FROM units");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,10 +70,14 @@
                             </datalist>
 
                             <div class="input-group-prepend">
-                                <select name="unit0" class="input-group-text">
-                                    <option value="cl">cl</option>
-                                    <option value="dl">dl</option>
-                                    <option value="pcs">pcs</option>
+                                <select name="beverage[0][unit]" class="input-group-text">
+                                    <?php
+                                        //Create options for every unit from the database
+                                        while($row = mysqli_fetch_array($result))
+                                        {
+                                            echo '<option value=' .$row['unit']. '>' .$row['unit']. '</option>';
+                                        }
+                                    ?>
                                 </select>
                             </div>
                             <input type="number" name="beverage[0][amount]" id="amount_0" class="form-control" required>
