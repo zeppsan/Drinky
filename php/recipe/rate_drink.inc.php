@@ -4,7 +4,6 @@
     session_start();
 
     $userID = $_SESSION['id'];
-    echo $_SESSION['id']; die();
     $drinkID = $_POST['drink_id'];
     $rating = $_POST['rating'];
     $comment = $_POST['drinkComment'];
@@ -20,10 +19,10 @@
 
 
     $stmt = $conn->prepare("UPDATE recipe SET recipe.rating_total = recipe.rating_total + ?, recipe.votes = recipe.votes + 1 WHERE recipe.recipe_ID = ?");
-    $stmt = $conn->prepare("ii", $rating, $drinkID);
+    $stmt->bind_param("ii", $rating, $drinkID);
     $stmt->execute();
 
-    header("Location: ../../index.php");
+    header("Location: ../../Index.php");
 
 
 

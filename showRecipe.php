@@ -47,6 +47,12 @@
     if($drink_ratings['rating'] == null)
         $drink_ratings['rating'] = 0;
 
+    $stmt = $conn->prepare("SELECT users.profile_picture, users.username, user_ratings.rating, user_ratings.comment FROM user_ratings JOIN users ON users.id = user_ratings.user_id WHERE user_ratings.recipe_id = ?");
+    $stmt->bind_param("i", $drink['recipe_ID']);
+    $stmt->execute();
+    $userRatings = $stmt->get_result();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -168,6 +174,29 @@
                     </form>
                 </div>
             </div>
+
+            <?php
+
+                while($ratingByUser = $userRatings->fetch_assoc()):?>
+
+                    <div class="row border-top border-secondary align-items-center">
+                        <div class="col-6 col-md-3 mx-auto mb-3 text-center">
+                            <div class="rounded-circle mt-5 ml-5" id="profile_picture">
+                                <a href="http://localhost/Drinky/profile.php?user=<?php echo $ratingByUser['username'] ?>"> 
+                                <img src="<?php if(isset($ratingByUser['profile_picture'])){
+                                    echo $ratingByUser['profile_picture']; 
+                                } else { echo "./media/profilepictures/profilestock.jpg";}
+                                ?>"  width="100%"></a>
+                            </div>
+                            <p> <?php echo $ratingByUser['username']; ?><p>
+                        </div>
+                        <div class="col-6 col-md-3 mx-auto mb-3">
+                                <label><?php echo $ratingByUser['rating'];?> / 5</label>
+                                <p><?php echo $ratingByUser['comment']; ?><p>
+                        </div>
+                    </div>
+    
+                 <?php endwhile; ?>
 
         </div>
 

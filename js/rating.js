@@ -11,7 +11,8 @@ const stars = document.querySelectorAll('.ratingStars');
 let voted;
 let commentFieldOutput = false;
 
-stars.forEach(element => {
+stars.forEach(element => {              //  måste lägga till en if sats som kollar om man redan har klickat en gång,
+                                        //  då ska man inte få upp en till textarea att skriva i.
 
     element.addEventListener("click", (e) => {
         if(commentFieldOutput == false){
