@@ -104,7 +104,6 @@
                 <h1 class="text-info"><?php echo round($drink_ratings['rating'], 1) ?> / 5</h1>
             </div>
         </div>
-
         <hr>
 
         <div class="row mt-2 p-3">
