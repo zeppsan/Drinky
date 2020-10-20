@@ -7,35 +7,62 @@
 
 */
 
+const stars = document.querySelectorAll('.ratingStars');
+let voted;
+let commentFieldOutput = false;
 
-document.addEventListener("click", (e) => {
+stars.forEach(element => {
 
-    switch (e.target.id) {
-        case "s1":
-            rate(1);
-            break;
-        case "s2":
-            rate(2);
-            break;
-        case "s3":
-            rate(3);
-            break;
-        case "s4":
-            rate(4);
-            break;
-        case "s5":
-            rate(5);
-            break;
-        default:
-            break;
-    }
+    element.addEventListener("click", (e) => {
+        if(commentFieldOutput == false){
+            document.getElementById("commentField").innerHTML += `
+                    <div class="form-group">
+                        <input type="number" name="rating" value="${voted}" hidden>
+                        <label>Drink Comment</label>
+                        <textarea class="form-control" name="drinkComment" rows="3"></textarea>
+                        <button type="submit" class="btn btn-gray">Submit</button>
+                    </div>
+            `;
+        }
+    });
 
+    element.addEventListener("mouseover", (e) => {
+        resetStars();
+        switch (e.target.id) {
+            case "s1":
+                voted = 1;
+                setStars(voted);
+                break;
+            case "s2":
+                voted = 2;
+                setStars(voted);
+                break;
+            case "s3":
+                voted = 3;
+                setStars(voted);
+                break;
+            case "s4":
+                voted = 4;
+                setStars(voted);
+                break;
+            case "s5":
+                voted = 5;
+                setStars(voted);
+                break;
+            default:
+                break;
+        }
+    });
 });
 
-function rate(ratedIndex){
-
-    for(var i=0; i <=ratedIndex; i++){
-        //pissråtta assåååå
+function setStars(amount){
+    for(let i = 0 ; i < amount; i++){
+        stars[i].style.color = "gold";
     }
+}
 
+function resetStars(){
+    stars.forEach(element => {
+        element.style.color = "black";
+    });
 }

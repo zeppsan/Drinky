@@ -209,20 +209,8 @@ a:hover {
     height: 8em;
     overflow: hidden;
 }
-.rating {
-    unicode-bidi: bidi-override;
-    direction: rtl;
-}
 
-.rating>span {
-    display: inline-block;
-    position: relative;
-    width: 1.1em;
-}
-
-.rating>span:hover:before,
-.rating>span:hover~span:before {
+.ratingStars{
+    font-size: 2em;
     content: "\2605";
-    position: absolute;
-    color: gold;
 }

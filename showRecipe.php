@@ -142,14 +142,36 @@
                 <div class="col-6 text-center">
                     <h2>Rate The Drink</h2>
                     <div class="rating">
-                        <span class="ratingStars" id="1">☆</span><span class="ratingStars" id="2">☆</span><span class="ratingStars" id="3">☆</span><span class="ratingStars" id="4">☆</span><span class="ratingStars" id="5">☆</span>
+                        <span class="ratingStars" id="s1">
+                            ☆
+                        </span>
+                        <span class="ratingStars" id="s2">
+                            ☆
+                        </span>
+                        <span class="ratingStars" id="s3">
+                            ☆
+                        </span>
+                        <span class="ratingStars" id="s4">
+                            ☆
+                        </span>
+                        <span class="ratingStars" id="s5">
+                            ☆
+                        </span>
                     </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-8 mx-auto mb-4">  
+                    <form action="php/recipe/rate_drink.inc.php" method="POST" id="commentField">
+                        <input type="number" name="drink_id" value="<?php echo $drink['recipe_ID'] ?>" hidden>
+                    </form>
                 </div>
             </div>
 
         </div>
 
-    </body>
+    </body> 
 
 
     <script src="http://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
