@@ -174,6 +174,6 @@
     </body> 
 
 
-    <script src="http://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    
     <script src="js/rating.js"></script>
 </html>
