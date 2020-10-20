@@ -69,6 +69,7 @@ function addField() {
                     <select name="beverage[${fieldCounter}][unit]" class="input-group-text">
                         <option value="cl">cl</option>
                         <option value="dl">dl</option>
+                        <option value="ml">ml</option>
                         <option value="pcs">pcs</option>
                     </select>
                 </div>

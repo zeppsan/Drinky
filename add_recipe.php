@@ -71,13 +71,10 @@
 
                             <div class="input-group-prepend">
                                 <select name="beverage[0][unit]" class="input-group-text">
-                                    <?php
-                                        //Create options for every unit from the database
-                                        while($row = mysqli_fetch_array($result))
-                                        {
-                                            echo '<option value=' .$row['unit']. '>' .$row['unit']. '</option>';
-                                        }
-                                    ?>
+                                    <option value="cl">cl</option>
+                                    <option value="dl">dl</option>
+                                    <option value="ml">ml</option>
+                                    <option value="pcs">pcs</option>
                                 </select>
                             </div>
                             <input type="number" step="0.1" name="beverage[0][amount]" id="amount_0" class="form-control" maxlength="11" required>
