@@ -11,8 +11,7 @@ const stars = document.querySelectorAll('.ratingStars');
 let voted;
 let commentFieldOutput = false;
 
-stars.forEach(element => {              //  måste lägga till en if sats som kollar om man redan har klickat en gång,
-                                        //  då ska man inte få upp en till textarea att skriva i.
+stars.forEach(element => {           
 
     element.addEventListener("click", (e) => {
         if(commentFieldOutput == false){
@@ -24,7 +23,9 @@ stars.forEach(element => {              //  måste lägga till en if sats som ko
                         <button type="submit" class="btn btn-gray">Submit</button>
                     </div>
             `;
+            commentFieldOutput = true;
         }
+
     });
 
     element.addEventListener("mouseover", (e) => {
