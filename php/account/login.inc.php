@@ -28,7 +28,8 @@
         $stmt = $conn->prepare("SELECT id, username, pwd FROM users WHERE username=?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
-        return $stmt->get_result();
+        $result = $stmt->get_result();
+        return $result;
     }
 
 
@@ -51,8 +52,7 @@
      * @param $password - user password
      * @return bool - returns true if user password is correct
     */
-    function verifyPassword($result, $password){
-        $row = $result->fetch_assoc();
+    function verifyPassword($row, $password){
 
         if(password_verify($password, $row['pwd']))
             return true;
@@ -94,7 +94,9 @@
         header('Location: ../../login.php?error=wrongcredentials');
     }
 
-    if(verifyPassword($result, $_POST['password']))
+    $row = $result->fetch_assoc();
+
+    if(verifyPassword($row, $_POST['password']))
         loginSuccess($row);
     else
         loginFailed();
