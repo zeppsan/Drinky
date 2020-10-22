@@ -202,7 +202,6 @@
 
     </body> 
 
-
-    
     <script src="js/rating.js"></script>
+    
 </html>
