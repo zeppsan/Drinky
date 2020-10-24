@@ -124,7 +124,7 @@
 
                         <a href="showRecipe.php?drinkName=<?php echo $drinkrow['name']?>">
                             <div class="row my-2 drink-container p-3">
-                                <div class="col">
+                            <div class="col">
                                     <img src="<?php if($drinkrow['image'] == NULL)
                                     echo "media/coctail.png"; else echo $drinkrow['image']?>" height="64px">
                                 </div>
@@ -145,6 +145,11 @@
                                 </div>
                             </div>
                         </a>
+                        <div class="col"> 
+                            <?php if($_SESSION['username'] == $row['username']): ?>
+                            <a href="php/recipe/remove_recipe.php?drinkName=<?php echo $drinkrow['name']?>" class="btn btn-gray mt-3">Delete</a>
+                            <?php endif;?>
+                        </div>
                     <?php endwhile; ?>
                 <?php else: ?>
             
