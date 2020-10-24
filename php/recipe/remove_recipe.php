@@ -29,5 +29,15 @@
     $stmt = $conn->prepare("DELETE FROM recipe WHERE name = '$name'");
     $stmt->execute();
 
+    // $stmt = $conn->prepare("SELECT * FROM recipe_ingredients WHERE recipe_ID = $recipeID");
+    // $stmt->execute();
+    // $ingredients = $stmt->get_result();
+
+    // while($ingredients = $ingredients->fetch_assoc()){
+    //     $id = $ingredients['ingredient_ID']; 
+    //     $stmt = $conn->prepare("DELETE from ingredients where ingredient_ID = $id");
+    //     $stmt->execute();  
+    // }
+
     header("Location: http://localhost/Drinky/profile.php"); 
 ?>
