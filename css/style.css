@@ -21,7 +21,7 @@ body {
 }
 
 header {
-    background-color: cornsilk;
+    background: linear-gradient(white, cornsilk);
 }
 
 * {
@@ -47,10 +47,10 @@ h1 {
     color: black;
 }
 
-a,
+a ,
 a:hover {
     color: black;
-    text-decoration: none;
+    text-decoration: none
 }
 
 .infoArea {
@@ -60,8 +60,6 @@ a:hover {
 #index {
     margin-top: 20vh;
 }
-
-
 
 /* search field in header */
 
@@ -88,22 +86,21 @@ a:hover {
     background-color: #dedede;
 }
 
-
 /* 
 ## General Classes ##
 */
 
 .btn-gray {
-    background-color: gray;
+    background-color: cornsilk;
     border-color: gray;
 }
 
 .btn-gray:hover {
-    background-color: rgb(179, 178, 178);
+    /* background-color: rgb(179, 178, 178); */
+    background-color: grey;
     border-color: white;
     color: white;
 }
-
 
 /* 
 ## Register, Login, Profile ##
@@ -112,7 +109,9 @@ a:hover {
 #registerBody,
 #loginBody,
 .bg-bluegradient {
-    background-color: rgba(0, 212, 255, 0.15);
+    /* background-color: rgba(0, 212, 255, 0.15); */
+    background: linear-gradient(cornsilk, white);
+
     background-repeat: no-repeat;
 }
 
@@ -141,8 +140,9 @@ a:hover {
 }
 
 .profile {
-    background-color: #FBFBFB;
-    -webkit-box-shadow: 4px 6px 37px 1px rgba(0, 0, 0, 0.33);
+    /* background-color: #FBFBFB; */
+    background-color: wheat; 
+    -webkit-box-shadow: 4px 6px 37px 1px rgba(32, 32, 32, 0.33);
     -moz-box-shadow: 4px 6px 37px 1px rgba(0, 0, 0, 0.33);
     box-shadow: 4px 6px 37px 1px rgba(0, 0, 0, 0.33);
 }
@@ -160,6 +160,8 @@ a:hover {
 
 .profile .text {
     color: darkslategray;
+    font-family: courier, arial, helvetica;
+
 }
 
 #EditProfile {
@@ -167,20 +169,22 @@ a:hover {
 }
 
 .drink-container {
-    background-color: #dedede;
+    background-color: cornsilk;
+    /* background-color: #dedede; */
     border: 1px solid white;
     border-radius: 10px;
     transition: .2s ease all;
 }
 
 .drink-container:hover {
-    background-color: lightsteelblue;
-}
+    /* background-color: lightsteelblue; */
+    background-color: grey;
+    color:white;
+} 
 
 .profileDrinkRating {
     color: black;
 }
-
 
 /* ## Edit Profile ## */
 
@@ -189,25 +193,16 @@ a:hover {
     border-radius: .5em;
 }
 
-
-/* drink_search */
-
-.addDrinkField {}
-
-
-/* ## AddRecipe ## */
-
-#addRecipeBody {
-    background: linear-gradient(cornsilk, white);
-}
-
-
 /* ## Show Recipe ## */
 
 #profile_picture {
     width: 8em;
     height: 8em;
     overflow: hidden;
+}
+
+.description{
+    font-family: courier, arial, helvetica;
 }
 
 .ratingStars{

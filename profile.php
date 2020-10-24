@@ -99,9 +99,9 @@
                     </a>
                 <?php endif;?>
             </div>
-            <div class="col-12 col-md-3 text-center my-auto">
+            <div  class="col-12 col-md-3 text-center my-auto ">
                 <p class="small my-0">Average Drink Score</p>
-                <h1 class="text-info"><?php echo round($drink_ratings['rating'], 1) ?> / 5</h1>
+                <h1 style="color:red;"><?php echo round($drink_ratings['rating'], 1) ?> / 5</h1>
             </div>
         </div>
         <hr>
@@ -125,7 +125,8 @@
                         <a href="showRecipe.php?drinkName=<?php echo $drinkrow['name']?>">
                             <div class="row my-2 drink-container p-3">
                                 <div class="col">
-                                    <img src="<?php echo $drinkrow['image']?>" height="64px">
+                                    <img src="<?php if($drinkrow['image'] == NULL)
+                                    echo "media/coctail.png"; else echo $drinkrow['image']?>" height="64px">
                                 </div>
                                 <div class="col">
                                     <p class="drink-name">

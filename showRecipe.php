@@ -75,15 +75,15 @@
                 } ?>
 
             <!--    imgurl, Name of Drink, Drink rating, Description    -->
-                <div class="col-6 col-md-2">
+                <div class="col-6 col-md-3">
                     <img src="<?php 
                     if(isset($drink['image'])){     // Image of drink  
                     echo $drink['image'];} else{ echo "./media/coctail.png";}
-                    ?>" width="120em" >
+                    ?>" width="250em" >
                 </div>
                 <div class="col-6 col-md-4 text-center">     
                     <h2><?php echo $drink['name']?></h2>
-                    <p><?php echo $drink['description'] ?></p>
+                    <p class="description"><?php echo $drink['description'] ?></p>
                     </div>
                     <!--    Drink Rating    -->
                     <div class="col-6 col-md-2"> 

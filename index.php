@@ -22,11 +22,11 @@
     $topRecipes = $stmt->get_result(); 
     $topArray = []; 
     $i = 0; 
+    $defaultImage = "media/drinkImages/default.png"; 
 
     while($row = mysqli_fetch_row($topRecipes)){
         $topArray[$i++] = array("name"=>$row[1], "rating_total"=>$row[4], "votes"=>$row[5], "image"=>$row[6]); 
     }
-    $defaultImage = "media/drinkImages/default.png"; 
 ?>
 
 <html lang="en">
