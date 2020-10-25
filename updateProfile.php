@@ -107,7 +107,7 @@
                     <h3 class="title"><?php echo ucfirst($row['username'])?></h3>
                     <p class="mt-3 mb-0">Presentation</p>
                     <p class="text mt-2">
-                        <textarea id ="presentation" name="presentation" cols="100" rows="5" id="editProfilePres"><?php echo $row['presentation'] ?></textarea>
+                        <textarea id ="presentation" name="presentation" cols="50" rows="5" id="editProfilePres"><?php echo $row['presentation'] ?></textarea>
                     </p>
 
                     <!-- First Name -->
