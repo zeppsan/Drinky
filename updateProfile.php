@@ -100,7 +100,7 @@
                 </form>
             </div>
 
-            <!-- update profile information -->
+            <!-- update profile information --> 
             <div class="col-12 col-md-6 my-auto">
                 <form action="php/account/update_profile.inc.php" method="POST">
                     
