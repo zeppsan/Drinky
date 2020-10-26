@@ -118,37 +118,41 @@
                         <div class="col"><b>Drink Name</b></div>
                         <div class="col"><b>Description</b></div>
                         <div class="col"><b>Drink Rating</b></div>
+                        <div class="col"></div>
                     </div>
                     <?php while($drinkrow = $top_drinks_result->fetch_assoc()): ?> 
 
-
-                        <a href="showRecipe.php?drinkName=<?php echo $drinkrow['name']?>">
-                            <div class="row my-2 drink-container p-3">
-                            <div class="col">
-                                    <img src="<?php if($drinkrow['image'] == NULL)
-                                    echo "media/coctail.png"; else echo $drinkrow['image']?>" height="64px">
-                                </div>
-                                <div class="col">
-                                    <p class="drink-name">
-                                        <?php echo $drinkrow['name']?>
-                                    </p>
-                                </div>
-                                <div class="col">
-                                    <p class="description">
-                                        <?php echo $drinkrow['description']?>
-                                    </p>
-                                </div>
-                                <div class="col">
-                                    <p class="profileDrinkRating">
-                                        <?php echo round($drinkrow['rating'], 1)?>
-                                    </p>    
-                                </div>
+                        <div class="row">
+                            <div class="col-10">
+                                <a href="showRecipe.php?drinkName=<?php echo $drinkrow['name']?>">
+                                    <div class="row my-2 drink-container p-3">
+                                        <div class="col">
+                                            <img src="<?php if($drinkrow['image'] == NULL)
+                                            echo "media/coctail.png"; else echo $drinkrow['image']?>" height="64px">
+                                        </div>
+                                        <div class="col">
+                                            <p class="drink-name">
+                                                <?php echo $drinkrow['name']?>
+                                            </p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="description">
+                                                <?php echo $drinkrow['description']?>
+                                            </p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="profileDrinkRating">
+                                                <?php echo round($drinkrow['rating'], 1)?>
+                                            </p>    
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                        <div class="col"> 
-                            <?php if($_SESSION['username'] == $row['username']): ?>
-                            <a href="php/recipe/remove_recipe.php?drinkName=<?php echo $drinkrow['name']?>" class="btn btn-gray mt-3">Delete</a>
-                            <?php endif;?>
+                            <div class="col-2 text-center my-auto"> 
+                                <?php if($_SESSION['username'] == $row['username']): ?>
+                                <a href="php/recipe/remove_recipe.php?drinkName=<?php echo $drinkrow['name']?>" class="btn btn-gray mt-3">Delete</a>
+                                <?php endif;?>
+                            </div>
                         </div>
                     <?php endwhile; ?>
                 <?php else: ?>
