@@ -30,6 +30,7 @@
 
     require_once 'php/includes/db.inc.php';
     
+    // Sql for the my recipes querys
     // Check if there is a specific profile that we should visit
     // Fetch information about the user from the database
     if(isset($_GET['user'])){
@@ -58,7 +59,6 @@
         if($drink_ratings['rating'] == null)
             $drink_ratings['rating'] = 0;
 
-
         // fetch user drinks 
         $stmt = $conn->prepare("SELECT name, image, description, instructions, rating_total / votes AS 'rating' FROM user_recipe JOIN recipe on user_recipe.recipe_ID = recipe.recipe_ID WHERE user_recipe.user_ID = ? ORDER BY rating DESC LIMIT 5");
         $stmt->bind_param("i", $row['id']);
@@ -72,7 +72,26 @@
         }else{ 
             $profilepic = "media/profilepictures/profilestock.jpg";
         }  
-    } 
+    }
+    
+    //Sql for the My top rated recipes
+    if(!isset($_GET['user'])){
+        // Get the logged in user
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
+        $stmt->bind_param("s", $_SESSION['username']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc(); 
+    }
+
+    if ($result->num_rows > 0) {
+        // Get the recipes and the rating for the user
+        $stmt = $conn->prepare("SELECT name, description, instructions, image, rating FROM user_ratings INNER JOIN recipe on recipe.recipe_ID=user_ratings.recipe_id WHERE user_ratings.user_id = ? ORDER BY rating DESC LIMIT 5");
+        $stmt->bind_param("i", $row['id']);
+        $stmt->execute();
+        $rated_result = $stmt->get_result();
+        $top_rated_amount = $rated_result->num_rows;
+    }
 ?>
 
 
@@ -106,61 +125,130 @@
         </div>
         <hr>
 
-        <div class="row mt-2 p-3">
-            <div class="col-12">
-                <h3><?php echo ucfirst($row['username']);?>'s Top Recipes</h3>
-            </div>
-            <div class="col-12">
-                <?php 
-                if($top_drinks_amount > 0): ?>
-                    <div class="row px-3 mt-3">
-                        <div class="col"><b>Image</b></div>
-                        <div class="col"><b>Drink Name</b></div>
-                        <div class="col"><b>Description</b></div>
-                        <div class="col"><b>Drink Rating</b></div>
-                        <div class="col"></div>
-                    </div>
-                    <?php while($drinkrow = $top_drinks_result->fetch_assoc()): ?> 
+        <div class="row px-3">
+        <!-- Tabs for the page -->
+        <?php if($_SESSION['username'] == $row['username']): ?>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="top-recipe-tab" data-toggle="tab" href="#top-recipes" role="tab" aria-controls="top-recipe" aria-selected="true">My Top Recipes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="rated-tab" data-toggle="tab" href="#rated-recipes" role="tab" aria-controls="rated" aria-selected="false">My Rated Recipes</a>
+                </li>
+            </ul>
+        <?php endif;?>
+            <div class="tab-content" id="tabsProfile">
+                <!-- My top recipes -->
+                <div class="tab-pane fade show active" id="top-recipes" role="tabpanel" aria-labelledby="top-recipe-tab">
+                    <div class="row mt-2 p-3">
+                        <div class="col-12">
+                            <h3><?php echo ucfirst($row['username']);?>'s Top Recipes</h3>
+                        </div>
+                        <div class="col-12">
+                            <?php 
+                            if($top_drinks_amount > 0): ?>
+                                <div class="row px-3 mt-3">
+                                    <div class="col"><b>Image</b></div>
+                                    <div class="col"><b>Drink Name</b></div>
+                                    <div class="col"><b>Description</b></div>
+                                    <div class="col"><b>Drink Rating</b></div>
+                                    <div class="col"></div>
+                                </div>
+                                <?php while($drinkrow = $top_drinks_result->fetch_assoc()): ?> 
 
-                        <div class="row">
-                            <div class="col-10">
-                                <a href="showRecipe.php?drinkName=<?php echo $drinkrow['name']?>">
-                                    <div class="row my-2 drink-container p-3">
-                                        <div class="col">
-                                            <img src="<?php if($drinkrow['image'] == NULL)
-                                            echo "media/coctail.png"; else echo $drinkrow['image']?>" height="64px">
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <a href="showRecipe.php?drinkName=<?php echo $drinkrow['name']?>">
+                                                <div class="row my-2 drink-container p-3">
+                                                    <div class="col">
+                                                        <img src="<?php if($drinkrow['image'] == NULL)
+                                                        echo "media/coctail.png"; else echo $drinkrow['image']?>" height="64px">
+                                                    </div>
+                                                    <div class="col">
+                                                        <p class="drink-name">
+                                                            <?php echo $drinkrow['name']?>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col">
+                                                        <p class="description">
+                                                            <?php echo $drinkrow['description']?>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col">
+                                                        <p class="profileDrinkRating">
+                                                            <?php echo round($drinkrow['rating'], 1)?>
+                                                        </p>    
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="col">
-                                            <p class="drink-name">
-                                                <?php echo $drinkrow['name']?>
-                                            </p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="description">
-                                                <?php echo $drinkrow['description']?>
-                                            </p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="profileDrinkRating">
-                                                <?php echo round($drinkrow['rating'], 1)?>
-                                            </p>    
+                                        <div class="col-2 text-center my-auto"> 
+                                            <?php if($_SESSION['username'] == $row['username']): ?>
+                                            <a href="php/recipe/remove_recipe.php?drinkName=<?php echo $drinkrow['name']?>" class="btn btn-gray mt-3">Delete</a>
+                                            <?php endif;?>
                                         </div>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="col-2 text-center my-auto"> 
-                                <?php if($_SESSION['username'] == $row['username']): ?>
-                                <a href="php/recipe/remove_recipe.php?drinkName=<?php echo $drinkrow['name']?>" class="btn btn-gray mt-3">Delete</a>
-                                <?php endif;?>
-                            </div>
+                                <?php endwhile; ?>
+                            <?php else: ?>
+                        
+                            <p><?php echo $row['username']?> Has not drinks to show :(</p>
+                            <?php endif;?> 
                         </div>
-                    <?php endwhile; ?>
-                <?php else: ?>
-            
-                <p><?php echo $row['username']?> Has not drinks to show :(</p>
-                <?php endif;?>
+                    </div>
+                </div>
+                <!-- My rated recipes -->
+                <?php if($_SESSION['username'] == $row['username']): ?>
+                <div class="tab-pane fade" id="rated-recipes" role="tabpanel" aria-labelledby="rated-tab">
+                    <div class="row mt-2 p-3">
+                        <div class="col-12">
+                            <h3><?php echo ucfirst($row['username']);?>'s Rated Recipes</h3>
+                        </div>
+                        <div class="col-12">
+                            <?php 
+                            if($top_rated_amount > 0): ?>
+                                <div class="row px-3 mt-3">
+                                    <div class="col"><b>Image</b></div>
+                                    <div class="col"><b>Drink Name</b></div>
+                                    <div class="col"><b>Description</b></div>
+                                    <div class="col"><b>Drink Rating</b></div>
+                                </div>
+                                <?php while($drinkrow = $rated_result->fetch_assoc()): ?> 
 
-                    
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <a href="showRecipe.php?drinkName=<?php echo $drinkrow['name']?>">
+                                                <div class="row my-2 drink-container p-3">
+                                                    <div class="col">
+                                                        <img src="<?php if($drinkrow['image'] == NULL)
+                                                        echo "media/coctail.png"; else echo $drinkrow['image']?>" height="64px">
+                                                    </div>
+                                                    <div class="col">
+                                                        <p class="drink-name">
+                                                            <?php echo $drinkrow['name']?>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col">
+                                                        <p class="description">
+                                                            <?php echo $drinkrow['description']?>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col">
+                                                        <p class="profileDrinkRating">
+                                                            <?php echo round($drinkrow['rating'], 1)?>
+                                                        </p>    
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                <?php endwhile; ?>
+                            <?php else: ?>
+                            <p><?php echo $row['username']?> Has not drinks to show :(</p>
+                            <?php endif;?> 
+                        </div>
+                    </div>
+                </div>
+                <?php endif;?>
             </div>
         </div>
     </div>
