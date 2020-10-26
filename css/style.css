@@ -207,5 +207,8 @@ a:hover {
 
 .ratingStars{
     font-size: 2em;
-    content: "\2605";
+}
+
+.mOnProfilePic{
+    margin-left: 4.2em;
 }

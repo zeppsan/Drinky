@@ -1,5 +1,4 @@
 <?php
-
 /* 
     Author: 
         Casper Kärrström
@@ -8,22 +7,17 @@
         Shows the recipe
 
 */ 
-
-
     include("./php/includes/db.inc.php");
-
 
     session_start();
     if(!isset($_SESSION['username']))
         header("Location: login.php");
-
 
     // Fetch information about the specified recipe
     $stmt = $conn->prepare("SELECT * FROM recipe WHERE name = ?");
     $stmt->bind_param("s", $_GET['drinkName']);
     $stmt->execute();
     $drink = $stmt->get_result()->fetch_assoc();
-
     // Fetch information about the user that created the recipe
     $stmt = $conn->prepare("SELECT id, username, fname, lname, age, profile_picture FROM user_recipe 
     INNER JOIN recipe ON user_recipe.recipe_ID = ? INNER JOIN users ON users.id = user_recipe.user_ID");
@@ -43,15 +37,19 @@
     $stmt->bind_param("i", $user['id']);
     $stmt->execute();
     $drink_ratings = $stmt->get_result()->fetch_assoc();
-
+    // Division with 0
     if($drink_ratings['rating'] == null)
         $drink_ratings['rating'] = 0;
-
+    // Ratings and comments from other users
     $stmt = $conn->prepare("SELECT users.profile_picture, users.username, user_ratings.rating, user_ratings.comment FROM user_ratings JOIN users ON users.id = user_ratings.user_id WHERE user_ratings.recipe_id = ?");
     $stmt->bind_param("i", $drink['recipe_ID']);
     $stmt->execute();
     $userRatings = $stmt->get_result();
 
+    $stmt = $conn->prepare("SELECT user_ratings.user_id FROM user_ratings WHERE user_ratings.recipe_id = ? AND user_ratings.user_id = ?");
+    $stmt->bind_param("ii", $drink['recipe_ID'], $_SESSION['id']);
+    $stmt->execute();
+    $AlreadyRated = $stmt->get_result()->fetch_assoc();
 
 ?>
 
@@ -146,24 +144,28 @@
                 <!--    Rating system   -->
             <div class="row justify-content-center align-items-center mt-5 p-4">
                 <div class="col-6 text-center">
-                    <h2>Rate The Drink</h2>
-                    <div class="rating">
-                        <span class="ratingStars" id="s1">
-                            ☆
-                        </span>
-                        <span class="ratingStars" id="s2">
-                            ☆
-                        </span>
-                        <span class="ratingStars" id="s3">
-                            ☆
-                        </span>
-                        <span class="ratingStars" id="s4">
-                            ☆
-                        </span>
-                        <span class="ratingStars" id="s5">
-                            ☆
-                        </span>
-                    </div>
+                  <?php if(!isset($AlreadyRated['user_id'])): ?>
+                        <h2>Rate The Drink</h2>
+                                <div class="rating">
+                                    <span class="ratingStars" id="s1">
+                                        ☆
+                                    </span>
+                                    <span class="ratingStars" id="s2">
+                                        ☆
+                                    </span>
+                                    <span class="ratingStars" id="s3">
+                                        ☆
+                                    </span>
+                                    <span class="ratingStars" id="s4">
+                                        ☆
+                                    </span>
+                                    <span class="ratingStars" id="s5">
+                                        ☆
+                                    </span>
+                                </div>
+                  <?php else: ?>
+                    <p><?php echo $_SESSION['username']?> have already rated this drink.<br>Look for your rating below</p>
+                  <?php endif; ?>
                 </div>
             </div>
 
@@ -175,18 +177,19 @@
                 </div>
             </div>
 
+                        <!--    Users rating    -->
             <?php
 
                 while($ratingByUser = $userRatings->fetch_assoc()):?>
 
                     <div class="row border-top border-secondary align-items-center">
                         <div class="col-6 col-md-3 mx-auto mb-3 text-center">
-                            <div class="rounded-circle mt-5 ml-5" id="profile_picture">
+                            <div class="rounded-circle mt-5 mOnProfilePic" id="profile_picture">
                                 <a href="http://localhost/Drinky/profile.php?user=<?php echo $ratingByUser['username'] ?>"> 
                                 <img src="<?php if(isset($ratingByUser['profile_picture'])){
                                     echo $ratingByUser['profile_picture']; 
                                 } else { echo "./media/profilepictures/profilestock.jpg";}
-                                ?>"  width="100%"></a>
+                                ?>" width="100%"></a>
                             </div>
                             <p> <?php echo $ratingByUser['username']; ?><p>
                         </div>
