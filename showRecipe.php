@@ -183,7 +183,7 @@
                 while($ratingByUser = $userRatings->fetch_assoc()):?>
 
                     <div class="row border-top border-secondary align-items-center">
-                        <div class="col-12 col-md-4 mx-auto mb-3 text-center">
+                        <div class="col-6 col-md-4 mx-auto mb-3 text-center">
                             <div class="rounded-circle mt-5 margin-rating" id="profile_picture">
                                 <a href="http://localhost/Drinky/profile.php?user=<?php echo $ratingByUser['username'] ?>"> 
                                 <img src="<?php if(isset($ratingByUser['profile_picture'])){
@@ -193,7 +193,7 @@
                             </div>
                             <p> <?php echo $ratingByUser['username']; ?><p>
                         </div>
-                        <div class="col-12 col-md-4 mx-auto mb-3">
+                        <div class="col-6 col-md-4 mx-auto mb-3">
                                 <label><?php echo $ratingByUser['rating'];?> / 5</label>
                                 <p><?php echo $ratingByUser['comment']; ?><p>
                         </div>
