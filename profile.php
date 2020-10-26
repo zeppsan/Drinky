@@ -4,6 +4,7 @@
         Author: 
             Eric Qvarnström - PHP, Layout, HTML
             Frida Westerlund - HTML
+            Max Jonsson - Tabs for showing top recipes and rated recipes
 
         Description:
             Script to login a user. Checks credentials agains database
@@ -243,7 +244,7 @@
                                     </div>
                                 <?php endwhile; ?>
                             <?php else: ?>
-                            <p><?php echo $row['username']?> Has not drinks to show :(</p>
+                            <p><?php echo $row['username']?> Has not rated any drinks to show :(</p>
                             <?php endif;?> 
                         </div>
                     </div>
