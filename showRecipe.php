@@ -73,18 +73,18 @@
                 } ?>
 
             <!--    imgurl, Name of Drink, Drink rating, Description    -->
-                <div class="col-6 col-md-3">
+                <div class="col-12 col-sm-12 col-md-3 text-center">
                     <img src="<?php 
                     if(isset($drink['image'])){     // Image of drink  
                     echo $drink['image'];} else{ echo "./media/coctail.png";}
-                    ?>" width="250em" >
+                    ?>" width="100%" >
                 </div>
-                <div class="col-6 col-md-4 text-center">     
+                <div class="col-12 col-sm-6 col-md-6 text-center">     
                     <h2><?php echo $drink['name']?></h2>
                     <p class="description"><?php echo $drink['description'] ?></p>
                     </div>
                     <!--    Drink Rating    -->
-                    <div class="col-6 col-md-2"> 
+                    <div class="col-12 col-sm-6 col-md-3"> 
                     <h4>Rating: <?php 
                     if($drink['votes'] == null){
                         echo "0";
@@ -120,7 +120,7 @@
 
             <!--    Drink Creator... Name, rating, link -->
             <div class="row justify-content-center align-items-center mt-5 p-4">
-                <div class="col-6 col-sm-4 col-md-2">
+                <div class="col-12 col-sm-6 col-md-3">
                     <h2>Recipe by </h2>
                      <!--    User picture    -->
                     <div class="rounded-circle" id="profile_picture">
@@ -132,7 +132,7 @@
                     </div>
                 </div>
                     <!--    Username, firstname, lastname and age    -->
-                <div class="col-6 col-sm-4 col-md-2">
+                <div class="col-12 col-sm-6 col-md-3">
                     <p> <?php echo $user['username'] ?></p>
                     <p> <?php echo $user['fname'], ' ', $user['lname'], ', ', $user['age'] ?></p>
                     <!--    User Rating    -->
@@ -183,8 +183,8 @@
                 while($ratingByUser = $userRatings->fetch_assoc()):?>
 
                     <div class="row border-top border-secondary align-items-center">
-                        <div class="col-6 col-md-3 mx-auto mb-3 text-center">
-                            <div class="rounded-circle mt-5 mOnProfilePic" id="profile_picture">
+                        <div class="col-12 col-md-4 mx-auto mb-3 text-center">
+                            <div class="rounded-circle mt-5 margin-rating" id="profile_picture">
                                 <a href="http://localhost/Drinky/profile.php?user=<?php echo $ratingByUser['username'] ?>"> 
                                 <img src="<?php if(isset($ratingByUser['profile_picture'])){
                                     echo $ratingByUser['profile_picture']; 
@@ -193,7 +193,7 @@
                             </div>
                             <p> <?php echo $ratingByUser['username']; ?><p>
                         </div>
-                        <div class="col-6 col-md-3 mx-auto mb-3">
+                        <div class="col-12 col-md-4 mx-auto mb-3">
                                 <label><?php echo $ratingByUser['rating'];?> / 5</label>
                                 <p><?php echo $ratingByUser['comment']; ?><p>
                         </div>
