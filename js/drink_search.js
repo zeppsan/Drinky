@@ -3,10 +3,12 @@ Author:
     Eric Qvarnström
 
 Description:
-    Javascript for handling drink_search
+    Javascript for managing the search recipe function.
+
 
 */
 
+// Variables
 const fieldHolder = document.getElementById("fieldHolder");
 const searchResultContainer = document.getElementById("searchResult");
 let fieldCounter = 1;
@@ -49,16 +51,19 @@ function addField() {
     fieldCounter++;
 }
 
+// Looks for klicks on the remove buttons
 document.addEventListener('click', (e) => {
     if (e.target.classList == "btn btn-warning remove")
         removeInputField(e.target.id);
 });
 
+// Removes the input field that was targeted (from delete button)
 function removeInputField(inputNumber) {
     let numToRemove = inputNumber.slice(6, 10);
     document.getElementById("input" + numToRemove).remove();
 }
 
+// Fetches drinks from the database when the user presses search
 function searchDrinks() {
     let inputs = document.querySelectorAll('.alcoInput');
     let data = [];
@@ -84,10 +89,10 @@ function searchDrinks() {
         })
 }
 
-
-
+// Prints the database result to the document.
 function applySearch(data) {
 
+    // if data exist, print title. Else, print that no drinks were found.
     if (data.length > 0) {
         searchResultContainer.innerHTML += `<div class="row px-3 mt-3">
         <div class="col"><b>Drink Image</b></div>
@@ -100,9 +105,6 @@ function applySearch(data) {
             <h2>No drinks were found...</h2>
         `;
     }
-
-
-
     data.forEach(element => {
         let image = element.image;
 
@@ -139,6 +141,7 @@ function applySearch(data) {
     });
 }
 
+// Clears the search result
 function clearResult() {
     document.getElementById("searchResult").innerHTML = "";
 }

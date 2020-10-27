@@ -12,6 +12,7 @@ const result_container = document.getElementById("searchField");
 
 result_container.style.top = searchBar.offsetTop + 2.5 + "em";
 
+// If the user clicks outside of the search-result container, the container will hide.
 document.addEventListener("click", (e) => {
     switch (e.target.className) {
         case "form-control":
@@ -24,6 +25,7 @@ document.addEventListener("click", (e) => {
     }
 });
 
+// Sends a fetch whenever a key is pressed in the searchfield.
 searchBar.addEventListener("keydown", (e) => {
     setTimeout(() => {
         fetch("php/global_search.inc.php", {
@@ -47,6 +49,7 @@ searchBar.addEventListener("keydown", (e) => {
     }, 10);
 });
 
+// Fills the datalist with result from the fetch
 function SetDatalist(data) {
     result_container.innerHTML = "";
     data['users'].forEach(element => {
@@ -72,10 +75,12 @@ function SetDatalist(data) {
     Show();
 }
 
+// Hides the result-cointainer
 function Hide() {
     result_container.style.display = "none";
 }
 
+// Shows the result-cointainer
 function Show() {
     result_container.style.display = "block";
 }
