@@ -86,6 +86,7 @@
 
     removeCurrentImage();
 
+    // Uploads new image
     uploadImage($_FILES['profilePicture']);
 
 

@@ -1,7 +1,7 @@
 <?php
     /* 
         Author: 
-            Eric Qvarnström - PHP, Layout, HTML
+            Eric Qvarnström - PHP, Layout, HTML - Page in general
             Frida Westerlund - HTML
 
         Description:
@@ -29,49 +29,30 @@
 
     require_once 'php/includes/db.inc.php';
     
-    // Check if there is a specific profile that we should visit
-    // Fetch information about the user from the database
-    if(isset($_GET['user'])){
-        // If a specific user is specified
+    /** Gets userdata from the specified user [Eric]
+     * 
+     * @param string username Users username
+     * @return mysqli::result Returns mysqli result
+     * 
+     */
+    function getUserData($username){
+        global $conn;
         $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
-        $stmt->bind_param("s", $_GET['user']);
+        $stmt->bind_param("s", $username);
         $stmt->execute();
         $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-    } else {
-        // If no user is specified, get the logged in user instead
-        $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
-        $stmt->bind_param("s", $_SESSION['username']);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
+        return $result;
     }
 
-    if($result->num_rows > 0){
-        // Gets the user average drink rating
-        $stmt = $conn->prepare("SELECT user_recipe.user_ID, sum(recipe.rating_total) / sum(recipe.votes) AS 'rating' FROM user_recipe INNER JOIN recipe on recipe.recipe_ID = user_recipe.recipe_ID WHERE user_recipe.user_ID = ?");
-        $stmt->bind_param("i", $row['id']);
-        $stmt->execute();
-        $drink_ratings = $stmt->get_result()->fetch_assoc();
+    $result = getUserData($_SESSION['username']);
+    $row = $result->fetch_assoc();
 
-        if($drink_ratings['rating'] == null)
-            $drink_ratings['rating'] = 0;
-
-
-        // fetch user drinks 
-        $stmt = $conn->prepare("SELECT name, description, instructions, rating_total / votes AS 'rating' FROM user_recipe JOIN recipe on user_recipe.recipe_ID = recipe.recipe_ID WHERE user_recipe.user_ID = ? ORDER BY rating DESC LIMIT 5");
-        $stmt->bind_param("i", $row['id']);
-        $stmt->execute();
-        $top_drinks_result = $stmt->get_result();
-        $top_drinks_amount = $top_drinks_result->num_rows;
-
-        // Checks if user has set an profile-image, else, display the stock one.
-        if($row['profile_picture'] != null){  
-            $profilepic = $row['profile_picture'];
-        }else{ 
-            $profilepic = "media/profilepictures/profilestock.jpg";
-        }  
-    } 
+    // Checks if user has set an profile-image, else, display the stock one.
+    if($row['profile_picture'] != null){  
+        $profilepic = $row['profile_picture'];
+    }else{ 
+        $profilepic = "media/profilepictures/profilestock.jpg";
+    }  
 ?>
 
 
@@ -86,7 +67,7 @@
     <div class="container profile">
         <div class="row p-3">
 
-            <!-- Profile picture & edit Profile picture-->
+            <!-- Profile picture & edit Profile picture [Eric]--> 
             <div class="col-12 col-md-6 col-lg-3 pl-3">
                 <img src="<?php echo $profilepic?>" class="img" width="100%;">
                 <form action="php/account/upload_image.inc.php" method="POST" enctype="multipart/form-data">
@@ -100,8 +81,8 @@
                 </form>
             </div>
 
-            <!-- update profile information --> 
-            <div class="col-12 col-md-6 my-auto">
+            <!-- update profile information [Eric] --> 
+            <div class="col-12 col-md-6 col-lg-9 my-auto">
                 <form action="php/account/update_profile.inc.php" method="POST">
                     
                     <h3 class="title"><?php echo ucfirst($row['username'])?></h3>

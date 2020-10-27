@@ -11,6 +11,8 @@
           The future solution should hide the login credentials begin the public www 
           folder to prevent the information to leak.
 
+          Database will be running untill the grade is set for our group.
+
   */ 
 
   // Connection Information

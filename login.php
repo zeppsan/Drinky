@@ -1,6 +1,6 @@
 <!--
         Author: 
-            Eric Qvarnström
+            Eric Qvarnström - Full page
 
         Description:
             Page for user login
