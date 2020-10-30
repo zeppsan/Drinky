@@ -168,6 +168,10 @@ a:hover {
     margin-left: 100%;
 }
 
+ .nav-tabs .active {
+   background-color:cornsilk !important;
+}
+
 .drink-container {
     background-color: cornsilk;
     /* background-color: #dedede; */
